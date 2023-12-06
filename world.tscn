@@ -1,3 +1,19 @@
-[gd_scene format=3 uid="uid://ctwlxb01ui5r8"]
+[gd_scene load_steps=4 format=3 uid="uid://ctwlxb01ui5r8"]
+
+[ext_resource type="ArrayMesh" uid="uid://dh7gamdvjygwu" path="res://Assets/Meshes/cube-light.res" id="1_8mrn4"]
+[ext_resource type="ArrayMesh" uid="uid://d2iju8ykknvfw" path="res://Assets/Meshes/cube-red.res" id="1_iuqoe"]
+[ext_resource type="ArrayMesh" uid="uid://b7bla15h20cp6" path="res://Assets/Meshes/cube-green.res" id="1_rhbem"]
 
 [node name="World" type="Node3D"]
+
+[node name="Red" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+mesh = ExtResource("1_iuqoe")
+
+[node name="Green" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+mesh = ExtResource("1_rhbem")
+
+[node name="Light" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+mesh = ExtResource("1_8mrn4")
