@@ -14,3 +14,11 @@ config/name="Hot 'n cold game"
 run/main_scene="res://world.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=160
+window/size/viewport_height=120
+window/size/window_width_override=1280
+window/size/window_height_override=960
+window/stretch/mode="viewport"
