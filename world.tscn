@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctwlxb01ui5r8"]
+[gd_scene load_steps=7 format=3 uid="uid://ctwlxb01ui5r8"]
 
 [ext_resource type="Script" path="res://camera_position.gd" id="1_0krmk"]
 [ext_resource type="ArrayMesh" uid="uid://dh7gamdvjygwu" path="res://Assets/Meshes/cube-light.res" id="1_8mrn4"]
 [ext_resource type="ArrayMesh" uid="uid://d2iju8ykknvfw" path="res://Assets/Meshes/cube-red.res" id="1_iuqoe"]
 [ext_resource type="ArrayMesh" uid="uid://b7bla15h20cp6" path="res://Assets/Meshes/cube-green.res" id="1_rhbem"]
+[ext_resource type="Texture2D" uid="uid://br8eof4ank6j1" path="res://Assets/Images/kenney_roguelike-characters/Spritesheet/roguelikeChar_transparent.png" id="5_sxm5h"]
 
 [sub_resource type="Environment" id="Environment_0qa8a"]
 ssao_enabled = true
@@ -61,3 +62,14 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0qa8a")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.745, 0.5, 0)
+pixel_size = 0.0625
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("5_sxm5h")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
