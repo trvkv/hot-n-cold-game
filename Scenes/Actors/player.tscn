@@ -67,11 +67,10 @@ animations = [{
 height = 1.5
 
 [node name="Player" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28918, 0)
 script = ExtResource("1_wdvuh")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.146564, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.736997, 0)
 cast_shadow = 2
 pixel_size = 0.0136
 shaded = true
@@ -83,5 +82,5 @@ autoplay = "idle"
 frame_progress = 0.384838
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.145188, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.736997, 0)
 shape = SubResource("CapsuleShape3D_fus73")
