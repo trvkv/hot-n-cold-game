@@ -1,80 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://ctwlxb01ui5r8"]
+[gd_scene load_steps=8 format=3 uid="uid://ctwlxb01ui5r8"]
 
 [ext_resource type="Script" path="res://camera_position.gd" id="1_0krmk"]
 [ext_resource type="ArrayMesh" uid="uid://dh7gamdvjygwu" path="res://Assets/Meshes/cube-light.res" id="1_8mrn4"]
 [ext_resource type="ArrayMesh" uid="uid://d2iju8ykknvfw" path="res://Assets/Meshes/cube-red.res" id="1_iuqoe"]
 [ext_resource type="ArrayMesh" uid="uid://b7bla15h20cp6" path="res://Assets/Meshes/cube-green.res" id="1_rhbem"]
-[ext_resource type="Texture2D" uid="uid://c0jlen5eqnhrp" path="res://Assets/Images/kenney_platformer-characters/PNG/Player/player_tilesheet.png" id="5_kjgps"]
-[ext_resource type="Script" path="res://player.gd" id="6_ay0ip"]
+[ext_resource type="PackedScene" uid="uid://dnbsanbg1w806" path="res://Meshes/Environment/cube_with_collision.tscn" id="2_rx2bi"]
+[ext_resource type="PackedScene" uid="uid://dkod8d31vxupb" path="res://Scenes/Actors/player.tscn" id="6_x12s6"]
 
 [sub_resource type="Environment" id="Environment_0qa8a"]
 ssao_enabled = true
 glow_enabled = true
 glow_intensity = 1.1
 glow_hdr_threshold = 0.7
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hxu7t"]
-atlas = ExtResource("5_kjgps")
-region = Rect2(0, 0, 80, 110)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_a24j2"]
-atlas = ExtResource("5_kjgps")
-region = Rect2(400, 220, 80, 110)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lm04k"]
-atlas = ExtResource("5_kjgps")
-region = Rect2(0, 110, 80, 110)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vjnsi"]
-atlas = ExtResource("5_kjgps")
-region = Rect2(80, 110, 80, 110)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b3otv"]
-atlas = ExtResource("5_kjgps")
-region = Rect2(560, 0, 80, 110)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n6oi8"]
-atlas = ExtResource("5_kjgps")
-region = Rect2(640, 0, 80, 110)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_kfebt"]
-animations = [{
-"frames": [{
-"duration": 3.0,
-"texture": SubResource("AtlasTexture_hxu7t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_a24j2")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lm04k")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vjnsi")
-}],
-"loop": true,
-"name": &"moving",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b3otv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n6oi8")
-}],
-"loop": true,
-"name": &"winner",
-"speed": 5.0
-}]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fus73"]
-height = 1.5
 
 [node name="World" type="Node3D"]
 
@@ -88,6 +25,9 @@ projection = 1
 current = true
 size = 5.0
 
+[node name="CubeWithCollision" parent="." instance=ExtResource("2_rx2bi")]
+transform = Transform3D(10, 0, 0, 0, 0.2, 0, 0, 0, 10, 0, 0, 0)
+
 [node name="Red" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1)
 mesh = ExtResource("1_iuqoe")
@@ -99,10 +39,6 @@ mesh = ExtResource("1_rhbem")
 [node name="Light" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 0)
 mesh = ExtResource("1_8mrn4")
-
-[node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 0.2, 0, 0, 0, 10, 0, -0.1, 0)
-mesh = ExtResource("1_rhbem")
 
 [node name="Floor2" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1.74846e-07, -0.2, 0, 4, -8.74228e-09, 0, 0, 0, 10, -5, 1.9, 0)
@@ -118,7 +54,6 @@ mesh = ExtResource("1_rhbem")
 
 [node name="Floor4" type="MeshInstance3D" parent="."]
 transform = Transform3D(7.64274e-15, 8.74228e-09, 10, 4, -8.74228e-09, 0, 1.74846e-07, 0.2, -4.37114e-07, 0, 1.9, -5)
-visible = false
 mesh = ExtResource("1_rhbem")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
@@ -129,21 +64,4 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0qa8a")
 
-[node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.735014, 0)
-script = ExtResource("6_ay0ip")
-
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Player"]
-cast_shadow = 2
-pixel_size = 0.0136
-shaded = true
-alpha_cut = 2
-texture_filter = 2
-sprite_frames = SubResource("SpriteFrames_kfebt")
-animation = &"idle"
-autoplay = "idle"
-frame_progress = 0.384838
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.145188, 0)
-shape = SubResource("CapsuleShape3D_fus73")
+[node name="Player" parent="." instance=ExtResource("6_x12s6")]

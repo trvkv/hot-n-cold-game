@@ -1,0 +1,87 @@
+[gd_scene load_steps=11 format=3 uid="uid://dkod8d31vxupb"]
+
+[ext_resource type="Script" path="res://Scenes/Actors/player.gd" id="1_wdvuh"]
+[ext_resource type="Texture2D" uid="uid://c0jlen5eqnhrp" path="res://Assets/Images/kenney_platformer-characters/PNG/Player/player_tilesheet.png" id="2_a437r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hxu7t"]
+atlas = ExtResource("2_a437r")
+region = Rect2(0, 0, 80, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a24j2"]
+atlas = ExtResource("2_a437r")
+region = Rect2(400, 220, 80, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lm04k"]
+atlas = ExtResource("2_a437r")
+region = Rect2(0, 110, 80, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjnsi"]
+atlas = ExtResource("2_a437r")
+region = Rect2(80, 110, 80, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3otv"]
+atlas = ExtResource("2_a437r")
+region = Rect2(560, 0, 80, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6oi8"]
+atlas = ExtResource("2_a437r")
+region = Rect2(640, 0, 80, 110)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kfebt"]
+animations = [{
+"frames": [{
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_hxu7t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a24j2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lm04k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vjnsi")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3otv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6oi8")
+}],
+"loop": true,
+"name": &"winner",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fus73"]
+height = 1.5
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28918, 0)
+script = ExtResource("1_wdvuh")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.146564, 0)
+cast_shadow = 2
+pixel_size = 0.0136
+shaded = true
+alpha_cut = 2
+texture_filter = 2
+sprite_frames = SubResource("SpriteFrames_kfebt")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.384838
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.145188, 0)
+shape = SubResource("CapsuleShape3D_fus73")
