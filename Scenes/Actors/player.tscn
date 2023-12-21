@@ -69,8 +69,20 @@ height = 1.5
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_wdvuh")
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+[node name="AnimatedSprite3D_Horizontal" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.736997, 0)
+cast_shadow = 2
+pixel_size = 0.0136
+shaded = true
+alpha_cut = 2
+texture_filter = 2
+sprite_frames = SubResource("SpriteFrames_kfebt")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.384838
+
+[node name="AnimatedSprite3D_Vertical" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.736997, 0)
 cast_shadow = 2
 pixel_size = 0.0136
 shaded = true
