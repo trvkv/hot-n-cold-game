@@ -55,14 +55,62 @@ shadow_enabled = true
 [node name="Wall1" parent="Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, -0.05, 0)
 
+[node name="Wall7" parent="Walls" instance=ExtResource("2_rx2bi")]
+transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, -0.05, 10)
+
+[node name="Wall8" parent="Walls" instance=ExtResource("2_rx2bi")]
+transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 10, -0.05, 10)
+
+[node name="Wall9" parent="Walls" instance=ExtResource("2_rx2bi")]
+transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 10, -0.05, 0)
+
 [node name="Wall2" parent="Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(0.1, 0, 0, 0, 4, 0, 0, 0, 10, 5, 2, 0)
+
+[node name="Wall10" parent="Walls" instance=ExtResource("2_rx2bi")]
+transform = Transform3D(0.1, 0, 0, 0, 4, 0, 0, 0, 10, 15, 2, 0)
+
+[node name="Wall11" parent="Walls" instance=ExtResource("2_rx2bi")]
+transform = Transform3D(0.1, 0, 0, 0, 4, 0, 0, 0, 10, 15, 2, 10)
+
+[node name="Wall15" parent="Walls" instance=ExtResource("2_rx2bi")]
+transform = Transform3D(0.1, 0, 0, 0, 4, 0, 0, 0, 10, -5, 2, 10)
 
 [node name="Wall3" parent="Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(0.1, 0, 0, 0, 4, 0, 0, 0, 10, -5, 2, 0)
 
 [node name="Wall4" parent="Walls" instance=ExtResource("2_rx2bi")]
-transform = Transform3D(10, 0, 0, 0, 4, 0, 0, 0, 0.1, 0, 2, 5)
+transform = Transform3D(6, 0, 0, 0, 4, 0, 0, 0, 0.1, -2, 2, 5)
+
+[node name="Wall6" parent="Walls" instance=ExtResource("2_rx2bi")]
+transform = Transform3D(2.16, 0, 0, 0, 4, 0, 0, 0, 0.1, 4, 2, 5)
+
+[node name="Wall21" parent="Walls" instance=ExtResource("2_rx2bi")]
+transform = Transform3D(0.761189, 0, 0, 0, 4, 0, 0, 0, 0.1, 5.32758, 2, 5)
+
+[node name="Wall16" parent="Walls" instance=ExtResource("2_rx2bi")]
+transform = Transform3D(-2.62268e-07, 0, -0.1, 0, 4, 0, 6, 0, -4.37114e-09, 1.19209e-07, 2, 8)
+
+[node name="Wall17" parent="Walls" instance=ExtResource("2_rx2bi")]
+transform = Transform3D(-9.44166e-08, 0, -0.1, 0, 4, 0, 2.16, 0, -4.37114e-09, -1.19209e-07, 2, 14)
+
+[node name="Wall18" parent="Walls" instance=ExtResource("2_rx2bi")]
+transform = Transform3D(-2.62268e-07, 0, -0.1, 0, 4, 0, 6, 0, -4.37114e-09, 8, 2, 8)
+
+[node name="Wall20" parent="Walls" instance=ExtResource("2_rx2bi")]
+transform = Transform3D(7.07327, 0, -4.50027e-16, 0, 4.05348, 0, 0, 0, 0.101337, 11.5176, 2, 5)
+
+[node name="Wall19" parent="Walls" instance=ExtResource("2_rx2bi")]
+transform = Transform3D(-9.44166e-08, 0, -0.1, 0, 4, 0, 2.16, 0, -4.37114e-09, 8, 2, 14)
 
 [node name="Wall5" parent="Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(10, 0, 0, 0, 4, 0, 0, 0, 0.1, 0, 2, -5)
+
+[node name="Wall12" parent="Walls" instance=ExtResource("2_rx2bi")]
+transform = Transform3D(10, 0, 0, 0, 4, 0, 0, 0, 0.1, 10, 2, -5)
+
+[node name="Wall13" parent="Walls" instance=ExtResource("2_rx2bi")]
+transform = Transform3D(10, 0, 0, 0, 4, 0, 0, 0, 0.1, 10, 2, 15)
+
+[node name="Wall14" parent="Walls" instance=ExtResource("2_rx2bi")]
+transform = Transform3D(10, 0, 0, 0, 4, 0, 0, 0, 0.1, 0, 2, 15)
