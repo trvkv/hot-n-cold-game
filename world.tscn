@@ -1,6 +1,5 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctwlxb01ui5r8"]
+[gd_scene load_steps=6 format=3 uid="uid://ctwlxb01ui5r8"]
 
-[ext_resource type="Script" path="res://camera_position.gd" id="1_0krmk"]
 [ext_resource type="ArrayMesh" uid="uid://dh7gamdvjygwu" path="res://Assets/Meshes/cube-light.res" id="1_8mrn4"]
 [ext_resource type="ArrayMesh" uid="uid://d2iju8ykknvfw" path="res://Assets/Meshes/cube-red.res" id="1_iuqoe"]
 [ext_resource type="PackedScene" uid="uid://dnbsanbg1w806" path="res://Scenes/Environment/cube_with_collision.tscn" id="2_rx2bi"]
@@ -20,8 +19,6 @@ environment = SubResource("Environment_0qa8a")
 [node name="Player" parent="." instance=ExtResource("6_x12s6")]
 
 [node name="CameraPosition" type="Node3D" parent="Player"]
-script = ExtResource("1_0krmk")
-rotation_speed = 0.0
 
 [node name="Camera3D" type="Camera3D" parent="Player/CameraPosition"]
 transform = Transform3D(-4.37114e-08, 0.707107, -0.707107, 0, 0.707107, 0.707107, 1, 3.09086e-08, -3.09086e-08, -5, 6, 0)
