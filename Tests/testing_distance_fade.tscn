@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnb0i2bexdsa"]
+
+[ext_resource type="PackedScene" uid="uid://dnbsanbg1w806" path="res://Scenes/Environment/cube_with_collision.tscn" id="1_1iapm"]
+[ext_resource type="PackedScene" uid="uid://dkod8d31vxupb" path="res://Scenes/Actors/player.tscn" id="2_p3ynh"]
+[ext_resource type="PackedScene" uid="uid://biqw183sh26cy" path="res://Scenes/Util/camera_position.tscn" id="3_xb882"]
+
+[node name="TestingDistanceFade" type="Node3D"]
+
+[node name="CubeWithCollision" parent="." instance=ExtResource("1_1iapm")]
+transform = Transform3D(50, 0, 0, 0, 0.1, 0, 0, 0, 50, 0, 0, 0)
+
+[node name="CubeWithCollision2" parent="." instance=ExtResource("1_1iapm")]
+transform = Transform3D(50, 0, 0, 0, 4, 0, 0, 0, 0.1, 0, 2, -25)
+
+[node name="CubeWithCollision3" parent="." instance=ExtResource("1_1iapm")]
+transform = Transform3D(50, 0, 0, 0, 4, 0, 0, 0, 0.1, 0, 2, 25)
+
+[node name="CubeWithCollision4" parent="." instance=ExtResource("1_1iapm")]
+transform = Transform3D(0.1, 0, 0, 0, 4, 0, 0, 0, 50, 25, 2, 0)
+
+[node name="CubeWithCollision5" parent="." instance=ExtResource("1_1iapm")]
+transform = Transform3D(0.1, 0, 0, 0, 4, 0, 0, 0, 50, -25, 2, 0)
+
+[node name="CubeWithCollision6" parent="." instance=ExtResource("1_1iapm")]
+transform = Transform3D(0.0918991, 0, -3.94279, 0, 4, 0, 0.0394279, 0, 9.18991, -5.9941, 2, -4.69484)
+can_fade_when_near_player = true
+
+[node name="CubeWithCollision7" parent="." instance=ExtResource("1_1iapm")]
+transform = Transform3D(-4.37114e-09, 0, -10, 0, 4, 0, 0.1, 0, -4.37114e-07, 0.891199, 2, -8.85519)
+can_fade_when_near_player = true
+
+[node name="Player" parent="." instance=ExtResource("2_p3ynh")]
+
+[node name="CameraPosition" parent="Player" instance=ExtResource("3_xb882")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.0763536, 0.997081, 0, -0.997081, 0.0763536, 0, 15.9041, 0)
