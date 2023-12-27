@@ -7,7 +7,6 @@ extends CharacterBody3D
 @onready var sprite_position = $SpritesPosition
 
 func _process(_delta):
-    print(velocity)
     if velocity.length() > 0.0:
         animation_player.current_animation = "move"
         if velocity.z > 0.0:

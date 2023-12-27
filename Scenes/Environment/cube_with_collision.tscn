@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnbsanbg1w806"]
+[gd_scene load_steps=4 format=3 uid="uid://dnbsanbg1w806"]
 
 [ext_resource type="ArrayMesh" uid="uid://b7bla15h20cp6" path="res://Assets/Meshes/cube-green.res" id="1_ergel"]
+[ext_resource type="Script" path="res://Scenes/Environment/cube_with_collision.gd" id="2_cd0n0"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_mbek5"]
 data = PackedVector3Array(0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5)
 
 [node name="CubeWithCollision" type="MeshInstance3D"]
 mesh = ExtResource("1_ergel")
+script = ExtResource("2_cd0n0")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctwlxb01ui5r8"]
+[gd_scene load_steps=7 format=3 uid="uid://ctwlxb01ui5r8"]
 
 [ext_resource type="ArrayMesh" uid="uid://dh7gamdvjygwu" path="res://Assets/Meshes/cube-light.res" id="1_8mrn4"]
 [ext_resource type="ArrayMesh" uid="uid://d2iju8ykknvfw" path="res://Assets/Meshes/cube-red.res" id="1_iuqoe"]
+[ext_resource type="PackedScene" uid="uid://biqw183sh26cy" path="res://Scenes/Util/camera_position.tscn" id="2_7wgqx"]
 [ext_resource type="PackedScene" uid="uid://dnbsanbg1w806" path="res://Scenes/Environment/cube_with_collision.tscn" id="2_rx2bi"]
 [ext_resource type="PackedScene" uid="uid://dkod8d31vxupb" path="res://Scenes/Actors/player.tscn" id="6_x12s6"]
 
@@ -18,13 +19,8 @@ environment = SubResource("Environment_0qa8a")
 
 [node name="Player" parent="." instance=ExtResource("6_x12s6")]
 
-[node name="CameraPosition" type="Node3D" parent="Player"]
-
-[node name="Camera3D" type="Camera3D" parent="Player/CameraPosition"]
-transform = Transform3D(-4.37114e-08, 0.707107, -0.707107, 0, 0.707107, 0.707107, 1, 3.09086e-08, -3.09086e-08, -5, 6, 0)
-current = true
-fov = 50.0
-size = 5.0
+[node name="CameraPosition" parent="Player" instance=ExtResource("2_7wgqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0079155)
 
 [node name="Furnitures" type="Node3D" parent="."]
 
@@ -63,6 +59,7 @@ transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 10, -0.05, 0)
 
 [node name="Wall2" parent="Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(0.1, 0, 0, 0, 4, 0, 0, 0, 10, 5, 2, 0)
+can_fade_when_near_player = true
 
 [node name="Wall10" parent="Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(0.1, 0, 0, 0, 4, 0, 0, 0, 10, 15, 2, 0)
@@ -72,12 +69,15 @@ transform = Transform3D(0.1, 0, 0, 0, 4, 0, 0, 0, 10, 15, 2, 10)
 
 [node name="Wall15" parent="Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(0.1, 0, 0, 0, 4, 0, 0, 0, 10, -5, 2, 10)
+can_fade_when_near_player = true
 
 [node name="Wall3" parent="Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(0.1, 0, 0, 0, 4, 0, 0, 0, 10, -5, 2, 0)
+can_fade_when_near_player = true
 
 [node name="Wall4" parent="Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(6, 0, 0, 0, 4, 0, 0, 0, 0.1, -2, 2, 5)
+can_fade_when_near_player = true
 
 [node name="Wall6" parent="Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(2.16, 0, 0, 0, 4, 0, 0, 0, 0.1, 4, 2, 5)
@@ -87,18 +87,22 @@ transform = Transform3D(0.761189, 0, 0, 0, 4, 0, 0, 0, 0.1, 5.32758, 2, 5)
 
 [node name="Wall16" parent="Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(-2.62268e-07, 0, -0.1, 0, 4, 0, 6, 0, -4.37114e-09, 1.19209e-07, 2, 8)
+can_fade_when_near_player = true
 
 [node name="Wall17" parent="Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(-9.44166e-08, 0, -0.1, 0, 4, 0, 2.16, 0, -4.37114e-09, -1.19209e-07, 2, 14)
+can_fade_when_near_player = true
 
 [node name="Wall18" parent="Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(-2.62268e-07, 0, -0.1, 0, 4, 0, 6, 0, -4.37114e-09, 8, 2, 8)
+can_fade_when_near_player = true
 
 [node name="Wall20" parent="Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(7.07327, 0, -4.50027e-16, 0, 4.05348, 0, 0, 0, 0.101337, 11.5176, 2, 5)
 
 [node name="Wall19" parent="Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(-9.44166e-08, 0, -0.1, 0, 4, 0, 2.16, 0, -4.37114e-09, 8, 2, 14)
+can_fade_when_near_player = true
 
 [node name="Wall5" parent="Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(10, 0, 0, 0, 4, 0, 0, 0, 0.1, 0, 2, -5)
