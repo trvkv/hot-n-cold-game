@@ -36,10 +36,10 @@ func _on_body_exited(body):
 func disable_distance_fade(body: CollisionObject3D):
     var wall: MeshInstance3D = body.get_parent()
     var material: StandardMaterial3D = wall.get_active_material(0)
-    # DISABLE HERE
+    material.set_distance_fade(StandardMaterial3D.DISTANCE_FADE_DISABLED)
 
 func set_distance_fade(body: CollisionObject3D, distance: float):
     var wall: MeshInstance3D = body.get_parent()
     var material: StandardMaterial3D = wall.get_active_material(0)
-    print(distance)
-    # ENABLE HERE
+    material.set_distance_fade(StandardMaterial3D.DISTANCE_FADE_PIXEL_ALPHA)
+    material.set_distance_fade_max_distance(25.0 - min(distance * 7.0, 25.0))
