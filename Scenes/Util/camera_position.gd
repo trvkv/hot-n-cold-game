@@ -15,8 +15,6 @@ func _process(_delta):
             var raycast_vec: Vector3 = position - to_local(body.global_position)
             var nearest_wall_position = cos(raycast_vec.angle_to(normal)) * raycast_vec.length()
             set_distance_fade(body, nearest_wall_position)
-        else:
-            disable_distance_fade(body)
 
 func _physics_process(_delta):
     for body in faded_objects.keys():
@@ -33,15 +31,18 @@ func _on_body_entered(body):
 func _on_body_exited(body):
     if body.is_in_group("fadable_walls"):
         faded_objects.erase(body)
+        disable_distance_fade(body)
+
+func interpolate_max_distance(material: StandardMaterial3D, distance: float, duration: float = 0.3):
+    var tween: Tween = get_tree().create_tween()
+    tween.tween_property(material, "distance_fade_max_distance", distance, duration)
 
 func disable_distance_fade(body: CollisionObject3D):
     var wall: MeshInstance3D = body.get_parent()
     var material: StandardMaterial3D = wall.get_active_material(0)
-    material.set_distance_fade(StandardMaterial3D.DISTANCE_FADE_DISABLED)
-    material.set_distance_fade_max_distance(0.0)
+    interpolate_max_distance(material, 0.0)
 
 func set_distance_fade(body: CollisionObject3D, distance: float):
     var wall: MeshInstance3D = body.get_parent()
     var material: StandardMaterial3D = wall.get_active_material(0)
-    material.set_distance_fade(StandardMaterial3D.DISTANCE_FADE_PIXEL_ALPHA)
-    material.set_distance_fade_max_distance(25.0 - min(distance * 7.0, 25.0))
+    interpolate_max_distance(material, 25.0 - min(distance * 7.0, 25.0))
