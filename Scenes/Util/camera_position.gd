@@ -1,10 +1,13 @@
 extends Node3D
 
+@export var camera_type: CameraManager.CameraType = CameraManager.CameraType.GLOBAL
+
 @onready var collision_area = $Area3D
 
 var faded_objects: Dictionary
 
 func _ready():
+    CameraManager.register_camera(camera_type, $Camera3D)
     collision_area.connect("body_entered", _on_body_entered)
     collision_area.connect("body_exited", _on_body_exited)
 
