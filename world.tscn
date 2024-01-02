@@ -331,10 +331,9 @@ handle_input_locally = false
 size = Vector2i(160, 240)
 render_target_update_mode = 4
 
-[node name="Player" parent="GridContainer/SubViewportContainer_P1/SubViewport" instance=ExtResource("6_x12s6")]
+[node name="Player1" parent="GridContainer/SubViewportContainer_P1/SubViewport" instance=ExtResource("6_x12s6")]
 
-[node name="CameraPosition" parent="GridContainer/SubViewportContainer_P1/SubViewport/Player" instance=ExtResource("2_7wgqx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0079155)
+[node name="CameraPosition" parent="GridContainer/SubViewportContainer_P1/SubViewport/Player1" instance=ExtResource("2_7wgqx")]
 camera_type = 1
 
 [node name="SubViewportContainer_P2" type="SubViewportContainer" parent="GridContainer"]
@@ -348,8 +347,11 @@ handle_input_locally = false
 size = Vector2i(159, 240)
 render_target_update_mode = 4
 
-[node name="CameraPosition" parent="GridContainer/SubViewportContainer_P2/SubViewport" instance=ExtResource("2_7wgqx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.9366)
+[node name="Player2" parent="GridContainer/SubViewportContainer_P2/SubViewport" instance=ExtResource("6_x12s6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.25578)
+player_id = 2
+
+[node name="CameraPosition" parent="GridContainer/SubViewportContainer_P2/SubViewport/Player2" instance=ExtResource("2_7wgqx")]
 camera_type = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

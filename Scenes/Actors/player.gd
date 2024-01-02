@@ -1,10 +1,16 @@
 extends CharacterBody3D
 
+class_name Player
+
+@export var player_id: PlayersManager.PlayerID = PlayersManager.PlayerID.PLAYER_1
 @export var movement_speed: float = 4.0
 @export var gravity = 0.9
 
 @onready var animation_player = $AnimationPlayer
 @onready var sprite_position = $SpritesPosition
+
+func _ready() -> void:
+    PlayersManager.add_player(player_id, self)
 
 func _process(_delta):
     if velocity.length() > 0.0:
@@ -22,7 +28,7 @@ func _physics_process(delta):
     velocity.y -= gravity * delta
 
     # movement
-    var movement_dir = Vector2(Input.get_axis("ui_down", "ui_up"), Input.get_axis("ui_left", "ui_right"))
+    var movement_dir = PlayersManager.get_input(player_id)
     movement_dir = movement_dir.normalized()
     velocity = Vector3(movement_dir.x, 0.0, movement_dir.y) * movement_speed
 
