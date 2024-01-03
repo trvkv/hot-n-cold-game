@@ -1,14 +1,17 @@
 [gd_scene load_steps=24 format=3 uid="uid://ctwlxb01ui5r8"]
 
 [ext_resource type="ArrayMesh" uid="uid://dh7gamdvjygwu" path="res://Assets/Meshes/cube-light.res" id="1_8mrn4"]
-[ext_resource type="ArrayMesh" uid="uid://d2iju8ykknvfw" path="res://Assets/Meshes/cube-red.res" id="1_iuqoe"]
 [ext_resource type="Script" path="res://world.gd" id="1_pwml2"]
 [ext_resource type="PackedScene" uid="uid://biqw183sh26cy" path="res://Scenes/Util/camera_position.tscn" id="2_7wgqx"]
 [ext_resource type="PackedScene" uid="uid://dnbsanbg1w806" path="res://Scenes/Environment/cube_with_collision.tscn" id="2_rx2bi"]
+[ext_resource type="PackedScene" uid="uid://o80ya65nvwp2" path="res://Scenes/Environment/item_container.tscn" id="3_utqoj"]
 [ext_resource type="Texture2D" uid="uid://bhu5kergo3m88" path="res://Assets/Images/kenney_prototype-textures/PNG/Green/texture_06.png" id="6_2o67f"]
 [ext_resource type="PackedScene" uid="uid://dkod8d31vxupb" path="res://Scenes/Actors/player.tscn" id="6_x12s6"]
 
 [sub_resource type="Environment" id="Environment_0qa8a"]
+background_mode = 2
+ambient_light_color = Color(0.258824, 0, 0.364706, 1)
+ambient_light_sky_contribution = 0.0
 ssao_enabled = true
 glow_enabled = true
 glow_intensity = 1.1
@@ -213,24 +216,58 @@ environment = SubResource("Environment_0qa8a")
 
 [node name="Furnitures" type="Node3D" parent="."]
 
-[node name="Red" parent="Furnitures" instance=ExtResource("2_rx2bi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.315, 0.5, 1.315)
-mesh = ExtResource("1_iuqoe")
-skeleton = NodePath("../..")
-
-[node name="Green" parent="Furnitures" instance=ExtResource("2_rx2bi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.31513, 0.5, 0)
-skeleton = NodePath("../..")
-
 [node name="Light" parent="Furnitures" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18107, 0.5, 0.0076685)
 mesh = ExtResource("1_8mrn4")
 skeleton = NodePath("../..")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Furnitures"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06263, 1.22622, 1.70167)
-light_energy = 1.4
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 0.00518363, 0.999987, 0, -0.999987, 0.00518363, 0, 8.3928, -8.49657)
+light_energy = 0.0
+directional_shadow_mode = 0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.57937, 3.6966, 0.000743985)
+light_color = Color(1, 1, 0.768627, 1)
+light_energy = 4.0
 shadow_enabled = true
+omni_range = 10.8623
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57937, 3.6966, 11.0007)
+light_color = Color(1, 1, 0.768627, 1)
+light_energy = 4.0
+shadow_enabled = true
+omni_range = 10.8623
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5794, 3.6966, 10.0007)
+light_color = Color(1, 1, 0.768627, 1)
+light_energy = 4.0
+shadow_enabled = true
+omni_range = 10.8623
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.42063, 3.6966, 10.0007)
+light_color = Color(1, 1, 0.768627, 1)
+light_energy = 4.0
+shadow_enabled = true
+omni_range = 10.8623
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5794, 3.6966, -0.999256)
+light_color = Color(1, 1, 0.768627, 1)
+light_energy = 4.0
+shadow_enabled = true
+omni_range = 10.8623
+
+[node name="Containers" type="Node3D" parent="."]
+
+[node name="Container" parent="Containers" instance=ExtResource("3_utqoj")]
+transform = Transform3D(0.766044, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766044, 1.40671, 0.5, -2.22907)
+container_mesh_scene = ExtResource("2_rx2bi")
 
 [node name="Walls" type="Node3D" parent="."]
 
