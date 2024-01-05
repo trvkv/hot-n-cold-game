@@ -10,7 +10,13 @@ class_name ItemContainer
 
 var container_mesh: MeshInstance3D
 
+func _ready() -> void:
+    create_container_instance()
+
 func create_container_instance() -> void:
+    if not is_instance_valid(mesh):
+        return
+
     for child in mesh.get_children():
         remove_child(child)
         child.queue_free()
@@ -21,7 +27,7 @@ func create_container_instance() -> void:
     if container_mesh_scene.can_instantiate():
         container_mesh = container_mesh_scene.instantiate()
         if is_instance_valid(container_mesh):
-            add_child(container_mesh)
+            mesh.add_child(container_mesh)
         else:
             printerr("Mesh instance is invalid: ", container_mesh)
 
