@@ -5,12 +5,13 @@ class_name ItemContainer
 
 @export var container_mesh_scene: PackedScene: set = set_container, get = get_container
 
+@onready var inventory: ItemInventory = $ItemInventory
+@onready var mesh: Node3D = $Mesh
+
 var container_mesh: MeshInstance3D
 
-var inventory: ItemInventory = ItemInventory.new()
-
 func create_container_instance() -> void:
-    for child in get_children():
+    for child in mesh.get_children():
         remove_child(child)
         child.queue_free()
 
@@ -21,6 +22,8 @@ func create_container_instance() -> void:
         container_mesh = container_mesh_scene.instantiate()
         if is_instance_valid(container_mesh):
             add_child(container_mesh)
+        else:
+            printerr("Mesh instance is invalid: ", container_mesh)
 
 func set_container(scene: PackedScene) -> void:
     container_mesh_scene = scene

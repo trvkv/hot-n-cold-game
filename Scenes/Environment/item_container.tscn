@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://o80ya65nvwp2"]
+[gd_scene load_steps=3 format=3 uid="uid://o80ya65nvwp2"]
 
 [ext_resource type="Script" path="res://Scenes/Environment/item_container.gd" id="1_4x5bq"]
+[ext_resource type="Script" path="res://Scenes/Items/inventory.gd" id="2_474dh"]
 
 [node name="Container" type="Node3D"]
 script = ExtResource("1_4x5bq")
+
+[node name="ItemInventory" type="Node3D" parent="."]
+script = ExtResource("2_474dh")
+
+[node name="Mesh" type="Node3D" parent="."]
