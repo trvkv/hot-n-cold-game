@@ -7,7 +7,7 @@ class_name ItemContainer
 
 var container_mesh: MeshInstance3D
 
-var inventory: ItemInventory
+var inventory: ItemInventory = ItemInventory.new()
 
 func create_container_instance() -> void:
     for child in get_children():
@@ -28,3 +28,21 @@ func set_container(scene: PackedScene) -> void:
 
 func get_container() -> PackedScene:
     return container_mesh_scene
+
+func put(item: ItemBase) -> bool:
+    if not inventory.has_item(item):
+        inventory.add_item(item)
+        return true
+    return false
+
+func peek(item_type: String = "") -> Array:
+    var items = inventory.get_items()
+    if item_type.is_empty():
+        return items
+    return items.filter(func(i): return i.get_class_name() == item_type)
+
+func retrieve(item: ItemBase) -> bool:
+    if inventory.has_item(item):
+        inventory.remove_item(item)
+        return true
+    return false
