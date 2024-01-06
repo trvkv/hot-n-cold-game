@@ -8,9 +8,12 @@ class_name Player
 
 @onready var animation_player = $AnimationPlayer
 @onready var sprite_position = $SpritesPosition
+@onready var interaction_area = $InteractionArea
 
 func _ready() -> void:
     PlayersManager.add_player(player_id, self)
+
+    interaction_area.connect("body_entered", _on_body_entered)
 
 func _process(_delta):
     if velocity.length() > 0.0:
@@ -33,3 +36,7 @@ func _physics_process(delta):
     velocity = Vector3(movement_dir.x, 0.0, movement_dir.y) * movement_speed
 
     move_and_slide()
+
+func _on_body_entered(body):
+    if body.is_in_group("containers"):
+        EventBus.emit_signal("interact", body, self)

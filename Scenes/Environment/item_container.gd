@@ -28,6 +28,11 @@ func create_container_instance() -> void:
         container_mesh = container_mesh_scene.instantiate()
         if is_instance_valid(container_mesh):
             mesh.add_child(container_mesh)
+            if is_instance_valid(container_mesh.collision_body):
+                container_mesh.collision_body.add_to_group("containers")
+                EventBus.connect("interact", _on_interact)
+            else:
+                printerr("Mesh collision body is invalid: ", container_mesh)
         else:
             printerr("Mesh instance is invalid: ", container_mesh)
 
@@ -55,3 +60,8 @@ func retrieve(item: ItemBase) -> bool:
         inventory.remove_item(item)
         return true
     return false
+
+func _on_interact(target, interactor) -> void:
+    if is_instance_valid(container_mesh) and is_instance_valid(container_mesh.collision_body):
+        if target == container_mesh.collision_body:
+            print(self, ": Interacted with ", interactor)
