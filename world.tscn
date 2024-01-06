@@ -365,7 +365,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer_P1"]
 handle_input_locally = false
-size = Vector2i(160, 240)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="Player1" parent="GridContainer/SubViewportContainer_P1/SubViewport" instance=ExtResource("6_x12s6")]
@@ -381,7 +381,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer_P2"]
 handle_input_locally = false
-size = Vector2i(159, 240)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="Player2" parent="GridContainer/SubViewportContainer_P2/SubViewport" instance=ExtResource("6_x12s6")]
