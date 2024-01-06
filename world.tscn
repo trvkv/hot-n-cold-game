@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ctwlxb01ui5r8"]
+[gd_scene load_steps=25 format=3 uid="uid://ctwlxb01ui5r8"]
 
 [ext_resource type="ArrayMesh" uid="uid://dh7gamdvjygwu" path="res://Assets/Meshes/cube-light.res" id="1_8mrn4"]
 [ext_resource type="Script" path="res://world.gd" id="1_pwml2"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dnbsanbg1w806" path="res://Scenes/Environment/cube_with_collision.tscn" id="2_rx2bi"]
 [ext_resource type="PackedScene" uid="uid://o80ya65nvwp2" path="res://Scenes/Environment/item_container.tscn" id="3_utqoj"]
 [ext_resource type="Texture2D" uid="uid://bhu5kergo3m88" path="res://Assets/Images/kenney_prototype-textures/PNG/Green/texture_06.png" id="6_2o67f"]
+[ext_resource type="PackedScene" uid="uid://d3n5648hv4hmc" path="res://Scenes/Environment/Furnitures/wardrobe.tscn" id="6_mhe2n"]
 [ext_resource type="PackedScene" uid="uid://dkod8d31vxupb" path="res://Scenes/Actors/player.tscn" id="6_x12s6"]
 
 [sub_resource type="Environment" id="Environment_0qa8a"]
@@ -265,9 +266,9 @@ omni_range = 10.8623
 
 [node name="Containers" type="Node3D" parent="."]
 
-[node name="Container" parent="Containers" instance=ExtResource("3_utqoj")]
-transform = Transform3D(0.766044, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766044, 1.40671, 0.5, -2.22907)
-container_mesh_scene = ExtResource("2_rx2bi")
+[node name="Wardrobe" parent="Containers" instance=ExtResource("3_utqoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.56876, 0, 3.771)
+container_mesh_scene = ExtResource("6_mhe2n")
 
 [node name="Walls" type="Node3D" parent="."]
 
