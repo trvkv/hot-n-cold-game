@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/Actors/player.gd" id="1_wdvuh"]
 [ext_resource type="Texture2D" uid="uid://c0jlen5eqnhrp" path="res://Assets/Images/kenney_platformer-characters/PNG/Player/player_tilesheet.png" id="2_a437r"]
+[ext_resource type="PackedScene" uid="uid://hoccdjw8bcjs" path="res://Scenes/Actors/Components/interaction_area.tscn" id="3_1vdlc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hxu7t"]
 atlas = ExtResource("2_a437r")
@@ -126,9 +127,6 @@ _data = {
 "move": SubResource("Animation_sibnx")
 }
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_bv0t1"]
-size = Vector3(0.5, 1, 1.5)
-
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_wdvuh")
 
@@ -166,8 +164,5 @@ libraries = {
 "": SubResource("AnimationLibrary_albr1")
 }
 
-[node name="InteractionArea" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0.5, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
-shape = SubResource("BoxShape3D_bv0t1")
+[node name="InteractionArea" parent="." node_paths=PackedStringArray("interactor") instance=ExtResource("3_1vdlc")]
+interactor = NodePath("..")
