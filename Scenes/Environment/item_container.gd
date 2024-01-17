@@ -30,6 +30,7 @@ func create_container_instance() -> void:
             mesh.add_child(container_mesh)
             if is_instance_valid(container_mesh.collision_body):
                 container_mesh.collision_body.add_to_group("containers")
+                EventBus.connect("update_interactees", _on_update_interactees)
                 EventBus.connect("interact", _on_interact)
             else:
                 printerr("Mesh collision body is invalid: ", container_mesh)
@@ -61,7 +62,14 @@ func retrieve(item: ItemBase) -> bool:
         return true
     return false
 
-func _on_interact(target, interactor) -> void:
+func _on_update_interactees(interactees, active_interactee) -> void:
     if is_instance_valid(container_mesh) and is_instance_valid(container_mesh.collision_body):
-        if target == container_mesh.collision_body:
+        if active_interactee == container_mesh.collision_body:
+            container_mesh.get_active_material(0).albedo_color = Color(0.0, 0.0, 0.0)
+        else:
+            container_mesh.get_active_material(0).albedo_color = Color(1.0, 1.0, 1.0)
+
+func _on_interact(interactee, interactor) -> void:
+    if is_instance_valid(container_mesh) and is_instance_valid(container_mesh.collision_body):
+        if interactee == container_mesh.collision_body:
             print(self, ": Interacted with ", interactor)
