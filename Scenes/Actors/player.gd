@@ -34,3 +34,7 @@ func _physics_process(delta):
     velocity = Vector3(movement_dir.x, 0.0, movement_dir.y) * movement_speed
 
     move_and_slide()
+
+func handle_input(action: InputEventAction) -> void:
+    if action.action == "interact":
+        EventBus.emit_signal("trigger_interaction", self)

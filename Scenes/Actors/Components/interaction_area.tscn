@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/Actors/Components/interaction_area.gd" id="1_t1q7a"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bv0t1"]
-size = Vector3(0.5, 1, 1.5)
+size = Vector3(0.8, 1, 1)
 
 [node name="InteractionArea" type="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0.5, 0)

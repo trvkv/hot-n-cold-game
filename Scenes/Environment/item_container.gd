@@ -66,6 +66,8 @@ func _on_update_interactees(interactees, active_interactee) -> void:
     if is_instance_valid(container_mesh) and is_instance_valid(container_mesh.collision_body):
         if active_interactee == container_mesh.collision_body:
             container_mesh.get_active_material(0).albedo_color = Color(0.0, 0.0, 0.0)
+        elif container_mesh.collision_body in interactees:
+            container_mesh.get_active_material(0).albedo_color = Color(0.8, 0.8, 0.8)
         else:
             container_mesh.get_active_material(0).albedo_color = Color(1.0, 1.0, 1.0)
 

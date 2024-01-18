@@ -72,6 +72,6 @@ func _on_body_exited(body):
     if send_signal:
         EventBus.emit_signal("update_interactees", interactees, active_interactee)
 
-func _on_trigger_interaction() -> void:
+func _on_trigger_interaction(event_interactor) -> void:
     if is_instance_valid(active_interactee):
-        EventBus.emit_signal("interact", active_interactee, interactor)
+        EventBus.emit_signal("interact", active_interactee, event_interactor)
