@@ -355,18 +355,21 @@ transform = Transform3D(10, 0, 0, 0, 4, 0, 0, 0, 0.1, 10, 2, 15)
 transform = Transform3D(10, 0, 0, 0, 4, 0, 0, 0, 0.1, 0, 2, 15)
 
 [node name="GridContainer" type="GridContainer" parent="."]
+texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -959.0
+offset_bottom = -720.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(4, 4)
 theme_override_constants/h_separation = 1
 columns = 2
 
 [node name="SubViewportContainer_P1" type="SubViewportContainer" parent="GridContainer"]
+custom_minimum_size = Vector2(160, 240)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer_P1"]
@@ -380,14 +383,13 @@ render_target_update_mode = 4
 camera_type = 1
 
 [node name="SubViewportContainer_P2" type="SubViewportContainer" parent="GridContainer"]
+custom_minimum_size = Vector2(160, 240)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer_P2"]
 handle_input_locally = false
-size = Vector2i(159, 240)
+size = Vector2i(160, 240)
 render_target_update_mode = 4
 
 [node name="Player2" parent="GridContainer/SubViewportContainer_P2/SubViewport" instance=ExtResource("6_x12s6")]
