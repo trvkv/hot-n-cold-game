@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ctwlxb01ui5r8"]
+[gd_scene load_steps=27 format=3 uid="uid://ctwlxb01ui5r8"]
 
 [ext_resource type="ArrayMesh" uid="uid://dh7gamdvjygwu" path="res://Assets/Meshes/cube-light.res" id="1_8mrn4"]
 [ext_resource type="Script" path="res://world.gd" id="1_pwml2"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d3n5648hv4hmc" path="res://Scenes/Environment/Furnitures/wardrobe.tscn" id="6_mhe2n"]
 [ext_resource type="PackedScene" uid="uid://k8fwqgtj23rd" path="res://Scenes/Environment/Furnitures/small_cabinet.tscn" id="6_s5i3c"]
 [ext_resource type="PackedScene" uid="uid://dkod8d31vxupb" path="res://Scenes/Actors/player.tscn" id="6_x12s6"]
+[ext_resource type="PackedScene" uid="uid://c1jry8m8264rs" path="res://Scenes/GUI/gui_inventory.tscn" id="10_puf7h"]
 
 [sub_resource type="Environment" id="Environment_0qa8a"]
 background_mode = 2
@@ -401,15 +402,59 @@ camera_type = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="CenterContainer" type="VBoxContainer" parent="CanvasLayer"]
+[node name="PlayersDebugGUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/CenterContainer"]
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/PlayersDebugGUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="VBC_P1" type="VBoxContainer" parent="CanvasLayer/PlayersDebugGUI/GridContainer"]
 layout_mode = 2
-text = "THIS WILL BE THE GUI"
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P1"]
+layout_mode = 2
+text = "Player 1"
+
+[node name="GuiInventory" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P1" instance=ExtResource("10_puf7h")]
+layout_mode = 2
+
+[node name="VBC_P2" type="VBoxContainer" parent="CanvasLayer/PlayersDebugGUI/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P2"]
+layout_mode = 2
+text = "Player 2"
+horizontal_alignment = 2
+
+[node name="GuiInventory" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P2" instance=ExtResource("10_puf7h")]
+layout_direction = 3
+layout_mode = 2
+
+[node name="VBC" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBC"]
+layout_mode = 2
+text = "
+
+THIS WILL BE THE GLOBAL GUI"
 horizontal_alignment = 1
 vertical_alignment = 1
