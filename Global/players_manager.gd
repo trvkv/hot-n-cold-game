@@ -94,6 +94,13 @@ func get_player(player_id: PlayerID) -> Player:
         return null
     return container.player
 
+func get_player_name(player_id: PlayerID) -> String:
+    if player_id == PlayerID.PLAYER_1:
+        return "Player 1"
+    elif player_id == PlayerID.PLAYER_2:
+        return "Player 2"
+    return "Unknown"
+
 func get_input(player_id: PlayerID) -> Vector2:
     var container: PlayerContainer = get_container(player_id)
     if container == null:
