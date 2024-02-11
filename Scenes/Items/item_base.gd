@@ -1,4 +1,4 @@
-extends Node3D
+extends RefCounted
 
 class_name ItemBase
 
