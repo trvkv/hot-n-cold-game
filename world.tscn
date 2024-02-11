@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d3n5648hv4hmc" path="res://Scenes/Environment/Furnitures/wardrobe.tscn" id="6_mhe2n"]
 [ext_resource type="PackedScene" uid="uid://k8fwqgtj23rd" path="res://Scenes/Environment/Furnitures/small_cabinet.tscn" id="6_s5i3c"]
 [ext_resource type="PackedScene" uid="uid://dkod8d31vxupb" path="res://Scenes/Actors/player.tscn" id="6_x12s6"]
-[ext_resource type="PackedScene" uid="uid://c1jry8m8264rs" path="res://Scenes/GUI/gui_inventory.tscn" id="10_puf7h"]
+[ext_resource type="PackedScene" uid="uid://c1jry8m8264rs" path="res://Scenes/GUI/gui_player.tscn" id="10_puf7h"]
 
 [sub_resource type="Environment" id="Environment_0qa8a"]
 background_mode = 2
@@ -424,14 +424,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="GuiInventory" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P1" instance=ExtResource("10_puf7h")]
+[node name="GuiPlayer" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P1" instance=ExtResource("10_puf7h")]
 layout_mode = 2
 
 [node name="VBC_P2" type="VBoxContainer" parent="CanvasLayer/PlayersDebugGUI/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="GuiInventory" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P2" instance=ExtResource("10_puf7h")]
+[node name="GuiPlayer" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P2" instance=ExtResource("10_puf7h")]
 layout_direction = 3
 layout_mode = 2
 player = 2
