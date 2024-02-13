@@ -1,42 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://df2dm6r1dpgo6"]
 
-[ext_resource type="Texture2D" uid="uid://j1aikejpioj6" path="res://icon.svg" id="1_cqgw4"]
 [ext_resource type="Script" path="res://Scenes/Items/horizontal_item_container.gd" id="1_g823m"]
+[ext_resource type="PackedScene" uid="uid://c8sggdoocb33i" path="res://Scenes/Items/item_element.tscn" id="2_alvkk"]
 
 [node name="HorizontalItemContainer" type="HBoxContainer"]
 script = ExtResource("1_g823m")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(64, 64)
+[node name="ItemElement_1" parent="." instance=ExtResource("2_alvkk")]
 layout_mode = 2
-texture = ExtResource("1_cqgw4")
-expand_mode = 1
-stretch_mode = 4
 
-[node name="TextureRect2" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(64, 64)
+[node name="ItemElement_2" parent="." instance=ExtResource("2_alvkk")]
 layout_mode = 2
-texture = ExtResource("1_cqgw4")
-expand_mode = 1
-stretch_mode = 4
 
-[node name="TextureRect3" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(64, 64)
+[node name="ItemElement_3" parent="." instance=ExtResource("2_alvkk")]
 layout_mode = 2
-texture = ExtResource("1_cqgw4")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="TextureRect4" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-texture = ExtResource("1_cqgw4")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="TextureRect5" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-texture = ExtResource("1_cqgw4")
-expand_mode = 1
-stretch_mode = 4
