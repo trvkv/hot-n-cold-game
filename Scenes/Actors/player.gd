@@ -9,6 +9,7 @@ class_name Player
 @onready var animation_player = $AnimationPlayer
 @onready var sprite_position = $SpritesPosition
 @onready var interaction_area = $InteractionArea
+@onready var item_inventory = $ItemInventory
 
 func _ready() -> void:
     PlayersManager.add_player(player_id, self)

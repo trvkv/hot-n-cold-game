@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c1jry8m8264rs"]
 
 [ext_resource type="Script" path="res://Scenes/GUI/gui_player.gd" id="1_kogb5"]
-[ext_resource type="PackedScene" uid="uid://df2dm6r1dpgo6" path="res://Scenes/Items/horizontal_item_container.tscn" id="2_el2ng"]
+[ext_resource type="PackedScene" uid="uid://df2dm6r1dpgo6" path="res://Scenes/GUI/horizontal_item_container.tscn" id="2_el2ng"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jhiyp"]
 bg_color = Color(0, 0, 0, 0.6)

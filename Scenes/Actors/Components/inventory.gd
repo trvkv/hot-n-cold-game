@@ -2,7 +2,7 @@ extends Node3D
 
 class_name ItemInventory
 
-var items: Array[ItemBase] = []
+@export var items: Array[ItemBase] = []
 
 func add_item(item: ItemBase) -> void:
     if is_instance_valid(item) and is_instance_valid(item as ItemBase):

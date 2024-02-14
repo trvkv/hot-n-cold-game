@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://df2dm6r1dpgo6"]
+
+[ext_resource type="Script" path="res://Scenes/GUI/horizontal_item_container.gd" id="1_wc5fk"]
+[ext_resource type="PackedScene" uid="uid://c8sggdoocb33i" path="res://Scenes/GUI/item_element.tscn" id="2_oyih1"]
+
+[node name="HorizontalItemContainer" type="HBoxContainer"]
+script = ExtResource("1_wc5fk")
+
+[node name="ItemElement_1" parent="." instance=ExtResource("2_oyih1")]
+layout_mode = 2
+
+[node name="ItemElement_2" parent="." instance=ExtResource("2_oyih1")]
+layout_mode = 2
+
+[node name="ItemElement_3" parent="." instance=ExtResource("2_oyih1")]
+layout_mode = 2

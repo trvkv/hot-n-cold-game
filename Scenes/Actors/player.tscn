@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://dkod8d31vxupb"]
+[gd_scene load_steps=17 format=3 uid="uid://dkod8d31vxupb"]
 
 [ext_resource type="Script" path="res://Scenes/Actors/player.gd" id="1_wdvuh"]
 [ext_resource type="Texture2D" uid="uid://c0jlen5eqnhrp" path="res://Assets/Images/kenney_platformer-characters/PNG/Player/player_tilesheet.png" id="2_a437r"]
 [ext_resource type="PackedScene" uid="uid://hoccdjw8bcjs" path="res://Scenes/Actors/Components/interaction_area.tscn" id="3_1vdlc"]
+[ext_resource type="Script" path="res://Scenes/Actors/Components/inventory.gd" id="4_crp7u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hxu7t"]
 atlas = ExtResource("2_a437r")
@@ -174,3 +175,6 @@ transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.528072, 0)
 layers = 2
 cast_shadow = 3
 mesh = SubResource("CapsuleMesh_50i36")
+
+[node name="ItemInventory" type="Node3D" parent="."]
+script = ExtResource("4_crp7u")

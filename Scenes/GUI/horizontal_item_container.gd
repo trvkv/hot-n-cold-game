@@ -12,4 +12,8 @@ func reload_items() -> void:
     for child in get_children():
         remove_child(child)
 
+    for item in items:
+        add_item(item)
 
+func add_item(item: ItemBase) -> void:
+    pass
