@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://c8sggdoocb33i"]
+[gd_scene load_steps=2 format=3 uid="uid://c8sggdoocb33i"]
+
+[ext_resource type="Script" path="res://Scenes/GUI/item_element.gd" id="1_s7bh4"]
 
 [node name="ItemElement" type="PanelContainer"]
+script = ExtResource("1_s7bh4")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
