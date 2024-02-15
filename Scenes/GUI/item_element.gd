@@ -26,12 +26,7 @@ func _ready():
 func set_number(value: int) -> void:
     if not is_instance_valid(number_label):
         return
-
-    var s = str(value)
-    if not s.is_valid_int():
-        return
-
-    number_label.set_text(s)
+    number_label.set_text(str(value))
 
 func set_icon(icon: Texture2D) -> void:
     if not is_instance_valid(texture_rect):
