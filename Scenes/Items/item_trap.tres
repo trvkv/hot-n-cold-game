@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="ItemTrap" load_steps=2 format=3 uid="uid://don7pfb0cf8pq"]
+
+[ext_resource type="Script" path="res://Scenes/Items/item_trap.gd" id="1_oagm8"]
+
+[resource]
+script = ExtResource("1_oagm8")

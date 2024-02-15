@@ -2,6 +2,8 @@ extends Resource
 
 class_name ItemBase
 
+@export var icon: Texture2D = null
+
 func interact() -> void:
     pass
 
