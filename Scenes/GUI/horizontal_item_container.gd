@@ -8,12 +8,15 @@ func _ready() -> void:
     reload_items()
 
 func reload_items() -> void:
-    # clear current items
-    for child in get_children():
-        remove_child(child)
+    # TODO: not finished yet
+    for item_element: ItemElement in get_children():
+        # clear current item
+        clear_item(item_element)
 
-    for item in items:
-        add_item(item)
+func add_item(item_element: ItemElement, item: ItemBase) -> void:
+    if is_instance_valid(item_element) and is_instance_valid(item):
+        item_element.set_icon(item.icon)
 
-func add_item(item: ItemBase) -> void:
-    pass
+func clear_item(item_element: ItemElement) -> void:
+    if is_instance_valid(item_element):
+        item_element.set_icon(null)
