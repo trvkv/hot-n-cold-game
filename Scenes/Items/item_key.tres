@@ -1,6 +1,8 @@
-[gd_resource type="Resource" script_class="ItemKey" load_steps=2 format=3 uid="uid://b5ohqfe6mt3q5"]
+[gd_resource type="Resource" script_class="ItemKey" load_steps=3 format=3 uid="uid://b5ohqfe6mt3q5"]
 
+[ext_resource type="Texture2D" uid="uid://6aoc75agjqgf" path="res://Assets/Images/kenney_platformer-pack-redux/PNG/Items/keyBlue.png" id="1_1rlyc"]
 [ext_resource type="Script" path="res://Scenes/Items/item_key.gd" id="1_dh8d4"]
 
 [resource]
 script = ExtResource("1_dh8d4")
+icon = ExtResource("1_1rlyc")

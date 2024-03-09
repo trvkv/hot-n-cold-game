@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1jry8m8264rs"]
+[gd_scene load_steps=8 format=3 uid="uid://c1jry8m8264rs"]
 
 [ext_resource type="Script" path="res://Scenes/GUI/gui_player.gd" id="1_kogb5"]
 [ext_resource type="PackedScene" uid="uid://df2dm6r1dpgo6" path="res://Scenes/GUI/horizontal_item_container.tscn" id="2_el2ng"]
+[ext_resource type="PackedScene" uid="uid://c8sggdoocb33i" path="res://Scenes/GUI/item_element.tscn" id="3_4ha2u"]
+[ext_resource type="Resource" uid="uid://don7pfb0cf8pq" path="res://Scenes/Items/item_trap.tres" id="3_vf76c"]
+[ext_resource type="Resource" uid="uid://b5ohqfe6mt3q5" path="res://Scenes/Items/item_key.tres" id="4_xcaea"]
+[ext_resource type="Resource" uid="uid://bqsiaqedj4v3e" path="res://Scenes/Items/item_favourite.tres" id="5_rxsnj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jhiyp"]
 bg_color = Color(0, 0, 0, 0.6)
@@ -40,3 +44,5 @@ vertical_alignment = 1
 
 [node name="ItemContainer" parent="PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("2_el2ng")]
 layout_mode = 2
+item_element_scene = ExtResource("3_4ha2u")
+items = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("3_vf76c"), ExtResource("4_xcaea"), ExtResource("5_rxsnj")])
