@@ -66,6 +66,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fus73"]
+radius = 0.4
 height = 1.5
 
 [sub_resource type="Animation" id="Animation_cpn6g"]
