@@ -1,9 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8sggdoocb33i"]
+[gd_scene load_steps=4 format=3 uid="uid://c8sggdoocb33i"]
 
+[ext_resource type="StyleBox" uid="uid://1djsqldc2p8e" path="res://Scenes/GUI/Styles/item_element_active.tres" id="1_7jh2t"]
 [ext_resource type="Script" path="res://Scenes/GUI/item_element.gd" id="1_s7bh4"]
+[ext_resource type="StyleBox" uid="uid://pe8aumcavs3h" path="res://Scenes/GUI/Styles/item_element_inactive.tres" id="1_snfey"]
 
 [node name="ItemElement" type="PanelContainer"]
+theme_override_styles/panel = ExtResource("1_snfey")
 script = ExtResource("1_s7bh4")
+style_active = ExtResource("1_7jh2t")
+style_inactive = ExtResource("1_snfey")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2

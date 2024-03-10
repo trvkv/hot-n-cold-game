@@ -427,6 +427,7 @@ alignment = 1
 
 [node name="GuiPlayer" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P1" instance=ExtResource("10_puf7h")]
 layout_mode = 2
+player_id = 1
 
 [node name="VBC_P2" type="VBoxContainer" parent="CanvasLayer/PlayersDebugGUI/GridContainer"]
 layout_mode = 2
@@ -435,7 +436,7 @@ size_flags_horizontal = 3
 [node name="GuiPlayer" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P2" instance=ExtResource("10_puf7h")]
 layout_direction = 3
 layout_mode = 2
-player = 2
+player_id = 2
 
 [node name="GlobalDebugGUI" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("frames_value_path", "fps_value_path", "process_value_path", "physics_value_path")]
 layout_mode = 3

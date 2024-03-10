@@ -36,8 +36,10 @@ func _physics_process(delta):
 
     move_and_slide()
 
-func handle_input(action: InputEventAction) -> void:
-    if action.action == "interact" and action.pressed:
+func handle_input(input: InputEventAction) -> void:
+    if input.action == "interact" and input.pressed:
         EventBus.emit_signal("trigger_interaction", $InteractionArea, self)
-    elif action.action == "switch" and action.pressed:
+    elif input.action == "switch_interaction" and input.pressed:
         EventBus.emit_signal("switch_interaction", $InteractionArea)
+    elif input.action == "switch_item" and input.pressed:
+        EventBus.emit_signal("switch_item", self)

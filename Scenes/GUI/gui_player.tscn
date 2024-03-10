@@ -14,8 +14,10 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[node name="GuiIPlayer" type="Panel"]
+[node name="GuiIPlayer" type="Panel" node_paths=PackedStringArray("label_player_name", "item_container")]
 script = ExtResource("1_kogb5")
+label_player_name = NodePath("PanelContainer/MarginContainer/VBoxContainer/L_player_name")
+item_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/ItemContainer")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
