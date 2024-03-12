@@ -4,7 +4,7 @@ class_name Player
 
 @export var player_id: PlayersManager.PlayerID = PlayersManager.PlayerID.PLAYER_1
 @export var movement_speed: float = 4.0
-@export var gravity = 0.9
+@export var gravity = 9.8
 
 @onready var animation_player = $AnimationPlayer
 @onready var sprite_position = $SpritesPosition
@@ -30,9 +30,14 @@ func _physics_process(delta):
     velocity.y -= gravity * delta
 
     # movement
-    var movement_dir = PlayersManager.get_input(player_id)
+    var movement_dir: Vector2 = PlayersManager.get_input(player_id)
     movement_dir = movement_dir.normalized()
-    velocity = Vector3(movement_dir.x, 0.0, movement_dir.y) * movement_speed
+
+    velocity = Vector3(
+        movement_dir.x * movement_speed,
+        velocity.y,
+        movement_dir.y * movement_speed
+    )
 
     move_and_slide()
 

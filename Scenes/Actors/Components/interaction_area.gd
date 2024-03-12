@@ -21,7 +21,7 @@ func _ready() -> void:
         interactor = self
 
 func _physics_process(_delta) -> void:
-    var movement_dir: Vector2 = Vector2(interactor.velocity.x, interactor.velocity.z).normalized()
+    var movement_dir: Vector2 = PlayersManager.get_input(interactor.player_id).normalized()
     if movement_dir.length() > 0:
         move_interaction_area(movement_dir)
 

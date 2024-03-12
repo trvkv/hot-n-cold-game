@@ -14,10 +14,12 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[node name="GuiIPlayer" type="Panel" node_paths=PackedStringArray("label_player_name", "item_container")]
+[node name="GuiIPlayer" type="Panel" node_paths=PackedStringArray("label_player_name", "item_container", "position_label_value", "rotation_label_value")]
 script = ExtResource("1_kogb5")
 label_player_name = NodePath("PanelContainer/MarginContainer/VBoxContainer/L_player_name")
 item_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/ItemContainer")
+position_label_value = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBC_Position/Label_value_position")
+rotation_label_value = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBC_Rotation/Label_value_rotation")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -48,3 +50,25 @@ vertical_alignment = 1
 layout_mode = 2
 item_element_scene = ExtResource("3_4ha2u")
 items = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("3_vf76c"), ExtResource("4_xcaea"), ExtResource("5_rxsnj")])
+
+[node name="HBC_Position" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label_name" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBC_Position"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Position"
+
+[node name="Label_value_position" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBC_Position"]
+layout_mode = 2
+
+[node name="HBC_Rotation" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label_name" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBC_Rotation"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Y Rotation"
+
+[node name="Label_value_rotation" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBC_Rotation"]
+layout_mode = 2

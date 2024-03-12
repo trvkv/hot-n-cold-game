@@ -427,7 +427,6 @@ alignment = 1
 
 [node name="GuiPlayer" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P1" instance=ExtResource("10_puf7h")]
 layout_mode = 2
-player_id = 1
 
 [node name="VBC_P2" type="VBoxContainer" parent="CanvasLayer/PlayersDebugGUI/GridContainer"]
 layout_mode = 2
