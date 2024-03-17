@@ -48,3 +48,5 @@ func handle_input(input: InputEventAction) -> void:
         EventBus.emit_signal("switch_interaction", $InteractionArea)
     elif input.action == "switch_item" and input.pressed:
         EventBus.emit_signal("switch_item", self)
+    elif input.action == "use_item" and input.pressed:
+        EventBus.emit_signal("use_item", self)

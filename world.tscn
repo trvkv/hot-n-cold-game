@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://ctwlxb01ui5r8"]
+[gd_scene load_steps=29 format=3 uid="uid://ctwlxb01ui5r8"]
 
 [ext_resource type="ArrayMesh" uid="uid://dh7gamdvjygwu" path="res://Assets/Meshes/cube-light.res" id="1_8mrn4"]
 [ext_resource type="Script" path="res://world.gd" id="1_pwml2"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dkod8d31vxupb" path="res://Scenes/Actors/player.tscn" id="6_x12s6"]
 [ext_resource type="PackedScene" uid="uid://c1jry8m8264rs" path="res://Scenes/GUI/gui_player.tscn" id="10_puf7h"]
 [ext_resource type="Script" path="res://Scenes/GUI/global_debug.gd" id="11_u3rha"]
+[ext_resource type="Script" path="res://Scenes/Util/interaction_manager.gd" id="11_wrfae"]
 
 [sub_resource type="Environment" id="Environment_0qa8a"]
 background_mode = 2
@@ -428,6 +429,9 @@ alignment = 1
 [node name="GuiPlayer" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P1" instance=ExtResource("10_puf7h")]
 layout_mode = 2
 
+[node name="P1_InteractionGUI" type="VBoxContainer" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P1"]
+layout_mode = 2
+
 [node name="VBC_P2" type="VBoxContainer" parent="CanvasLayer/PlayersDebugGUI/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -436,6 +440,17 @@ size_flags_horizontal = 3
 layout_direction = 3
 layout_mode = 2
 player_id = 2
+
+[node name="P2_InteractionGUI" type="VBoxContainer" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P2"]
+layout_mode = 2
+
+[node name="InteractionManager" type="Control" parent="CanvasLayer/PlayersDebugGUI" node_paths=PackedStringArray("player_1_interaction_gui", "player_2_interaction_gui")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("11_wrfae")
+player_1_interaction_gui = NodePath("../GridContainer/VBC_P1/P1_InteractionGUI")
+player_2_interaction_gui = NodePath("../GridContainer/VBC_P2/P2_InteractionGUI")
 
 [node name="GlobalDebugGUI" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("frames_value_path", "fps_value_path", "process_value_path", "physics_value_path")]
 layout_mode = 3

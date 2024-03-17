@@ -62,7 +62,7 @@ func retrieve(item: ItemBase) -> bool:
         return true
     return false
 
-func _on_update_interactees(interactees, active_interactee) -> void:
+func _on_update_interactees(_player, interactees, active_interactee) -> void:
     if is_instance_valid(container_mesh) and is_instance_valid(container_mesh.collision_body):
         if active_interactee == container_mesh.collision_body:
             container_mesh.get_active_material(0).albedo_color = Color(0.0, 0.0, 0.0)

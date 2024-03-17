@@ -62,7 +62,7 @@ func _on_body_entered(body):
         active_interactee = find_closest_node(interactor, interactees)
         send_signal = true
     if send_signal:
-        EventBus.emit_signal("update_interactees", interactees, active_interactee)
+        EventBus.emit_signal("update_interactees", interactor, interactees, active_interactee)
 
 func _on_body_exited(body):
     var send_signal = false
@@ -71,7 +71,7 @@ func _on_body_exited(body):
         active_interactee = find_closest_node(interactor, interactees)
         send_signal = true
     if send_signal:
-        EventBus.emit_signal("update_interactees", interactees, active_interactee)
+        EventBus.emit_signal("update_interactees", interactor, interactees, active_interactee)
 
 func _on_trigger_interaction(interaction_area, event_interactor) -> void:
     if interaction_area != self:
@@ -88,4 +88,4 @@ func _on_switch_interaction(interaction_area) -> void:
         if index == interactees.size():
             index = 0
         active_interactee = interactees[index]
-        EventBus.emit_signal("update_interactees", interactees, active_interactee)
+        EventBus.emit_signal("update_interactees", interactor, interactees, active_interactee)

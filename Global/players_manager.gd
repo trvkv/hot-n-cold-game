@@ -94,6 +94,12 @@ func get_player(player_id: PlayerID) -> Player:
         return null
     return container.player
 
+func get_players() -> Array[Player]:
+    var all_players: Array[Player] = []
+    for player_id in PlayerID:
+        all_players.append(get_player(PlayerID[player_id]))
+    return all_players
+
 func get_player_name(player_id: PlayerID) -> String:
     if player_id == PlayerID.PLAYER_1:
         return "Player 1"
