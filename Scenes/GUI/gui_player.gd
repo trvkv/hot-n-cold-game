@@ -1,4 +1,4 @@
-extends Panel
+extends PanelContainer
 
 @export var player_id: PlayersManager.PlayerID = PlayersManager.PlayerID.PLAYER_1
 @export var label_player_name: Label
