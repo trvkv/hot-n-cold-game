@@ -4,6 +4,7 @@ extends Node3D
 class_name ItemContainer
 
 @export var container_mesh_scene: PackedScene: set = set_container, get = get_container
+@export var actions: Array[ItemActions.ACTIONS] = [ItemActions.ACTIONS.OPEN_CONTAINER]
 
 @onready var inventory: ItemInventory = $ItemInventory
 @onready var mesh: Node3D = $Mesh
@@ -30,6 +31,9 @@ func create_container_instance() -> void:
             mesh.add_child(container_mesh)
             if is_instance_valid(container_mesh.collision_body):
                 container_mesh.collision_body.add_to_group("containers")
+                # setting owner to the "topmost" parent. It could be then retrieved
+                # inside 'interaction area' during collision detection
+                container_mesh.collision_body.set_owner(self)
                 EventBus.connect("update_interactees", _on_update_interactees)
                 EventBus.connect("interact", _on_interact)
             else:

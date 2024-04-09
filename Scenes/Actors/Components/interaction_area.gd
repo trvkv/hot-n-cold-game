@@ -56,9 +56,10 @@ func find_closest_node(target: Node3D, nodes: Array[Node3D]) -> Node3D:
 func _on_body_entered(body):
     var send_signal = false
     if body.is_in_group("containers"):
-        if body in interactees:
+        var body_owner = body.get_owner()
+        if body_owner in interactees:
             return
-        interactees.push_back(body)
+        interactees.push_back(body_owner)
         active_interactee = find_closest_node(interactor, interactees)
         send_signal = true
     if send_signal:
@@ -67,7 +68,8 @@ func _on_body_entered(body):
 func _on_body_exited(body):
     var send_signal = false
     if body.is_in_group("containers"):
-        interactees.erase(body)
+        var body_owner = body.get_owner()
+        interactees.erase(body_owner)
         active_interactee = find_closest_node(interactor, interactees)
         send_signal = true
     if send_signal:

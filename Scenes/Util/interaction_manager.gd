@@ -34,14 +34,18 @@ func _on_update_interactees(player, interactees, active_interactee) -> void:
         child.queue_free()
 
     if is_instance_valid(active_interactee):
-        # TODO: for active interactee gather possible actions
-        # and print them as strings in the gui.
-        pass
+        var actions = active_interactee.get("actions")
 
-    for interactee in player_interaction_data[player]["interactees"]:
-        var label = Label.new()
-        label.set_text(str(interactee))
-        gui.add_child(label)
+        if actions == null:
+            printerr("Actions not available on: ", active_interactee)
+            return
+
+        for action in actions:
+            var label = Label.new()
+            label.set_text(str(ItemActions.action_to_string(action)))
+            gui.add_child(label)
+
+        # TODO: Add active item actions here also
 
 func get_interaction_gui(player: Player) -> Control:
     if player.player_id == PlayersManager.PlayerID.PLAYER_1:

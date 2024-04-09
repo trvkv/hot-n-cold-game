@@ -6,7 +6,8 @@ enum ACTIONS {
     PUT_TO_CONTAINER,
     LOCK_CONTAINER,
     UNLOCK_CONTAINER,
-    SET_TRAP
+    SET_TRAP,
+    OPEN_CONTAINER
 }
 
 static func action_to_string(action: int) -> String:
@@ -18,5 +19,7 @@ static func action_to_string(action: int) -> String:
         return "Unlock container"
     elif action == ACTIONS.SET_TRAP:
         return "Set trap"
+    elif action == ACTIONS.OPEN_CONTAINER:
+        return "Open container"
     printerr("Incorrect action ID: %d, returning null" % action)
     return ""
