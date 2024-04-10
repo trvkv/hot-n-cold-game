@@ -67,15 +67,16 @@ func retrieve(item: ItemBase) -> bool:
     return false
 
 func _on_update_interactees(_player, interactees, active_interactee) -> void:
-    if is_instance_valid(container_mesh) and is_instance_valid(container_mesh.collision_body):
-        if active_interactee == container_mesh.collision_body:
+    if is_instance_valid(container_mesh):
+        if active_interactee == self:
             container_mesh.get_active_material(0).albedo_color = Color(0.0, 0.0, 0.0)
-        elif container_mesh.collision_body in interactees:
+        elif self in interactees:
             container_mesh.get_active_material(0).albedo_color = Color(0.8, 0.8, 0.8)
         else:
             container_mesh.get_active_material(0).albedo_color = Color(1.0, 1.0, 1.0)
+    else:
+        printerr("Mesh container or collision body invalid for ", self)
 
 func _on_interact(interactee, interactor) -> void:
-    if is_instance_valid(container_mesh) and is_instance_valid(container_mesh.collision_body):
-        if interactee == container_mesh.collision_body:
-            print(self, ": Interacted with ", interactor)
+    if interactee == self:
+        print(self, ": Interacted with ", interactor)
