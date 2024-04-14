@@ -4,7 +4,7 @@ extends Node3D
 class_name ItemContainer
 
 @export var container_mesh_scene: PackedScene: set = set_container, get = get_container
-@export var actions: Array[ItemActions.ACTIONS] = [ItemActions.ACTIONS.OPEN_CONTAINER]
+@export var actions: Array[PlayerActions.ACTIONS] = [PlayerActions.ACTIONS.OPEN_CONTAINER]
 
 @onready var inventory: ItemInventory = $ItemInventory
 @onready var mesh: Node3D = $Mesh
@@ -13,6 +13,9 @@ var container_mesh: MeshInstance3D
 
 func _ready() -> void:
     create_container_instance()
+
+func get_class_name() -> StringName:
+    return &"ItemContainer"
 
 func create_container_instance() -> void:
     if not is_instance_valid(mesh):
