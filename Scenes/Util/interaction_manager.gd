@@ -43,9 +43,7 @@ func reconstruct_gui(player: Player) -> void:
         return
 
     # resetting players gui
-    for child in gui.get_children():
-        gui.remove_child(child)
-        child.queue_free()
+    gui.clear_actions()
 
     var active_interactee = null
     if "active_interactee" in player_interaction_data[player].keys():
@@ -60,9 +58,7 @@ func reconstruct_gui(player: Player) -> void:
                 add_action_label_to_gui(gui, action)
 
 func add_action_label_to_gui(gui, action) -> void:
-    var label = Label.new()
-    label.set_text(str(PlayerActions.action_to_string(action)))
-    gui.add_child(label)
+    gui.add_action(action)
 
 func get_actions(active_resource) -> Array[PlayerActions.ACTIONS]:
     if not is_instance_valid(active_resource):

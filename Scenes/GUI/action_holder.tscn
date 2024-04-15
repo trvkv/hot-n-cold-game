@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4m1cmqe2oe2o"]
+
+[ext_resource type="Script" path="res://Scenes/GUI/action_holder.gd" id="1_pxhqn"]
+[ext_resource type="StyleBox" uid="uid://5g8m54g7d3mf" path="res://Scenes/GUI/Styles/action_holder_inactive.tres" id="2_oe2ht"]
+[ext_resource type="StyleBox" uid="uid://4l73aaukhdpo" path="res://Scenes/GUI/Styles/action_holder_active.tres" id="2_r51ef"]
+
+[node name="ActionHolder" type="HBoxContainer" node_paths=PackedStringArray("label")]
+script = ExtResource("1_pxhqn")
+label = NodePath("Label")
+style_active = ExtResource("2_r51ef")
+style_inactive = ExtResource("2_oe2ht")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_r51ef")
+text = "Example action"
