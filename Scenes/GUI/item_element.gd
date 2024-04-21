@@ -48,9 +48,8 @@ func set_icon(icon: Texture2D) -> void:
 func set_active(activate: bool) -> void:
     if activate == is_active:
         return # already set, nothing to do
+    is_active = activate
     if activate:
         add_theme_stylebox_override("panel", style_active)
-        is_active = true
     else:
         add_theme_stylebox_override("panel", style_inactive)
-        is_active = false

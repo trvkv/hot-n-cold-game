@@ -446,6 +446,7 @@ player_id = 2
 
 [node name="GuiActions" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P2" instance=ExtResource("11_lt7pl")]
 layout_mode = 2
+player_id = 2
 
 [node name="InteractionManager" type="Control" parent="CanvasLayer/PlayersDebugGUI" node_paths=PackedStringArray("player_1_interaction_gui", "player_2_interaction_gui")]
 anchors_preset = 0

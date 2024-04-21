@@ -12,5 +12,4 @@ style_inactive = ExtResource("2_oe2ht")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
-theme_override_styles/normal = ExtResource("2_r51ef")
 text = "Example action"

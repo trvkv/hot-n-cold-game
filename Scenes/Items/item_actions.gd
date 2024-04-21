@@ -3,6 +3,7 @@ extends Object
 class_name PlayerActions
 
 enum ACTIONS {
+    INVALID,
     PUT_TO_CONTAINER,
     LOCK_CONTAINER,
     UNLOCK_CONTAINER,

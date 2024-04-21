@@ -43,7 +43,7 @@ func reconstruct_gui(player: Player) -> void:
         return
 
     # resetting players gui
-    gui.clear_actions()
+    gui.remove_actions()
 
     var active_interactee = null
     if "active_interactee" in player_interaction_data[player].keys():
