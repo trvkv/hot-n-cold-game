@@ -43,6 +43,7 @@ func reconstruct_gui(player: Player) -> void:
         return
 
     # resetting players gui
+    gui.set_actions_inactive()
     gui.remove_actions()
 
     var active_interactee = null
@@ -56,6 +57,15 @@ func reconstruct_gui(player: Player) -> void:
         for action in get_actions(active_item):
             if PlayerActions.should_action_be_available(action, active_interactee):
                 add_action_label_to_gui(gui, action)
+
+    # all actions here should be inactive, because all were deleted above
+    # make first action an active one
+    var elements = gui.get_elements()
+    if elements.size() == 0:
+        return
+
+    var action: PlayerActions.ACTIONS = elements[0].action
+    gui.set_active_action(action)
 
 func add_action_label_to_gui(gui, action) -> void:
     gui.add_action(action)

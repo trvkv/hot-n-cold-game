@@ -14,12 +14,17 @@ func _ready():
 
 func _on_action_switch(player: Player) -> void:
     if player.player_id == player_id:
-        print("Player switched action ", player.player_id)
-        # TODO: start from here. Implement switching actions
+        var next = get_next_action_by_active()
+        if is_instance_valid(next):
+            set_actions_inactive()
+            set_active_action(next)
 
 func add_action(action: PlayerActions.ACTIONS) -> void:
     var holder: ActionHolder = spawn_action_holder(false, action)
     interaction_gui.add_child(holder)
+
+func get_elements() -> Array:
+    return interaction_gui.get_children()
 
 func set_active_action(action: PlayerActions.ACTIONS, active: bool = true) -> void:
     for child in interaction_gui.get_children():
@@ -41,6 +46,17 @@ func get_active_action() -> PlayerActions.ACTIONS:
 func set_actions_inactive() -> void:
     for child in interaction_gui.get_children():
         child.set_active(false)
+    active_action = null
+
+func get_next_action_by_active() -> ItemElement:
+    if not is_instance_valid(active_action):
+        return null
+
+    var index = active_action.get_index()
+    index += 1 # increase index
+    if index < interaction_gui.get_child_count():
+        return interaction_gui.get_child(index)
+    return interaction_gui.get_child(0)
 
 func remove_actions() -> void:
     for child in interaction_gui.get_children():

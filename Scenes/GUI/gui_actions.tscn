@@ -25,6 +25,3 @@ text = "Actions"
 
 [node name="InteractionGUI" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-
-[node name="ActionHolder" parent="MarginContainer/VBoxContainer/InteractionGUI" instance=ExtResource("2_51ep1")]
-layout_mode = 2
