@@ -19,9 +19,9 @@ func set_active(activate: bool) -> void:
         return # already set, nothing to do
     is_active = activate
     if activate:
-        add_theme_stylebox_override("label", style_active)
+        label.add_theme_stylebox_override("normal", style_active)
     else:
-        add_theme_stylebox_override("label", style_inactive)
+        label.add_theme_stylebox_override("normal", style_inactive)
 
 func set_action(action_: PlayerActions.ACTIONS) -> void:
     action = action_

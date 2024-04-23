@@ -14,10 +14,10 @@ func _ready():
 
 func _on_action_switch(player: Player) -> void:
     if player.player_id == player_id:
-        var next = get_next_action_by_active()
+        var next: ActionHolder = get_next_action_by_active()
         if is_instance_valid(next):
             set_actions_inactive()
-            set_active_action(next)
+            set_active_action(next.action)
 
 func add_action(action: PlayerActions.ACTIONS) -> void:
     var holder: ActionHolder = spawn_action_holder(false, action)
@@ -27,9 +27,10 @@ func get_elements() -> Array:
     return interaction_gui.get_children()
 
 func set_active_action(action: PlayerActions.ACTIONS, active: bool = true) -> void:
-    for child in interaction_gui.get_children():
-        if child.action == action:
-            child.set_active(active)
+    for holder in interaction_gui.get_children():
+        if holder.action == action:
+            holder.set_active(active)
+            active_action = holder
             return
 
 func get_active_action() -> PlayerActions.ACTIONS:
@@ -48,7 +49,7 @@ func set_actions_inactive() -> void:
         child.set_active(false)
     active_action = null
 
-func get_next_action_by_active() -> ItemElement:
+func get_next_action_by_active() -> ActionHolder:
     if not is_instance_valid(active_action):
         return null
 
