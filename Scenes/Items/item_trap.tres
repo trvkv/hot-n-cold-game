@@ -6,4 +6,4 @@
 [resource]
 script = ExtResource("1_oagm8")
 icon = ExtResource("1_1u2jr")
-actions = Array[int]([3])
+actions = Array[int]([4])
