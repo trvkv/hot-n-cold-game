@@ -34,6 +34,9 @@ func add_item(item: ItemBase) -> void:
         item_element.set_item(item)
         item_element.set_number(1)
 
+func get_active_element() -> ItemElement:
+    return active_element
+
 func get_next_element_by_active() -> ItemElement:
     var index = active_element.get_index()
     index += 1 # increase index

@@ -13,6 +13,10 @@ class_name Player
 
 func _ready() -> void:
     PlayersManager.add_player(player_id, self)
+    assert(is_instance_valid(animation_player), "Animation player not present")
+    assert(is_instance_valid(sprite_position), "Sprite position not present")
+    assert(is_instance_valid(interaction_area), "Interaction area not present")
+    assert(is_instance_valid(item_inventory), "Item inventory not present")
 
 func _process(_delta):
     if velocity.length() > 0.0:
@@ -43,9 +47,9 @@ func _physics_process(delta):
 
 func handle_input(input: InputEventAction) -> void:
     if input.action == "interact" and input.pressed:
-        EventBus.emit_signal("trigger_interaction", $InteractionArea, self)
+        EventBus.emit_signal("trigger_interaction", self, interaction_area)
     elif input.action == "switch_interaction" and input.pressed:
-        EventBus.emit_signal("switch_interaction", $InteractionArea)
+        EventBus.emit_signal("switch_interaction", self, interaction_area)
     elif input.action == "switch_item" and input.pressed:
         EventBus.emit_signal("switch_item", self)
     elif input.action == "switch_action" and input.pressed:

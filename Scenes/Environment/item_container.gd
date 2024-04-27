@@ -80,6 +80,6 @@ func _on_update_interactees(_player, interactees, active_interactee) -> void:
     else:
         printerr("Mesh container or collision body invalid for ", self)
 
-func _on_interact(interactee, interactor) -> void:
+func _on_interact(interactee, interactor, action) -> void:
     if interactee == self:
-        print(self, ": Interacted with ", interactor)
+        print(self, ": Interacted with ", interactor, ", action  ", action)

@@ -13,7 +13,6 @@ func _ready() -> void:
     move_interaction_area(interaction_initial_direction)
     connect("body_entered", _on_body_entered)
     connect("body_exited", _on_body_exited)
-    EventBus.connect("trigger_interaction", _on_trigger_interaction)
     EventBus.connect("switch_interaction", _on_switch_interaction)
 
     if not is_instance_valid(interactor):
@@ -75,13 +74,7 @@ func _on_body_exited(body):
     if send_signal:
         EventBus.emit_signal("update_interactees", interactor, interactees, active_interactee)
 
-func _on_trigger_interaction(interaction_area, event_interactor) -> void:
-    if interaction_area != self:
-        return
-    if is_instance_valid(active_interactee):
-        EventBus.emit_signal("interact", active_interactee, event_interactor)
-
-func _on_switch_interaction(interaction_area) -> void:
+func _on_switch_interaction(_player, interaction_area) -> void:
     if interaction_area != self:
         return
     var index = interactees.find(active_interactee)

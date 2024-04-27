@@ -9,12 +9,33 @@ func _ready() -> void:
     # initialize players data
     for player in PlayersManager.get_players():
         player_interaction_data[player] = {}
+        player_interaction_data[player]["interaction_area"] = get_interaction_area(player)
 
     assert(is_instance_valid(player_1_interaction_gui), "Player 1 gui not valid")
     assert(is_instance_valid(player_2_interaction_gui), "Player 2 gui not valid")
 
+    EventBus.connect("trigger_interaction", _on_trigger_interaction)
     EventBus.connect("update_interactees", _on_update_interactees)
     EventBus.connect("update_items", _on_update_items)
+    EventBus.connect("update_actions", _on_update_actions)
+    EventBus.connect("interact", _on_interact)
+
+func _on_interact(interactee, interactor, action) -> void:
+    print("Interacted: ", interactor, " -> ", interactee, " ", action)
+
+func _on_trigger_interaction(player, _interaction_area) -> void:
+    var active_interactee = get_active_interactee(player)
+    if is_instance_valid(active_interactee):
+        var action = get_active_action(player)
+        EventBus.emit_signal("interact", active_interactee, player, action)
+
+func _on_update_actions(player, actions, active_action) -> void:
+    if player not in player_interaction_data.keys():
+        printerr("FATAL: Player not found in player interaction data!")
+        return
+
+    player_interaction_data[player]["actions"] = actions
+    player_interaction_data[player]["active_action"] = active_action
 
 func _on_update_interactees(player, interactees, active_interactee) -> void:
     if player not in player_interaction_data.keys():
@@ -70,6 +91,12 @@ func reconstruct_gui(player: Player) -> void:
 func add_action_label_to_gui(gui, action) -> void:
     gui.add_action(action)
 
+func get_player_data(player: Player) -> Dictionary:
+    if player not in player_interaction_data.keys():
+        printerr("FATAL: Player not found in player interaction data!")
+        return {}
+    return player_interaction_data[player]
+
 func get_actions(active_resource) -> Array[PlayerActions.ACTIONS]:
     if not is_instance_valid(active_resource):
         return []
@@ -88,3 +115,25 @@ func get_interaction_gui(player: Player) -> Control:
         return player_2_interaction_gui
     printerr("Wrong player given... (", player, ")")
     return null
+
+func get_interaction_area(player: Player) -> Area3D:
+    if is_instance_valid(player):
+        return player.interaction_area
+    return null
+
+func get_active_interactee(player: Player):
+    var player_data = get_player_data(player)
+    if not "active_interactee" in player_data:
+        return null
+    return player_data["active_interactee"]
+
+func get_active_action(player: Player):
+    var player_data = get_player_data(player)
+    if not "active_action" in player_data:
+        return PlayerActions.ACTIONS.INVALID
+
+    var action = player_data["active_action"]
+    if not is_instance_valid(action):
+        return PlayerActions.ACTIONS.INVALID
+
+    return action.action

@@ -18,6 +18,7 @@ func _on_action_switch(player: Player) -> void:
         if is_instance_valid(next):
             set_actions_inactive()
             set_active_action(next.action)
+            EventBus.emit_signal("update_actions", player, get_elements(), next)
 
 func add_action(action: PlayerActions.ACTIONS) -> void:
     var holder: ActionHolder = spawn_action_holder(false, action)
