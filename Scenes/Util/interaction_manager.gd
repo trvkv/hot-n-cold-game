@@ -21,7 +21,8 @@ func _ready() -> void:
     EventBus.connect("interact", _on_interact)
 
 func _on_interact(interactee, interactor, action) -> void:
-    print("Interacted: ", interactor, " -> ", interactee, " ", action)
+    if interactee.has_method("interact"):
+        interactee.interact(interactee, interactor, action)
 
 func _on_trigger_interaction(player, _interaction_area) -> void:
     var active_interactee = get_active_interactee(player)

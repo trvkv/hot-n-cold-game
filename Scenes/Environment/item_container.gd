@@ -5,6 +5,7 @@ class_name ItemContainer
 
 @export var container_mesh_scene: PackedScene: set = set_container, get = get_container
 @export var actions: Array[PlayerActions.ACTIONS] = [PlayerActions.ACTIONS.OPEN_CONTAINER]
+@export var is_locked: bool = false
 
 @onready var inventory: ItemInventory = $ItemInventory
 @onready var mesh: Node3D = $Mesh
@@ -38,7 +39,6 @@ func create_container_instance() -> void:
                 # inside 'interaction area' during collision detection
                 container_mesh.collision_body.set_owner(self)
                 EventBus.connect("update_interactees", _on_update_interactees)
-                EventBus.connect("interact", _on_interact)
             else:
                 printerr("Mesh collision body is invalid: ", container_mesh)
         else:
@@ -69,6 +69,18 @@ func retrieve(item: ItemBase) -> bool:
         return true
     return false
 
+func lock() -> bool:
+    if not is_locked:
+        is_locked = true
+        return true
+    return false
+
+func unlock() -> bool:
+    if is_locked:
+        is_locked = false
+        return true
+    return false
+
 func _on_update_interactees(_player, interactees, active_interactee) -> void:
     if is_instance_valid(container_mesh):
         if active_interactee == self:
@@ -80,6 +92,21 @@ func _on_update_interactees(_player, interactees, active_interactee) -> void:
     else:
         printerr("Mesh container or collision body invalid for ", self)
 
-func _on_interact(interactee, interactor, action) -> void:
+func interact(interactee, interactor, action) -> void:
     if interactee == self:
-        print(self, ": Interacted with ", interactor, ", action  ", action)
+        if action == PlayerActions.ACTIONS.OPEN_CONTAINER:
+            if is_locked:
+                print("Container locked (", interactor, ")")
+                return
+            print("Items inside container: ", peek())
+        elif action == PlayerActions.ACTIONS.LOCK_CONTAINER:
+            print("Locking container (", interactor, ")")
+            if not lock():
+                print("Container already locked! (", interactor, ")")
+        elif action == PlayerActions.ACTIONS.UNLOCK_CONTAINER:
+            print("Unlocking container (", interactor, ")")
+            if not unlock():
+                print("Container already unlocked! (", interactor, ")")
+        elif action == PlayerActions.ACTIONS.PUT_TO_CONTAINER:
+            pass
+    return
