@@ -5,7 +5,6 @@
 
 [node name="Container" type="Node3D"]
 script = ExtResource("1_4x5bq")
-is_locked = null
 
 [node name="ItemInventory" type="Node3D" parent="."]
 script = ExtResource("2_474dh")
