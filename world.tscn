@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://ctwlxb01ui5r8"]
+[gd_scene load_steps=31 format=3 uid="uid://ctwlxb01ui5r8"]
 
 [ext_resource type="ArrayMesh" uid="uid://dh7gamdvjygwu" path="res://Assets/Meshes/cube-light.res" id="1_8mrn4"]
 [ext_resource type="Script" path="res://world.gd" id="1_pwml2"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://ciigl5pdv3i7u" path="res://Scenes/GUI/gui_actions.tscn" id="11_lt7pl"]
 [ext_resource type="Script" path="res://Scenes/GUI/global_debug.gd" id="11_u3rha"]
 [ext_resource type="Script" path="res://Scenes/Util/interaction_manager.gd" id="11_wrfae"]
+[ext_resource type="PackedScene" uid="uid://bka2hbsca3p2u" path="res://Scenes/GUI/gui_inventory.tscn" id="12_x1aap"]
 
 [sub_resource type="Environment" id="Environment_0qa8a"]
 background_mode = 2
@@ -225,12 +226,10 @@ environment = SubResource("Environment_0qa8a")
 [node name="SmallCabinet" parent="Containers" instance=ExtResource("3_utqoj")]
 transform = Transform3D(-0.106889, 0, -0.994271, 0, 1, 0, 0.994271, 0, -0.106889, 3.67021, 0, 2.65251)
 container_mesh_scene = ExtResource("6_s5i3c")
-is_locked = null
 
 [node name="Wardrobe" parent="Containers" instance=ExtResource("3_utqoj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.56876, 0, 3.771)
 container_mesh_scene = ExtResource("6_mhe2n")
-is_locked = null
 
 [node name="Furnitures" type="Node3D" parent="."]
 
@@ -436,6 +435,9 @@ size_flags_horizontal = 0
 [node name="GuiActions" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P1" instance=ExtResource("11_lt7pl")]
 layout_mode = 2
 
+[node name="GuiInventory" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P1" instance=ExtResource("12_x1aap")]
+layout_mode = 2
+
 [node name="VBC_P2" type="VBoxContainer" parent="CanvasLayer/PlayersDebugGUI/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -449,6 +451,9 @@ player_id = 2
 [node name="GuiActions" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P2" instance=ExtResource("11_lt7pl")]
 layout_mode = 2
 player_id = 2
+
+[node name="GuiInventory" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P2" instance=ExtResource("12_x1aap")]
+layout_mode = 2
 
 [node name="InteractionManager" type="Control" parent="CanvasLayer/PlayersDebugGUI" node_paths=PackedStringArray("player_1_interaction_gui", "player_2_interaction_gui")]
 anchors_preset = 0

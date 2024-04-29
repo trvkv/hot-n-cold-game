@@ -47,6 +47,7 @@ func _on_update_interactees(player, interactees, active_interactee) -> void:
     player_interaction_data[player]["active_interactee"] = active_interactee
 
     reconstruct_gui(player)
+    switch_gui_visibility(player)
 
 func _on_update_items(player, items, active_item) -> void:
     if player not in player_interaction_data.keys():
@@ -57,6 +58,7 @@ func _on_update_items(player, items, active_item) -> void:
     player_interaction_data[player]["active_item"] = active_item
 
     reconstruct_gui(player)
+    switch_gui_visibility(player)
 
 func reconstruct_gui(player: Player) -> void:
     var gui = get_interaction_gui(player)
@@ -88,6 +90,13 @@ func reconstruct_gui(player: Player) -> void:
 
     var action: PlayerActions.ACTIONS = elements[0].action
     gui.set_active_action(action)
+
+func switch_gui_visibility(player: Player) -> void:
+    var gui = get_interaction_gui(player)
+    if gui.count_elements() > 0:
+        gui.set_modulate(Color(1.0, 1.0, 1.0, 1.0))
+    else:
+        gui.set_modulate(Color(0.0, 0.0, 0.0, 0.0))
 
 func add_action_label_to_gui(gui, action) -> void:
     gui.add_action(action)

@@ -26,6 +26,9 @@ func add_action(action: PlayerActions.ACTIONS) -> void:
 func get_elements() -> Array:
     return interaction_gui.get_children()
 
+func count_elements() -> int:
+    return interaction_gui.get_children().size()
+
 func set_active_action(action: PlayerActions.ACTIONS, active: bool = true) -> void:
     for holder in interaction_gui.get_children():
         if holder.action == action:
