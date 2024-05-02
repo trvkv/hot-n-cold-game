@@ -4,12 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://df2dm6r1dpgo6" path="res://Scenes/GUI/horizontal_item_container.tscn" id="1_tby5a"]
 [ext_resource type="PackedScene" uid="uid://c8sggdoocb33i" path="res://Scenes/GUI/item_element.tscn" id="2_obat0"]
 
-[node name="GuiInventory" type="PanelContainer"]
+[node name="GuiInventory" type="PanelContainer" node_paths=PackedStringArray("item_container")]
 offset_right = 212.0
 offset_bottom = 95.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource("1_37tm5")
+item_container = NodePath("MarginContainer/VBoxContainer/HorizontalItemContainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
