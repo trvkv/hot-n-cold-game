@@ -5,7 +5,9 @@ extends PanelContainer
 
 func _ready() -> void:
     assert(is_instance_valid(item_container), "Item container not valid")
+    hide()
     EventBus.connect("action_successful", _on_action_successful)
+    EventBus.connect("update_interactees", _on_update_interactees)
 
 func _on_action_successful(interactor, _interactee, action, custom_data) -> void:
     if action != PlayerActions.ACTIONS.OPEN_CONTAINER:
@@ -19,5 +21,10 @@ func _on_action_successful(interactor, _interactee, action, custom_data) -> void
     if items == null:
         return
 
-    for item in items:
-        item_container.add_item(item)
+    item_container.items = items
+    item_container.reload_items()
+
+    show()
+
+func _on_update_interactees(_interactor, _interactees, _active_interactee):
+    hide()

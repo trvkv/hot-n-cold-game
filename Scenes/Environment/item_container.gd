@@ -15,7 +15,8 @@ var container_mesh: MeshInstance3D
 
 func _ready() -> void:
     create_container_instance()
-    put_all(items)
+    if not Engine.is_editor_hint():
+        put_all(items)
 
 func get_class_name() -> StringName:
     return &"ItemContainer"
