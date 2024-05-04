@@ -24,22 +24,3 @@ static func action_to_string(action: int) -> String:
         return "Open container"
     printerr("Incorrect action ID: %d, returning null" % action)
     return ""
-
-static func should_action_be_available(action, interactee) -> bool:
-
-    # set trap doesn't require interactable object nearby
-    if action == ACTIONS.SET_TRAP:
-        return true
-
-    # interactee/container related actions only, below
-
-    if interactee == null:
-        return false
-
-    if not interactee.has_method("get_class_name"):
-        return false
-
-    if interactee.get_class_name() == &"ItemContainer":
-        return true
-
-    return false

@@ -88,7 +88,7 @@ func reconstruct_gui(player: Player) -> void:
     if "active_item" in player_interaction_data[player].keys():
         var active_item = player_interaction_data[player]["active_item"]
         for action in get_actions(active_item):
-            if PlayerActions.should_action_be_available(action, active_interactee):
+            if should_action_be_available(action, active_interactee):
                 add_action_label_to_gui(gui, action)
 
     # all actions here should be inactive, because all were deleted above
@@ -156,3 +156,22 @@ func get_active_action(player: Player):
         return PlayerActions.ACTIONS.INVALID
 
     return action.action
+
+func should_action_be_available(action, interactee) -> bool:
+
+    # set trap doesn't require interactable object nearby
+    if action == PlayerActions.ACTIONS.SET_TRAP:
+        return true
+
+    # interactee/container related actions only, below
+
+    if interactee == null:
+        return false
+
+    if not interactee.has_method("get_class_name"):
+        return false
+
+    if interactee.get_class_name() == &"ItemContainer":
+        return true
+
+    return false
