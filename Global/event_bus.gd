@@ -9,5 +9,5 @@ signal switch_item(player)
 signal update_actions(player, actions, active_action)
 signal switch_action(player)
 
-signal action_successful(interactor, interactee, action, custom_data)
-signal action_unsuccessful(interactor, interactee, action, custom_data)
+signal action_successful(interaction_data)
+signal action_unsuccessful(interaction_data)

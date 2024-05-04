@@ -22,7 +22,16 @@ func _ready() -> void:
 
 func _on_interact(interactee, interactor, action) -> void:
     if interactee.has_method("interact"):
-        interactee.interact(interactee, interactor, action)
+        var interaction_data: InteractionData = InteractionData.new()
+        interaction_data.player_id = interactor.player_id
+        interaction_data.action = action
+        interaction_data.initiator = interactor
+        interaction_data.target = interactee
+        interaction_data.request = player_interaction_data[interactor]
+        if interactee.interact(interaction_data):
+            EventBus.emit_signal("action_successful", interaction_data)
+        else:
+            EventBus.emit_signal("action_unsuccessful", interaction_data)
 
 func _on_trigger_interaction(player, _interaction_area) -> void:
     var active_interactee = get_active_interactee(player)

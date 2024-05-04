@@ -16,3 +16,6 @@ func has_item(item: ItemBase) -> bool:
 
 func remove_item(item: ItemBase) -> void:
     items.erase(item)
+
+func size() -> int:
+    return items.size()

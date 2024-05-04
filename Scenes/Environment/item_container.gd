@@ -6,7 +6,7 @@ class_name ItemContainer
 @export var container_mesh_scene: PackedScene: set = set_container, get = get_container
 @export var actions: Array[PlayerActions.ACTIONS] = [PlayerActions.ACTIONS.OPEN_CONTAINER]
 @export var is_locked: bool = false
-@export var items: Array[ItemBase]: set = set_items, get = get_items
+@export var item: ItemBase: set = set_item, get = get_item
 
 @onready var inventory: ItemInventory = $ItemInventory
 @onready var mesh: Node3D = $Mesh
@@ -16,7 +16,7 @@ var container_mesh: MeshInstance3D
 func _ready() -> void:
     create_container_instance()
     if not Engine.is_editor_hint():
-        put_all(items)
+        set_item(item)
 
 func get_class_name() -> StringName:
     return &"ItemContainer"
@@ -54,28 +54,27 @@ func set_container(scene: PackedScene) -> void:
 func get_container() -> PackedScene:
     return container_mesh_scene
 
-func set_items(items_to_set: Array[ItemBase]) -> void:
-    items = items_to_set
+func set_item(item_to_set: ItemBase) -> void:
+    item = item_to_set
     if Engine.is_editor_hint():
         return
     if not is_node_ready():
         return
-    put_all(items)
+    put(item)
 
-func get_items():
-    return items
+func get_item():
+    return item
 
-func put_all(items_to_put: Array[ItemBase]) -> void:
-    for item in items_to_put:
-        put(item)
-    return
-
-func put(item: ItemBase) -> bool:
+func put(item_to_put: ItemBase) -> bool:
     if not is_instance_valid(inventory):
         return false
 
-    if not inventory.has_item(item):
-        inventory.add_item(item)
+    if inventory.size() > 0:
+        print("Inventory already contains an item!")
+        return false
+
+    if not inventory.has_item(item_to_put):
+        inventory.add_item(item_to_put)
         return true
     return false
 
@@ -88,9 +87,9 @@ func peek(item_type: String = "") -> Array[ItemBase]:
         return items_in_inventory
     return items_in_inventory.filter(func(i): return i.get_class_name() == item_type)
 
-func retrieve(item: ItemBase) -> bool:
-    if inventory.has_item(item):
-        inventory.remove_item(item)
+func retrieve(item_to_retrieve: ItemBase) -> bool:
+    if inventory.has_item(item_to_retrieve):
+        inventory.remove_item(item_to_retrieve)
         return true
     return false
 
@@ -106,6 +105,30 @@ func unlock() -> bool:
         return true
     return false
 
+func action_open_container(interaction_data: InteractionData) -> void:
+    print("Opening container (", interaction_data.initiator, ")")
+    interaction_data.response = {"items": peek()}
+    interaction_data.is_successful = not is_locked
+
+func action_lock_container(interaction_data: InteractionData) -> void:
+    print("Locking container (", interaction_data.initiator, ")")
+    interaction_data.is_successful = lock()
+
+func action_unlock_container(interaction_data: InteractionData) -> void:
+    print("Unlocking container (", interaction_data.initiator, ")")
+    interaction_data.is_successful = unlock()
+
+func action_put_to_container(interaction_data: InteractionData) -> void:
+    print("Putting item to container (", interaction_data.initiator, ")")
+    if "active_item" in interaction_data.request:
+        var active_item = interaction_data.request["active_item"]
+        interaction_data.is_successful = put(active_item)
+        interaction_data.response = {"active_item": active_item}
+        print("    ** Item => ", active_item)
+    else:
+        printerr("No active item selected, while putting item to container")
+        interaction_data.is_successful = false
+
 func _on_update_interactees(_player, interactees, active_interactee) -> void:
     if is_instance_valid(container_mesh):
         if active_interactee == self:
@@ -117,24 +140,14 @@ func _on_update_interactees(_player, interactees, active_interactee) -> void:
     else:
         printerr("Mesh container or collision body invalid for ", self)
 
-func interact(interactee, interactor, action) -> void:
-    if interactee == self:
-        if action == PlayerActions.ACTIONS.OPEN_CONTAINER:
-            if is_locked:
-                print("Container locked (", interactor, ")")
-                EventBus.emit_signal("action_unsuccessful", interactor, interactee, action, [])
-                return
-            print("Items inside container: ", peek())
-            EventBus.emit_signal("action_successful", interactor, interactee, action, peek())
-            return
-        elif action == PlayerActions.ACTIONS.LOCK_CONTAINER:
-            print("Locking container (", interactor, ")")
-            if not lock():
-                print("Container already locked! (", interactor, ")")
-        elif action == PlayerActions.ACTIONS.UNLOCK_CONTAINER:
-            print("Unlocking container (", interactor, ")")
-            if not unlock():
-                print("Container already unlocked! (", interactor, ")")
-        elif action == PlayerActions.ACTIONS.PUT_TO_CONTAINER:
-            pass
-    return
+func interact(interaction_data: InteractionData) -> bool:
+    if interaction_data.target == self:
+        if interaction_data.action == PlayerActions.ACTIONS.OPEN_CONTAINER:
+            action_open_container(interaction_data)
+        elif interaction_data.action == PlayerActions.ACTIONS.LOCK_CONTAINER:
+            action_lock_container(interaction_data)
+        elif interaction_data.action == PlayerActions.ACTIONS.UNLOCK_CONTAINER:
+            action_unlock_container(interaction_data)
+        elif interaction_data.action == PlayerActions.ACTIONS.PUT_TO_CONTAINER:
+            action_put_to_container(interaction_data)
+    return interaction_data.is_successful

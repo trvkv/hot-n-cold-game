@@ -34,6 +34,11 @@ func add_item(item: ItemBase) -> void:
         item_element.set_item(item)
         item_element.set_number(1)
 
+func add_empty() -> void:
+    var item_element: ItemElement = item_element_scene.instantiate()
+    if is_instance_valid(item_element):
+        add_child(item_element)
+
 func get_active_element() -> ItemElement:
     return active_element
 
