@@ -50,14 +50,14 @@ func get_next_element_by_active() -> ItemElement:
 
     return get_child(0)
 
-func clear_item(item_element: ItemElement) -> void:
+func clear_element(item_element: ItemElement) -> void:
     if is_instance_valid(item_element):
         remove_child(item_element)
         item_element.queue_free()
 
 func clear() -> void:
-    for item in get_children():
-        clear_item(item)
+    for element in get_children():
+        clear_element(element)
 
 func get_elements() -> Array[ItemElement]:
     var elements: Array[ItemElement] = []
@@ -84,3 +84,17 @@ func set_active_by_element(new_active: ItemElement) -> void:
 
 func size() -> int:
     return get_child_count()
+
+func has_item(item_to_check: ItemBase) -> bool:
+    for item in get_items():
+        if item == item_to_check:
+            return true
+    return false
+
+func clear_item(item_to_clear: ItemBase) -> bool:
+    if has_item(item_to_clear):
+        for element in get_children():
+            if element.item == item_to_clear:
+                clear_element(element)
+                return true
+    return false

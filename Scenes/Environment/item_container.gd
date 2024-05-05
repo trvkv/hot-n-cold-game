@@ -129,7 +129,6 @@ func action_put_to_container(interaction_data: InteractionData) -> void:
         var active_item = interaction_data.request["active_item"]
         interaction_data.is_successful = put(active_item)
         interaction_data.response = {"active_item": active_item}
-        print("    ** Item => ", active_item)
     else:
         printerr("No active item selected, while putting item to container")
         interaction_data.is_successful = false

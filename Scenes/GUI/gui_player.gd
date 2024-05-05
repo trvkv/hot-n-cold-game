@@ -21,6 +21,7 @@ func _ready() -> void:
         horizontal_item_container.add_item(item)
 
     EventBus.connect("switch_item", _on_switch_item)
+    EventBus.connect("action_successful", _on_action_successful)
 
 func _process(_delta: float) -> void:
     var player: Player = PlayersManager.get_player(player_id)
@@ -37,3 +38,13 @@ func _on_switch_item(player: Player):
         var item: ItemBase = next.item if is_instance_valid(next) else null
         horizontal_item_container.set_active_by_element(next)
         EventBus.emit_signal("update_items", player, horizontal_item_container.get_items(), item)
+
+func _on_action_successful(interaction_data: InteractionData) -> void:
+    if interaction_data.player_id != player_id:
+        return
+
+    if interaction_data.action == PlayerActions.ACTIONS.PUT_TO_CONTAINER:
+        if 'active_item' in interaction_data.response:
+            var active_item: ItemBase = interaction_data.response['active_item']
+            if not horizontal_item_container.clear_item(active_item):
+                printerr("Cannot clear active item: ", active_item, ", on player ", player_id)

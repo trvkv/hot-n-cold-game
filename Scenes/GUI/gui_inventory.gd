@@ -15,15 +15,12 @@ func _ready() -> void:
     for item in set_items_at_start:
         horizontal_item_container.add_item(item)
 
-func _on_action_successful(interaction_data: InteractionData) -> void:
-    if interaction_data.action != PlayerActions.ACTIONS.OPEN_CONTAINER:
-        return
-
+func handle_open_container(interaction_data: InteractionData) -> void:
     var player = PlayersManager.get_player(player_id)
     if interaction_data.initiator != player:
         return
 
-    if not "items" in interaction_data.response:
+    if "items" not in interaction_data.response:
         printerr("No 'items' in interaction data response")
         return
 
@@ -37,6 +34,20 @@ func _on_action_successful(interaction_data: InteractionData) -> void:
         horizontal_item_container.add_empty()
 
     show()
+
+func handle_put_to_container(interaction_data: InteractionData) -> void:
+    if 'active_item' in interaction_data.response:
+        var active_item: ItemBase = interaction_data.response['active_item']
+        if is_instance_valid(active_item):
+            horizontal_item_container.add_item(active_item)
+            show() # show container contents after adding item
+
+func _on_action_successful(interaction_data: InteractionData) -> void:
+    if interaction_data.action == PlayerActions.ACTIONS.OPEN_CONTAINER:
+        handle_open_container(interaction_data)
+    elif interaction_data.action == PlayerActions.ACTIONS.PUT_TO_CONTAINER:
+        handle_put_to_container(interaction_data)
+    return
 
 func _on_update_interactees(_interactor, _interactees, _active_interactee):
     horizontal_item_container.clear()
