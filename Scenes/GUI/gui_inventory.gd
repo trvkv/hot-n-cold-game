@@ -16,10 +16,6 @@ func _ready() -> void:
         horizontal_item_container.add_item(item)
 
 func handle_open_container(interaction_data: InteractionData) -> void:
-    var player = PlayersManager.get_player(player_id)
-    if interaction_data.initiator != player:
-        return
-
     if "items" not in interaction_data.response:
         printerr("No 'items' in interaction data response")
         return
@@ -43,6 +39,9 @@ func handle_put_to_container(interaction_data: InteractionData) -> void:
             show() # show container contents after adding item
 
 func _on_action_successful(interaction_data: InteractionData) -> void:
+    if interaction_data.player_id != player_id:
+        return
+
     if interaction_data.action == PlayerActions.ACTIONS.OPEN_CONTAINER:
         handle_open_container(interaction_data)
     elif interaction_data.action == PlayerActions.ACTIONS.PUT_TO_CONTAINER:
