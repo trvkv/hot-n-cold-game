@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://ctwlxb01ui5r8"]
+[gd_scene load_steps=34 format=3 uid="uid://ctwlxb01ui5r8"]
 
 [ext_resource type="ArrayMesh" uid="uid://dh7gamdvjygwu" path="res://Assets/Meshes/cube-light.res" id="1_8mrn4"]
 [ext_resource type="Script" path="res://world.gd" id="1_pwml2"]
@@ -15,6 +15,8 @@
 [ext_resource type="Script" path="res://Scenes/GUI/global_debug.gd" id="11_u3rha"]
 [ext_resource type="Script" path="res://Scenes/Util/interaction_manager.gd" id="11_wrfae"]
 [ext_resource type="PackedScene" uid="uid://bka2hbsca3p2u" path="res://Scenes/GUI/gui_inventory.tscn" id="12_x1aap"]
+[ext_resource type="Resource" uid="uid://b5ohqfe6mt3q5" path="res://Scenes/Items/item_key.tres" id="14_4gjh5"]
+[ext_resource type="Resource" uid="uid://bqsiaqedj4v3e" path="res://Scenes/Items/item_favourite.tres" id="15_axdb4"]
 
 [sub_resource type="Environment" id="Environment_0qa8a"]
 background_mode = 2
@@ -433,6 +435,7 @@ alignment = 1
 [node name="GuiPlayer" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P1" instance=ExtResource("10_puf7h")]
 layout_mode = 2
 size_flags_horizontal = 0
+set_items_at_start = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("5_aelyp"), ExtResource("14_4gjh5"), ExtResource("15_axdb4")])
 
 [node name="GuiActions" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P1" instance=ExtResource("11_lt7pl")]
 layout_mode = 2
@@ -449,6 +452,7 @@ layout_direction = 3
 layout_mode = 2
 size_flags_horizontal = 8
 player_id = 2
+set_items_at_start = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("5_aelyp"), ExtResource("14_4gjh5"), ExtResource("15_axdb4")])
 
 [node name="GuiActions" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P2" instance=ExtResource("11_lt7pl")]
 layout_direction = 3

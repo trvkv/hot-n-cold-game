@@ -5,6 +5,7 @@
 
 [node name="HorizontalItemContainer" type="HBoxContainer"]
 script = ExtResource("1_wc5fk")
+item_element_scene = ExtResource("2_oyih1")
 
 [node name="ItemElement_1" parent="." instance=ExtResource("2_oyih1")]
 layout_mode = 2

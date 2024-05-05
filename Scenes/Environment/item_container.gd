@@ -15,7 +15,9 @@ var container_mesh: MeshInstance3D
 
 func _ready() -> void:
     create_container_instance()
+    assert(is_instance_valid(inventory), "Inventory is not a valid instance")
     if not Engine.is_editor_hint():
+        inventory.clear()
         set_item(item)
 
 func get_class_name() -> StringName:
@@ -78,20 +80,23 @@ func put(item_to_put: ItemBase) -> bool:
         return true
     return false
 
-func peek(item_type: String = "") -> Array[ItemBase]:
+func peek() -> ItemBase:
     if not is_instance_valid(inventory):
-        return []
+        return null
 
     var items_in_inventory = inventory.get_items()
-    if item_type.is_empty():
-        return items_in_inventory
-    return items_in_inventory.filter(func(i): return i.get_class_name() == item_type)
+    if items_in_inventory.size() > 0:
+        # return first element when size is greater than 0
+        return items_in_inventory[0]
 
-func retrieve(item_to_retrieve: ItemBase) -> bool:
-    if inventory.has_item(item_to_retrieve):
+    return null
+
+func retrieve() -> ItemBase:
+    var item_to_retrieve = peek()
+    if is_instance_valid(item_to_retrieve):
         inventory.remove_item(item_to_retrieve)
-        return true
-    return false
+        return item_to_retrieve
+    return null
 
 func lock() -> bool:
     if not is_locked:

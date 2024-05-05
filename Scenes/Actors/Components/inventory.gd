@@ -19,3 +19,6 @@ func remove_item(item: ItemBase) -> void:
 
 func size() -> int:
     return items.size()
+
+func clear() -> void:
+    items.clear()
