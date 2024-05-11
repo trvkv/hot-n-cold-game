@@ -35,6 +35,13 @@ func handle_put_to_container(interaction_data: InteractionData) -> void:
     if 'active_item' in interaction_data.response:
         var active_item: ItemBase = interaction_data.response['active_item']
         if is_instance_valid(active_item):
+            # clear contents of the container of empty elements
+            # 'open_container' function adds empty element in case when
+            # the container is empty.
+            for element in horizontal_item_container.get_elements():
+                if element.item == null:
+                    horizontal_item_container.clear_element(element)
+
             horizontal_item_container.add_item(active_item)
             show() # show container contents after adding item
 
