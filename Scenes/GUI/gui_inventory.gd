@@ -45,6 +45,14 @@ func handle_put_to_container(interaction_data: InteractionData) -> void:
             horizontal_item_container.add_item(active_item)
             show() # show container contents after adding item
 
+func handle_get_from_container(interaction_data: InteractionData) -> void:
+    if 'item' in interaction_data.response:
+        var item: ItemBase = interaction_data.response['item']
+        if is_instance_valid(item):
+            horizontal_item_container.clear_item(item)
+        else:
+            printerr("Item instance invalid: ", item)
+
 func _on_action_successful(interaction_data: InteractionData) -> void:
     if interaction_data.player_id != player_id:
         return
@@ -53,6 +61,8 @@ func _on_action_successful(interaction_data: InteractionData) -> void:
         handle_open_container(interaction_data)
     elif interaction_data.action == PlayerActions.ACTIONS.PUT_TO_CONTAINER:
         handle_put_to_container(interaction_data)
+    elif interaction_data.action == PlayerActions.ACTIONS.GET_FROM_CONTAINER:
+        handle_get_from_container(interaction_data)
     return
 
 func _on_update_interactees(_interactor, _interactees, _active_interactee):

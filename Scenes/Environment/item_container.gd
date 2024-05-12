@@ -11,6 +11,8 @@ class_name ItemContainer
 @onready var inventory: ItemInventory = $ItemInventory
 @onready var mesh: Node3D = $Mesh
 
+var is_opened: bool = false
+
 var container_mesh: MeshInstance3D
 
 func _ready() -> void:
@@ -114,6 +116,7 @@ func action_open_container(interaction_data: InteractionData) -> void:
     print("Opening container (", interaction_data.initiator, ")")
     interaction_data.response = {"items": peek()}
     interaction_data.is_successful = not is_locked
+    is_opened = not is_locked
 
 func action_lock_container(interaction_data: InteractionData) -> void:
     print("Locking container (", interaction_data.initiator, ")")
@@ -132,6 +135,17 @@ func action_put_to_container(interaction_data: InteractionData) -> void:
     else:
         printerr("No active item selected, while putting item to container")
         interaction_data.is_successful = false
+
+func action_get_from_container(interaction_data: InteractionData) -> void:
+    print("Getting item from container (", interaction_data.initiator, ")")
+    interaction_data.is_successful = is_opened
+    if interaction_data.is_successful:
+        if peek() != null:
+            interaction_data.response = {"item": retrieve()}
+        else:
+            print("Container is empty!")
+    else:
+        print("Container closed! Open it first.")
 
 func _on_update_interactees(_player, interactees, active_interactee) -> void:
     if is_instance_valid(container_mesh):
@@ -154,4 +168,6 @@ func interact(interaction_data: InteractionData) -> bool:
             action_unlock_container(interaction_data)
         elif interaction_data.action == PlayerActions.ACTIONS.PUT_TO_CONTAINER:
             action_put_to_container(interaction_data)
+        elif interaction_data.action == PlayerActions.ACTIONS.GET_FROM_CONTAINER:
+            action_get_from_container(interaction_data)
     return interaction_data.is_successful

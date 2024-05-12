@@ -48,3 +48,12 @@ func _on_action_successful(interaction_data: InteractionData) -> void:
             var active_item: ItemBase = interaction_data.response['active_item']
             if not horizontal_item_container.clear_item(active_item):
                 printerr("Cannot clear active item: ", active_item, ", on player ", player_id)
+    elif interaction_data.action == PlayerActions.ACTIONS.GET_FROM_CONTAINER:
+        if 'item' in interaction_data.response:
+            var item: ItemBase = interaction_data.response['item']
+            if is_instance_valid(item):
+                horizontal_item_container.add_item(item)
+            else:
+                printerr("Item instance invalid: ", item, " on player ", player_id)
+        else:
+            printerr("'item' field not found in interaction data response for player ", player_id)
