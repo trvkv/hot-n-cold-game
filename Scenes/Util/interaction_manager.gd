@@ -150,12 +150,7 @@ func get_active_action(player: Player):
     var player_data = get_player_data(player)
     if not "active_action" in player_data:
         return PlayerActions.ACTIONS.INVALID
-
-    var action = player_data["active_action"]
-    if not is_instance_valid(action):
-        return PlayerActions.ACTIONS.INVALID
-
-    return action.action
+    return player_data["active_action"]
 
 func should_action_be_available(action, interactee) -> bool:
 

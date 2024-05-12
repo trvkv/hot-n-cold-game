@@ -29,12 +29,18 @@ func get_elements() -> Array:
 func count_elements() -> int:
     return interaction_gui.get_children().size()
 
+func get_actions() -> Array:
+    var actions: Array = []
+    for element in get_elements():
+        actions.append(element.action)
+    return actions
+
 func set_active_action(action: PlayerActions.ACTIONS, active: bool = true) -> void:
     for holder in interaction_gui.get_children():
         if holder.action == action:
             holder.set_active(active)
             active_action = holder
-            EventBus.emit_signal("update_actions", PlayersManager.get_player(player_id), get_elements(), holder)
+            EventBus.emit_signal("update_actions", PlayersManager.get_player(player_id), get_actions(), holder.action)
             return
 
 func get_active_action() -> PlayerActions.ACTIONS:
