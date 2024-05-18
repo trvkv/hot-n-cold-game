@@ -20,7 +20,7 @@ func _ready() -> void:
     assert(is_instance_valid(item_inventory), "Item inventory not present")
     assert(is_instance_valid(trap_component), "Trap component not present")
 
-    trap_component.connect("detected", _on_trap_detected)
+    trap_component.connect("obstacles_updated", _on_obstacles_updated)
 
 func _process(_delta):
     if velocity.length() > 0.0:
@@ -59,5 +59,5 @@ func handle_input(input: InputEventAction) -> void:
     elif input.action == "switch_action" and input.pressed:
         EventBus.emit_signal("switch_action", self)
 
-func _on_trap_detected(body: Node) -> void:
-    print("Body detected: ", body)
+func _on_obstacles_updated(bodies: Array) -> void:
+    print("Bodies detected: ", bodies)

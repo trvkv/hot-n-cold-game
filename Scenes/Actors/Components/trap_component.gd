@@ -2,15 +2,20 @@ extends Area3D
 
 class_name TrapComponent
 
-signal detected(body)
+signal obstacles_updated(obstacles)
 
 @export var interaction_distance = 0.75
 @export var component_owner: Node3D
 
+@onready var trap_indicator = $MeshInstance3D
+
 var interaction_height = 1.5
 
-func _ready():
+var bodies: Array = []
+
+func _ready() -> void:
     assert(is_instance_valid(component_owner), "Component owner invalid")
+    assert(is_instance_valid(trap_indicator), "Trap indicator invalid")
     connect("body_entered", _on_body_entered)
     connect("body_exited", _on_body_exited)
 
@@ -27,8 +32,25 @@ func move_interaction_area(move_direction: Vector2) -> void:
             interaction_distance * move_direction.y
     ))
 
-func _on_body_entered(body: Node) -> void:
-    emit_signal("detected", body)
+func update_indicator() -> void:
+    if bodies.size() > 0:
+        update_indicator_color(Color(1.0, 0.0, 0.0, 1.0))
+    else:
+        update_indicator_color(Color(0.0, 1.0, 0.0, 1.0))
 
-func _on_body_exited(_body: Node) -> void:
-    pass
+func update_indicator_color(color: Color) -> void:
+    var mat: StandardMaterial3D = trap_indicator.get_active_material(0)
+    if is_instance_valid(mat):
+        mat.albedo_color = color
+
+func _on_body_entered(body: Node) -> void:
+    if body not in bodies:
+        emit_signal("obstacles_updated", bodies)
+        bodies.append(body)
+        update_indicator()
+
+func _on_body_exited(body: Node) -> void:
+    if body in bodies:
+        bodies.erase(body)
+        emit_signal("obstacles_updated", bodies)
+        update_indicator()

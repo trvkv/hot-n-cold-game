@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dyvx5q2u7tl6y"]
+[gd_scene load_steps=4 format=3 uid="uid://dyvx5q2u7tl6y"]
 
 [ext_resource type="Script" path="res://Scenes/Actors/Components/trap_component.gd" id="1_nkufc"]
+[ext_resource type="ArrayMesh" uid="uid://bob1abga010qa" path="res://Assets/Meshes/trap.res" id="2_ds6ev"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_frhhu"]
 height = 3.0
@@ -11,3 +12,7 @@ script = ExtResource("1_nkufc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_frhhu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1.45, 0)
+mesh = ExtResource("2_ds6ev")
