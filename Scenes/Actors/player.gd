@@ -13,51 +13,51 @@ class_name Player
 @onready var trap_component = $TrapComponent
 
 func _ready() -> void:
-	PlayersManager.add_player(player_id, self)
-	assert(is_instance_valid(animation_player), "Animation player not present")
-	assert(is_instance_valid(sprite_position), "Sprite position not present")
-	assert(is_instance_valid(interaction_area), "Interaction area not present")
-	assert(is_instance_valid(item_inventory), "Item inventory not present")
-	assert(is_instance_valid(trap_component), "Trap component not present")
+    PlayersManager.add_player(player_id, self)
+    assert(is_instance_valid(animation_player), "Animation player not present")
+    assert(is_instance_valid(sprite_position), "Sprite position not present")
+    assert(is_instance_valid(interaction_area), "Interaction area not present")
+    assert(is_instance_valid(item_inventory), "Item inventory not present")
+    assert(is_instance_valid(trap_component), "Trap component not present")
 
-	trap_component.connect("detected", _on_trap_detected)
+    trap_component.connect("detected", _on_trap_detected)
 
 func _process(_delta):
-	if velocity.length() > 0.0:
-		animation_player.current_animation = "move"
-		if velocity.z > 0.0:
-			sprite_position.rotation.y = deg_to_rad(180.0)
-		if velocity.z < 0.0:
-			sprite_position.rotation.y = deg_to_rad(0.0)
+    if velocity.length() > 0.0:
+        animation_player.current_animation = "move"
+        if velocity.z > 0.0:
+            sprite_position.rotation.y = deg_to_rad(180.0)
+        if velocity.z < 0.0:
+            sprite_position.rotation.y = deg_to_rad(0.0)
 
-	if velocity == Vector3.ZERO:
-		animation_player.current_animation = "idle"
+    if velocity == Vector3.ZERO:
+        animation_player.current_animation = "idle"
 
 func _physics_process(delta):
-	# gravity comes first
-	velocity.y -= gravity * delta
+    # gravity comes first
+    velocity.y -= gravity * delta
 
-	# movement
-	var movement_dir: Vector2 = PlayersManager.get_input(player_id)
-	movement_dir = movement_dir.normalized()
+    # movement
+    var movement_dir: Vector2 = PlayersManager.get_input(player_id)
+    movement_dir = movement_dir.normalized()
 
-	velocity = Vector3(
-		movement_dir.x * movement_speed,
-		velocity.y,
-		movement_dir.y * movement_speed
-	)
+    velocity = Vector3(
+        movement_dir.x * movement_speed,
+        velocity.y,
+        movement_dir.y * movement_speed
+    )
 
-	move_and_slide()
+    move_and_slide()
 
 func handle_input(input: InputEventAction) -> void:
-	if input.action == "interact" and input.pressed:
-		EventBus.emit_signal("trigger_interaction", self, interaction_area)
-	elif input.action == "switch_interaction" and input.pressed:
-		EventBus.emit_signal("switch_interaction", self, interaction_area)
-	elif input.action == "switch_item" and input.pressed:
-		EventBus.emit_signal("switch_item", self)
-	elif input.action == "switch_action" and input.pressed:
-		EventBus.emit_signal("switch_action", self)
+    if input.action == "interact" and input.pressed:
+        EventBus.emit_signal("trigger_interaction", self, interaction_area)
+    elif input.action == "switch_interaction" and input.pressed:
+        EventBus.emit_signal("switch_interaction", self, interaction_area)
+    elif input.action == "switch_item" and input.pressed:
+        EventBus.emit_signal("switch_item", self)
+    elif input.action == "switch_action" and input.pressed:
+        EventBus.emit_signal("switch_action", self)
 
 func _on_trap_detected(body: Node) -> void:
-	print("Body detected: ", body)
+    print("Body detected: ", body)
