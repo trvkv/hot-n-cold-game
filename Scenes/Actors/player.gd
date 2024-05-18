@@ -59,5 +59,5 @@ func handle_input(input: InputEventAction) -> void:
     elif input.action == "switch_action" and input.pressed:
         EventBus.emit_signal("switch_action", self)
 
-func _on_obstacles_updated(bodies: Array) -> void:
-    print("Bodies detected: ", bodies)
+func _on_obstacles_updated(_player: Player, _bodies: Array) -> void:
+    pass

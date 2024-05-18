@@ -2,7 +2,7 @@ extends Area3D
 
 class_name TrapComponent
 
-signal obstacles_updated(obstacles)
+signal obstacles_updated(player, obstacles)
 
 @export var interaction_distance = 0.75
 @export var component_owner: Node3D
@@ -16,8 +16,11 @@ var bodies: Array = []
 func _ready() -> void:
     assert(is_instance_valid(component_owner), "Component owner invalid")
     assert(is_instance_valid(trap_indicator), "Trap indicator invalid")
+
     connect("body_entered", _on_body_entered)
     connect("body_exited", _on_body_exited)
+
+    update_indicator()
 
 func _physics_process(_delta) -> void:
     var movement_dir: Vector2 = PlayersManager.get_input(component_owner.player_id).normalized()
@@ -39,18 +42,18 @@ func update_indicator() -> void:
         update_indicator_color(Color(0.0, 1.0, 0.0, 1.0))
 
 func update_indicator_color(color: Color) -> void:
-    var mat: StandardMaterial3D = trap_indicator.get_active_material(0)
+    var mat: StandardMaterial3D = trap_indicator.get_surface_override_material(0)
     if is_instance_valid(mat):
         mat.albedo_color = color
 
 func _on_body_entered(body: Node) -> void:
     if body not in bodies:
-        emit_signal("obstacles_updated", bodies)
+        emit_signal("obstacles_updated", component_owner, bodies)
         bodies.append(body)
         update_indicator()
 
 func _on_body_exited(body: Node) -> void:
     if body in bodies:
         bodies.erase(body)
-        emit_signal("obstacles_updated", bodies)
+        emit_signal("obstacles_updated", component_owner, bodies)
         update_indicator()
