@@ -1,9 +1,10 @@
-[gd_scene load_steps=34 format=3 uid="uid://ctwlxb01ui5r8"]
+[gd_scene load_steps=35 format=3 uid="uid://ctwlxb01ui5r8"]
 
 [ext_resource type="ArrayMesh" uid="uid://dh7gamdvjygwu" path="res://Assets/Meshes/cube-light.res" id="1_8mrn4"]
 [ext_resource type="Script" path="res://world.gd" id="1_pwml2"]
 [ext_resource type="PackedScene" uid="uid://biqw183sh26cy" path="res://Scenes/Util/camera_position.tscn" id="2_7wgqx"]
 [ext_resource type="PackedScene" uid="uid://dnbsanbg1w806" path="res://Scenes/Environment/cube_with_collision.tscn" id="2_rx2bi"]
+[ext_resource type="PackedScene" uid="uid://7w3upqpuk27q" path="res://Scenes/Environment/Traps/trap.tscn" id="2_wfy8b"]
 [ext_resource type="PackedScene" uid="uid://o80ya65nvwp2" path="res://Scenes/Environment/item_container.tscn" id="3_utqoj"]
 [ext_resource type="Resource" uid="uid://don7pfb0cf8pq" path="res://Scenes/Items/item_trap.tres" id="5_aelyp"]
 [ext_resource type="Texture2D" uid="uid://bhu5kergo3m88" path="res://Assets/Images/kenney_prototype-textures/PNG/Green/texture_06.png" id="6_2o67f"]
@@ -218,6 +219,7 @@ shadow_mesh = SubResource("ArrayMesh_mdgff")
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_pwml2")
+trap_scene = ExtResource("2_wfy8b")
 
 [node name="CameraPosition" parent="." instance=ExtResource("2_7wgqx")]
 

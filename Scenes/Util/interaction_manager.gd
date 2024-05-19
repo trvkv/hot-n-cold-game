@@ -32,14 +32,18 @@ func _on_action_switch(player: Player) -> void:
         gui.set_active_action(next.action)
         EventBus.emit_signal("update_actions", player, gui.get_actions(), next.action)
 
+func create_interaction_data(interactee, interactor, action) -> InteractionData:
+    var interaction_data: InteractionData = InteractionData.new()
+    interaction_data.player_id = interactor.player_id
+    interaction_data.action = action
+    interaction_data.initiator = interactor
+    interaction_data.target = interactee
+    interaction_data.request = player_interaction_data[interactor]
+    return interaction_data
+
 func _on_interact(interactee, interactor, action) -> void:
     if interactee.has_method("interact"):
-        var interaction_data: InteractionData = InteractionData.new()
-        interaction_data.player_id = interactor.player_id
-        interaction_data.action = action
-        interaction_data.initiator = interactor
-        interaction_data.target = interactee
-        interaction_data.request = player_interaction_data[interactor]
+        var interaction_data: InteractionData = create_interaction_data(interactee, interactor, action)
         if interactee.interact(interaction_data):
             EventBus.emit_signal("action_successful", interaction_data)
         else:

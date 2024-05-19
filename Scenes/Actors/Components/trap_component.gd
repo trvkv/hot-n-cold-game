@@ -12,6 +12,7 @@ signal obstacles_updated(player, obstacles)
 var interaction_height = 1.5
 
 var bodies: Array = []
+var active_action: PlayerActions.ACTIONS
 
 func _ready() -> void:
     assert(is_instance_valid(component_owner), "Component owner invalid")
@@ -21,6 +22,7 @@ func _ready() -> void:
     connect("body_exited", _on_body_exited)
 
     EventBus.connect("update_actions", _on_update_actions)
+    EventBus.connect("trigger_interaction", _on_trigger_interaction)
 
     update_indicator()
     hide()
@@ -49,8 +51,19 @@ func update_indicator_color(color: Color) -> void:
     if is_instance_valid(mat):
         mat.albedo_color = color
 
-func _on_update_actions(player, _actions, active_action) -> void:
+func _on_trigger_interaction(player, _interaction_area) -> void:
+    if bodies.size() > 0:
+        return # colliding, cannot set trap
+
+    if player == component_owner:
+        if active_action == PlayerActions.ACTIONS.SET_TRAP:
+            var global_pos: Vector3 = get_global_position()
+            global_pos.y = 0.0 # reset to ground level
+            EventBus.emit_signal("set_trap", player, global_pos)
+
+func _on_update_actions(player, _actions, active_action_) -> void:
     if component_owner == player:
+        active_action = active_action_
         if active_action == PlayerActions.ACTIONS.SET_TRAP:
             show()
         else:

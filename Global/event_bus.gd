@@ -9,5 +9,7 @@ signal switch_item(player)
 signal update_actions(player, actions, active_action)
 signal switch_action(player)
 
+signal set_trap(player, global_trap_position)
+
 signal action_successful(interaction_data)
 signal action_unsuccessful(interaction_data)
