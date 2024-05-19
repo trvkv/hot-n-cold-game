@@ -37,7 +37,8 @@ func _on_trigger_interaction(player, _interaction_area) -> void:
     var active_interactee = get_active_interactee(player)
     if is_instance_valid(active_interactee):
         var action = get_active_action(player)
-        EventBus.emit_signal("interact", active_interactee, player, action)
+        if action != PlayerActions.ACTIONS.INVALID:
+            EventBus.emit_signal("interact", active_interactee, player, action)
 
 func _on_update_actions(player, actions, active_action) -> void:
     if player not in player_interaction_data.keys():
@@ -95,10 +96,22 @@ func reconstruct_gui(player: Player) -> void:
     # make first action an active one
     var elements = gui.get_elements()
     if elements.size() == 0:
+        EventBus.emit_signal(
+            "update_actions",
+            PlayersManager.get_player(player.player_id),
+            gui.get_actions(),
+            PlayerActions.ACTIONS.INVALID
+        )
         return
 
     var action: PlayerActions.ACTIONS = elements[0].action
     gui.set_active_action(action)
+    EventBus.emit_signal(
+        "update_actions",
+        PlayersManager.get_player(player.player_id),
+        gui.get_actions(),
+        action
+    )
 
 func switch_gui_visibility(player: Player) -> void:
     var gui = get_interaction_gui(player)

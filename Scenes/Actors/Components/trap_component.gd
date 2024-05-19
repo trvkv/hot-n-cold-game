@@ -20,7 +20,10 @@ func _ready() -> void:
     connect("body_entered", _on_body_entered)
     connect("body_exited", _on_body_exited)
 
+    EventBus.connect("update_actions", _on_update_actions)
+
     update_indicator()
+    hide()
 
 func _physics_process(_delta) -> void:
     var movement_dir: Vector2 = PlayersManager.get_input(component_owner.player_id).normalized()
@@ -45,6 +48,13 @@ func update_indicator_color(color: Color) -> void:
     var mat: StandardMaterial3D = trap_indicator.get_surface_override_material(0)
     if is_instance_valid(mat):
         mat.albedo_color = color
+
+func _on_update_actions(player, _actions, active_action) -> void:
+    if component_owner == player:
+        if active_action == PlayerActions.ACTIONS.SET_TRAP:
+            show()
+        else:
+            hide()
 
 func _on_body_entered(body: Node) -> void:
     if body not in bodies:
