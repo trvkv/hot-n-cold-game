@@ -9,16 +9,7 @@ var active_action: ActionHolder
 func _ready():
     assert(is_instance_valid(interaction_gui), "Interaction gui instance invalid")
     assert(is_instance_valid(action_holder_scene), "Action holder instance invalid")
-    EventBus.connect("switch_action", _on_action_switch)
     remove_actions()
-
-func _on_action_switch(player: Player) -> void:
-    if player.player_id == player_id:
-        var next: ActionHolder = get_next_action_by_active()
-        if is_instance_valid(next):
-            set_actions_inactive()
-            set_active_action(next.action)
-            EventBus.emit_signal("update_actions", PlayersManager.get_player(player_id), get_actions(), next.action)
 
 func add_action(action: PlayerActions.ACTIONS) -> void:
     var holder: ActionHolder = spawn_action_holder(false, action)

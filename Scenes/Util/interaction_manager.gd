@@ -18,7 +18,19 @@ func _ready() -> void:
     EventBus.connect("update_interactees", _on_update_interactees)
     EventBus.connect("update_items", _on_update_items)
     EventBus.connect("update_actions", _on_update_actions)
+    EventBus.connect("switch_action", _on_action_switch)
     EventBus.connect("interact", _on_interact)
+
+func _on_action_switch(player: Player) -> void:
+    var gui = get_interaction_gui(player)
+    if not is_instance_valid(gui):
+        return
+
+    var next: ActionHolder = gui.get_next_action_by_active()
+    if is_instance_valid(next):
+        gui.set_actions_inactive()
+        gui.set_active_action(next.action)
+        EventBus.emit_signal("update_actions", player, gui.get_actions(), next.action)
 
 func _on_interact(interactee, interactor, action) -> void:
     if interactee.has_method("interact"):
@@ -115,6 +127,9 @@ func reconstruct_gui(player: Player) -> void:
 
 func switch_gui_visibility(player: Player) -> void:
     var gui = get_interaction_gui(player)
+    if not is_instance_valid(gui):
+        return
+
     if gui.count_elements() > 0:
         gui.set_modulate(Color(1.0, 1.0, 1.0, 1.0))
     else:
