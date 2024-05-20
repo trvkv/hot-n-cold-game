@@ -5,7 +5,7 @@ extends Node3D
 
 @export var trap_scene: PackedScene
 
-func _ready():
+func _ready() -> void:
     assert(trap_scene, "Trap scene invalid")
     CameraManager.set_active_cameras(CameraManager.CameraType.PLAYER_1 | CameraManager.CameraType.PLAYER_2)
     EventBus.connect("set_trap", _on_trap_set)

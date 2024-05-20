@@ -14,4 +14,9 @@ shape = SubResource("CylinderShape3D_8leif")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.05, 0)
 transparency = 0.7
+cast_shadow = 0
 mesh = ExtResource("1_7pedc")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
