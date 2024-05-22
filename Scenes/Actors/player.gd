@@ -8,6 +8,7 @@ class_name Player
 
 @onready var animation_player = $AnimationPlayer
 @onready var sprite_position = $SpritesPosition
+@onready var animated_sprite = $SpritesPosition/AnimatedSprite3D
 @onready var interaction_area = $InteractionArea
 @onready var item_inventory = $ItemInventory
 @onready var trap_component = $TrapComponent
@@ -19,8 +20,6 @@ func _ready() -> void:
     assert(is_instance_valid(interaction_area), "Interaction area not present")
     assert(is_instance_valid(item_inventory), "Item inventory not present")
     assert(is_instance_valid(trap_component), "Trap component not present")
-
-    trap_component.connect("obstacles_updated", _on_obstacles_updated)
 
 func _process(_delta):
     if velocity.length() > 0.0:
@@ -59,5 +58,14 @@ func handle_input(input: InputEventAction) -> void:
     elif input.action == "switch_action" and input.pressed:
         EventBus.emit_signal("switch_action", self)
 
-func _on_obstacles_updated(_player: Player, _bodies: Array) -> void:
-    pass
+func freeze() -> void:
+    set_process(false)
+    set_physics_process(false)
+    animation_player.pause()
+    animated_sprite.pause()
+
+func unfreeze() -> void:
+    set_process(true)
+    set_physics_process(true)
+    animation_player.play()
+    animated_sprite.play()
