@@ -57,3 +57,17 @@ func _on_action_successful(interaction_data: InteractionData) -> void:
                 printerr("Item instance invalid: ", item, " on player ", player_id)
         else:
             printerr("'item' field not found in interaction data response for player ", player_id)
+    elif interaction_data.action == PlayerActions.ACTIONS.SET_TRAP:
+        var active_element = horizontal_item_container.get_active_element()
+        assert(is_instance_valid(active_element.item), "Critical: item invalid!")
+        if active_element.item.get_class_name() == &"ItemTrap":
+            var next = horizontal_item_container.get_next_element_by_active()
+            horizontal_item_container.clear_element(active_element)
+            horizontal_item_container.set_active_by_element(next)
+            EventBus.emit_signal(
+                "update_items",
+                interaction_data.initiator,
+                horizontal_item_container.get_items(),
+                next.item
+            )
+
