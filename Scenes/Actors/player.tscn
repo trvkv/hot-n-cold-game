@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://dkod8d31vxupb"]
+[gd_scene load_steps=19 format=3 uid="uid://dkod8d31vxupb"]
 
 [ext_resource type="Script" path="res://Scenes/Actors/player.gd" id="1_wdvuh"]
 [ext_resource type="Texture2D" uid="uid://c0jlen5eqnhrp" path="res://Assets/Images/kenney_platformer-characters/PNG/Player/player_tilesheet.png" id="2_a437r"]
 [ext_resource type="PackedScene" uid="uid://hoccdjw8bcjs" path="res://Scenes/Actors/Components/interaction_area.tscn" id="3_1vdlc"]
 [ext_resource type="Script" path="res://Scenes/Actors/Components/inventory.gd" id="4_crp7u"]
 [ext_resource type="PackedScene" uid="uid://dyvx5q2u7tl6y" path="res://Scenes/Actors/Components/trap_component.tscn" id="5_02noe"]
+[ext_resource type="PackedScene" uid="uid://0bfel3yf06jm" path="res://Scenes/Actors/Components/navigation_component.tscn" id="6_xmm25"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hxu7t"]
 atlas = ExtResource("2_a437r")
@@ -147,3 +148,5 @@ script = ExtResource("4_crp7u")
 
 [node name="TrapComponent" parent="." node_paths=PackedStringArray("component_owner") instance=ExtResource("5_02noe")]
 component_owner = NodePath("..")
+
+[node name="NavigationComponent" parent="." instance=ExtResource("6_xmm25")]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://0bfel3yf06jm"]
+
+[ext_resource type="Script" path="res://Scenes/Actors/Components/navigation_component.gd" id="1_3hxyr"]
+
+[node name="NavigationComponent" type="Node3D"]
+script = ExtResource("1_3hxyr")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true
+debug_path_custom_point_size = 8.0
