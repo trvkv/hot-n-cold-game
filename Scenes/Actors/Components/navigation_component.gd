@@ -1,26 +1,31 @@
 extends Node3D
 
-var movement_target_position: Vector3 = Vector3(0.0, 0.0, 0.0)
+@export var component_owner: Player
+@export var target_position: Vector3 = Vector3(3.0, 0.0, 0.0)
+@export var debug: bool = false
+@export var debug_line_color: Color = Color(1.0, 1.0, 1.0, 1.0)
 
-@onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
+@onready var map_rid: RID = get_world_3d().get_navigation_map()
+@onready var canvas: CanvasItem = $CanvasLayer/Control
+
+var current_path: PackedVector3Array = []
 
 func _ready() -> void:
-    randomize()
-    navigation_agent.path_desired_distance = 0.5
-    navigation_agent.target_desired_distance = 0.5
-    navigation_agent.debug_path_custom_color = Color(abs(randf()), abs(randf()), abs(randf()), 1.0)
-    call_deferred("actor_setup")
+    if debug:
+        setup_debug_line()
+    else:
+        if is_instance_valid(canvas):
+            canvas.queue_free()
 
-func actor_setup() -> void:
-    await get_tree().physics_frame
-    set_movement_target(movement_target_position)
+func _process(_delta: float) -> void:
+    current_path = get_path_to_target(get_global_position(), target_position)
+    if debug:
+        setup_debug_line()
 
-func set_movement_target(movement_target: Vector3):
-    navigation_agent.set_target_position(movement_target)
+func setup_debug_line() -> void:
+    if is_instance_valid(canvas):
+        canvas.debug_line_color = debug_line_color
+        canvas.current_path = current_path
 
-func _physics_process(_delta) -> void:
-    if navigation_agent.is_navigation_finished():
-        return
-    var path = navigation_agent.get_current_navigation_path()
-    print(path)
-    set_movement_target(movement_target_position)
+func get_path_to_target(from: Vector3, to: Vector3) -> PackedVector3Array:
+    return NavigationServer3D.map_get_path(map_rid, from, to, true)

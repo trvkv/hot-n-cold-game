@@ -149,4 +149,5 @@ script = ExtResource("4_crp7u")
 [node name="TrapComponent" parent="." node_paths=PackedStringArray("component_owner") instance=ExtResource("5_02noe")]
 component_owner = NodePath("..")
 
-[node name="NavigationComponent" parent="." instance=ExtResource("6_xmm25")]
+[node name="NavigationComponent" parent="." node_paths=PackedStringArray("component_owner") instance=ExtResource("6_xmm25")]
+component_owner = NodePath("..")

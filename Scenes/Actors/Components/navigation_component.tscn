@@ -1,10 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://0bfel3yf06jm"]
+[gd_scene load_steps=3 format=3 uid="uid://0bfel3yf06jm"]
 
 [ext_resource type="Script" path="res://Scenes/Actors/Components/navigation_component.gd" id="1_3hxyr"]
+[ext_resource type="Script" path="res://Scenes/Actors/Components/nav_debug_draw.gd" id="2_brifl"]
 
 [node name="NavigationComponent" type="Node3D"]
 script = ExtResource("1_3hxyr")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-debug_enabled = true
-debug_path_custom_point_size = 8.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_brifl")
