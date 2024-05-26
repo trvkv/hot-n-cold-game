@@ -11,5 +11,8 @@ signal switch_action(player)
 
 signal set_trap(player, global_trap_position)
 
+signal store_game_state(player, data_type, data)
+signal retrieve_game_state(player, data_type, data)
+
 signal action_successful(interaction_data)
 signal action_unsuccessful(interaction_data)

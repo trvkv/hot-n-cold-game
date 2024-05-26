@@ -129,9 +129,17 @@ func action_unlock_container(interaction_data: InteractionData) -> void:
 func action_put_to_container(interaction_data: InteractionData) -> void:
     print("Putting item to container (", interaction_data.initiator, ")")
     if "active_item" in interaction_data.request:
-        var active_item = interaction_data.request["active_item"]
+        var active_item: ItemBase = interaction_data.request["active_item"]
         interaction_data.is_successful = put(active_item)
         interaction_data.response = {"active_item": active_item}
+
+        if active_item.get_class_name() == &"ItemFavourite":
+            var state = GameStateTypes.GameStateData.new(
+                interaction_data.initiator,
+                GameStateTypes.TYPES.FAVOURITE_ITEM_CONTAINER,
+                self
+            )
+            EventBus.emit_signal("store_game_state", state)
     else:
         printerr("No active item selected, while putting item to container")
         interaction_data.is_successful = false

@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 PlayersManager="*res://Global/players_manager.gd"
 CameraManager="*res://Global/camera_manager.gd"
 EventBus="*res://Global/event_bus.gd"
+GameState="*res://Global/game_state.gd"
 
 [display]
 
