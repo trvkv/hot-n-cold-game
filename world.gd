@@ -1,7 +1,7 @@
 extends Node3D
 
-@onready var viewport_player_1: SubViewportContainer = $GridContainer/SubViewportContainer_P1
-@onready var viewport_player_2: SubViewportContainer = $GridContainer/SubViewportContainer_P2
+@export var viewport_player_1: SubViewportContainer
+@export var viewport_player_2: SubViewportContainer
 
 @export var trap_scene: PackedScene
 

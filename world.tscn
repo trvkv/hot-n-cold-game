@@ -221,160 +221,164 @@ glow_enabled = true
 glow_intensity = 1.1
 glow_hdr_threshold = 0.7
 
-[node name="World" type="Node3D"]
+[node name="World" type="Node3D" node_paths=PackedStringArray("viewport_player_1", "viewport_player_2")]
 script = ExtResource("1_pwml2")
+viewport_player_1 = NodePath("SplitScreenGridContainer/SubViewportContainer_P1")
+viewport_player_2 = NodePath("SplitScreenGridContainer/SubViewportContainer_P2")
 trap_scene = ExtResource("2_wfy8b")
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+[node name="Map" type="Node3D" parent="."]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Map"]
 navigation_mesh = SubResource("NavigationMesh_15x4p")
 
-[node name="Static" type="Node3D" parent="NavigationRegion3D"]
+[node name="Static" type="Node3D" parent="Map/NavigationRegion3D"]
 
-[node name="Walls" type="Node3D" parent="NavigationRegion3D/Static"]
+[node name="Walls" type="Node3D" parent="Map/NavigationRegion3D/Static"]
 
-[node name="Wall1" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
+[node name="Wall1" parent="Map/NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, -0.05, 0)
 
-[node name="Wall7" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
+[node name="Wall7" parent="Map/NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, -0.05, 10)
 
-[node name="Wall8" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
+[node name="Wall8" parent="Map/NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 10, -0.05, 10)
 
-[node name="Wall9" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
+[node name="Wall9" parent="Map/NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 10, -0.05, 0)
 
-[node name="Wall2" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
+[node name="Wall2" parent="Map/NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(0.1, 0, 0, 0, 4, 0, 0, 0, 10, 5, 2, 0)
 mesh = SubResource("ArrayMesh_lfvsj")
 can_fade_when_near_player = true
 
-[node name="Wall10" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
+[node name="Wall10" parent="Map/NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(0.1, 0, 0, 0, 4, 0, 0, 0, 10, 15, 2, 0)
 
-[node name="Wall11" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
+[node name="Wall11" parent="Map/NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(0.1, 0, 0, 0, 4, 0, 0, 0, 10, 15, 2, 10)
 
-[node name="Wall15" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
+[node name="Wall15" parent="Map/NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(0.1, 0, 0, 0, 4, 0, 0, 0, 10, -5, 2, 10)
 mesh = SubResource("ArrayMesh_ow8uj")
 can_fade_when_near_player = true
 
-[node name="Wall3" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
+[node name="Wall3" parent="Map/NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(0.1, 0, 0, 0, 4, 0, 0, 0, 10, -5, 2, 0)
 mesh = SubResource("ArrayMesh_75elv")
 can_fade_when_near_player = true
 
-[node name="Wall4" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
+[node name="Wall4" parent="Map/NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(6, 0, 0, 0, 4, 0, 0, 0, 0.1, -2, 2, 5)
 
-[node name="Wall6" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
+[node name="Wall6" parent="Map/NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(2.16, 0, 0, 0, 4, 0, 0, 0, 0.1, 4, 2, 5)
 
-[node name="Wall21" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
+[node name="Wall21" parent="Map/NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(0.761189, 0, 0, 0, 4, 0, 0, 0, 0.1, 5.32758, 2, 5)
 
-[node name="Wall16" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
+[node name="Wall16" parent="Map/NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(-2.62268e-07, 0, -0.1, 0, 4, 0, 6, 0, -4.37114e-09, 1.19209e-07, 2, 8)
 mesh = SubResource("ArrayMesh_lbd88")
 can_fade_when_near_player = true
 
-[node name="Wall17" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
+[node name="Wall17" parent="Map/NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(-9.44166e-08, 0, -0.1, 0, 4, 0, 2.16, 0, -4.37114e-09, -1.19209e-07, 2, 14)
 mesh = SubResource("ArrayMesh_jh0tb")
 can_fade_when_near_player = true
 
-[node name="Wall18" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
+[node name="Wall18" parent="Map/NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(-2.62268e-07, 0, -0.1, 0, 4, 0, 6, 0, -4.37114e-09, 8, 2, 8)
 mesh = SubResource("ArrayMesh_70cp2")
 can_fade_when_near_player = true
 
-[node name="Wall20" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
+[node name="Wall20" parent="Map/NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(7.07327, 0, -4.50027e-16, 0, 4.05348, 0, 0, 0, 0.101337, 11.5176, 2, 5)
 
-[node name="Wall19" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
+[node name="Wall19" parent="Map/NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(-9.44166e-08, 0, -0.1, 0, 4, 0, 2.16, 0, -4.37114e-09, 8, 2, 14)
 mesh = SubResource("ArrayMesh_2myny")
 can_fade_when_near_player = true
 
-[node name="Wall5" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
+[node name="Wall5" parent="Map/NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(10, 0, 0, 0, 4, 0, 0, 0, 0.1, 0, 2, -5)
 
-[node name="Wall12" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
+[node name="Wall12" parent="Map/NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(10, 0, 0, 0, 4, 0, 0, 0, 0.1, 10, 2, -5)
 
-[node name="Wall13" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
+[node name="Wall13" parent="Map/NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(10, 0, 0, 0, 4, 0, 0, 0, 0.1, 10, 2, 15)
 
-[node name="Wall14" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
+[node name="Wall14" parent="Map/NavigationRegion3D/Static/Walls" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(10, 0, 0, 0, 4, 0, 0, 0, 0.1, 0, 2, 15)
 
-[node name="Furnitures" type="Node3D" parent="NavigationRegion3D/Static"]
+[node name="Furnitures" type="Node3D" parent="Map/NavigationRegion3D/Static"]
 
-[node name="Light" parent="NavigationRegion3D/Static/Furnitures" instance=ExtResource("2_rx2bi")]
+[node name="Light" parent="Map/NavigationRegion3D/Static/Furnitures" instance=ExtResource("2_rx2bi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18107, 0.5, 0.0076685)
 mesh = ExtResource("1_8mrn4")
-skeleton = NodePath("../../../..")
+skeleton = NodePath("../../../../..")
 
-[node name="CameraPosition" parent="." instance=ExtResource("2_7wgqx")]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Map"]
 environment = SubResource("Environment_0qa8a")
 
-[node name="Containers" type="Node3D" parent="."]
+[node name="Containers" type="Node3D" parent="Map"]
 
-[node name="SmallCabinet" parent="Containers" instance=ExtResource("3_utqoj")]
+[node name="SmallCabinet" parent="Map/Containers" instance=ExtResource("3_utqoj")]
 transform = Transform3D(-0.106889, 0, -0.994271, 0, 1, 0, 0.994271, 0, -0.106889, 3.67021, 0, 2.65251)
 container_mesh_scene = ExtResource("6_s5i3c")
 item = ExtResource("5_aelyp")
 
-[node name="Wardrobe" parent="Containers" instance=ExtResource("3_utqoj")]
+[node name="Wardrobe" parent="Map/Containers" instance=ExtResource("3_utqoj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.56876, 0, 3.771)
 container_mesh_scene = ExtResource("6_mhe2n")
 
-[node name="Lights" type="Node3D" parent="."]
+[node name="Lights" type="Node3D" parent="Map"]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map/Lights"]
 transform = Transform3D(1, 0, 0, 0, 0.00518363, 0.999987, 0, -0.999987, 0.00518363, 0, 8.3928, -8.49657)
 light_energy = 0.0
 directional_shadow_mode = 0
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Map/Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.57937, 3.6966, 0.000743985)
 light_color = Color(1, 1, 0.768627, 1)
 light_energy = 4.0
 shadow_enabled = true
 omni_range = 10.8623
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+[node name="OmniLight3D2" type="OmniLight3D" parent="Map/Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57937, 3.6966, 11.0007)
 light_color = Color(1, 1, 0.768627, 1)
 light_energy = 4.0
 shadow_enabled = true
 omni_range = 10.8623
 
-[node name="OmniLight3D3" type="OmniLight3D" parent="Lights"]
+[node name="OmniLight3D3" type="OmniLight3D" parent="Map/Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5794, 3.6966, 10.0007)
 light_color = Color(1, 1, 0.768627, 1)
 light_energy = 4.0
 shadow_enabled = true
 omni_range = 10.8623
 
-[node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
+[node name="OmniLight3D4" type="OmniLight3D" parent="Map/Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.42063, 3.6966, 10.0007)
 light_color = Color(1, 1, 0.768627, 1)
 light_energy = 4.0
 shadow_enabled = true
 omni_range = 10.8623
 
-[node name="OmniLight3D5" type="OmniLight3D" parent="Lights"]
+[node name="OmniLight3D5" type="OmniLight3D" parent="Map/Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5794, 3.6966, -0.999256)
 light_color = Color(1, 1, 0.768627, 1)
 light_energy = 4.0
 shadow_enabled = true
 omni_range = 10.8623
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="GeneralCamera" parent="." instance=ExtResource("2_7wgqx")]
+
+[node name="SplitScreenGridContainer" type="GridContainer" parent="."]
 texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -387,41 +391,41 @@ scale = Vector2(4, 4)
 theme_override_constants/h_separation = 1
 columns = 2
 
-[node name="SubViewportContainer_P1" type="SubViewportContainer" parent="GridContainer"]
+[node name="SubViewportContainer_P1" type="SubViewportContainer" parent="SplitScreenGridContainer"]
 custom_minimum_size = Vector2(160, 240)
 layout_mode = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer_P1"]
+[node name="SubViewport" type="SubViewport" parent="SplitScreenGridContainer/SubViewportContainer_P1"]
 handle_input_locally = false
 size = Vector2i(160, 240)
 render_target_update_mode = 4
 
-[node name="Player1" parent="GridContainer/SubViewportContainer_P1/SubViewport" instance=ExtResource("6_x12s6")]
+[node name="Player1" parent="SplitScreenGridContainer/SubViewportContainer_P1/SubViewport" instance=ExtResource("6_x12s6")]
 
-[node name="CameraPosition" parent="GridContainer/SubViewportContainer_P1/SubViewport/Player1" instance=ExtResource("2_7wgqx")]
+[node name="Player1_Camera" parent="SplitScreenGridContainer/SubViewportContainer_P1/SubViewport/Player1" instance=ExtResource("2_7wgqx")]
 camera_type = 1
 
-[node name="SubViewportContainer_P2" type="SubViewportContainer" parent="GridContainer"]
+[node name="SubViewportContainer_P2" type="SubViewportContainer" parent="SplitScreenGridContainer"]
 custom_minimum_size = Vector2(160, 240)
 layout_mode = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer_P2"]
+[node name="SubViewport" type="SubViewport" parent="SplitScreenGridContainer/SubViewportContainer_P2"]
 handle_input_locally = false
 size = Vector2i(160, 240)
 render_target_update_mode = 4
 
-[node name="Player2" parent="GridContainer/SubViewportContainer_P2/SubViewport" instance=ExtResource("6_x12s6")]
+[node name="Player2" parent="SplitScreenGridContainer/SubViewportContainer_P2/SubViewport" instance=ExtResource("6_x12s6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.25578)
 player_id = 2
 
-[node name="CameraPosition" parent="GridContainer/SubViewportContainer_P2/SubViewport/Player2" instance=ExtResource("2_7wgqx")]
+[node name="Player2_ Camera" parent="SplitScreenGridContainer/SubViewportContainer_P2/SubViewport/Player2" instance=ExtResource("2_7wgqx")]
 camera_type = 2
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Gui" type="CanvasLayer" parent="."]
 
-[node name="PlayersDebugGUI" type="Control" parent="CanvasLayer"]
+[node name="PlayersDebugGUI" type="Control" parent="Gui"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -429,7 +433,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer/PlayersDebugGUI"]
+[node name="GridContainer" type="GridContainer" parent="Gui/PlayersDebugGUI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -438,46 +442,46 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 2
 
-[node name="VBC_P1" type="VBoxContainer" parent="CanvasLayer/PlayersDebugGUI/GridContainer"]
+[node name="VBC_P1" type="VBoxContainer" parent="Gui/PlayersDebugGUI/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="GuiPlayer" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P1" instance=ExtResource("10_puf7h")]
+[node name="GuiPlayer" parent="Gui/PlayersDebugGUI/GridContainer/VBC_P1" instance=ExtResource("10_puf7h")]
 layout_mode = 2
 size_flags_horizontal = 0
 set_items_at_start = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("5_aelyp"), ExtResource("14_4gjh5"), ExtResource("15_axdb4")])
 
-[node name="GuiActions" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P1" instance=ExtResource("11_lt7pl")]
+[node name="GuiActions" parent="Gui/PlayersDebugGUI/GridContainer/VBC_P1" instance=ExtResource("11_lt7pl")]
 layout_mode = 2
 
-[node name="GuiInventory" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P1" instance=ExtResource("12_x1aap")]
+[node name="GuiInventory" parent="Gui/PlayersDebugGUI/GridContainer/VBC_P1" instance=ExtResource("12_x1aap")]
 layout_mode = 2
 
-[node name="VBC_P2" type="VBoxContainer" parent="CanvasLayer/PlayersDebugGUI/GridContainer"]
+[node name="VBC_P2" type="VBoxContainer" parent="Gui/PlayersDebugGUI/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="GuiPlayer" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P2" instance=ExtResource("10_puf7h")]
+[node name="GuiPlayer" parent="Gui/PlayersDebugGUI/GridContainer/VBC_P2" instance=ExtResource("10_puf7h")]
 layout_direction = 3
 layout_mode = 2
 size_flags_horizontal = 8
 player_id = 2
 set_items_at_start = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("5_aelyp"), ExtResource("14_4gjh5"), ExtResource("15_axdb4")])
 
-[node name="GuiActions" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P2" instance=ExtResource("11_lt7pl")]
+[node name="GuiActions" parent="Gui/PlayersDebugGUI/GridContainer/VBC_P2" instance=ExtResource("11_lt7pl")]
 layout_direction = 3
 layout_mode = 2
 size_flags_horizontal = 8
 player_id = 2
 
-[node name="GuiInventory" parent="CanvasLayer/PlayersDebugGUI/GridContainer/VBC_P2" instance=ExtResource("12_x1aap")]
+[node name="GuiInventory" parent="Gui/PlayersDebugGUI/GridContainer/VBC_P2" instance=ExtResource("12_x1aap")]
 layout_direction = 3
 layout_mode = 2
 size_flags_horizontal = 8
 player_id = 2
 
-[node name="InteractionManager" type="Control" parent="CanvasLayer/PlayersDebugGUI" node_paths=PackedStringArray("player_1_interaction_gui", "player_2_interaction_gui")]
+[node name="InteractionManager" type="Control" parent="Gui/PlayersDebugGUI" node_paths=PackedStringArray("player_1_interaction_gui", "player_2_interaction_gui")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -485,7 +489,7 @@ script = ExtResource("11_wrfae")
 player_1_interaction_gui = NodePath("../GridContainer/VBC_P1/GuiActions")
 player_2_interaction_gui = NodePath("../GridContainer/VBC_P2/GuiActions")
 
-[node name="GlobalDebugGUI" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("frames_value_path", "fps_value_path", "process_value_path", "physics_value_path")]
+[node name="GlobalDebugGUI" type="Control" parent="Gui" node_paths=PackedStringArray("frames_value_path", "fps_value_path", "process_value_path", "physics_value_path")]
 layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
@@ -502,7 +506,7 @@ fps_value_path = NodePath("CenterContainer/VBC/PanelContainer/MarginContainer/VB
 process_value_path = NodePath("CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Process/LabelValue")
 physics_value_path = NodePath("CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Physics/LabelValue")
 
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/GlobalDebugGUI"]
+[node name="CenterContainer" type="CenterContainer" parent="Gui/GlobalDebugGUI"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -512,68 +516,68 @@ offset_right = 75.5
 offset_bottom = 66.0
 grow_horizontal = 2
 
-[node name="VBC" type="VBoxContainer" parent="CanvasLayer/GlobalDebugGUI/CenterContainer"]
+[node name="VBC" type="VBoxContainer" parent="Gui/GlobalDebugGUI/CenterContainer"]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GlobalDebugGUI/CenterContainer/VBC"]
+[node name="PanelContainer" type="PanelContainer" parent="Gui/GlobalDebugGUI/CenterContainer/VBC"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GlobalDebugGUI/CenterContainer/VBC/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Gui/GlobalDebugGUI/CenterContainer/VBC/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Gui/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="LabelDebug" type="Label" parent="CanvasLayer/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="LabelDebug" type="Label" parent="Gui/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Debug"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBC_FPS" type="HBoxContainer" parent="CanvasLayer/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBC_FPS" type="HBoxContainer" parent="Gui/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="LabelName" type="Label" parent="CanvasLayer/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_FPS"]
+[node name="LabelName" type="Label" parent="Gui/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_FPS"]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 text = "FPS"
 
-[node name="LabelValue" type="Label" parent="CanvasLayer/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_FPS"]
+[node name="LabelValue" type="Label" parent="Gui/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_FPS"]
 layout_mode = 2
 
-[node name="HBC_Frame" type="HBoxContainer" parent="CanvasLayer/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBC_Frame" type="HBoxContainer" parent="Gui/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="LabelName" type="Label" parent="CanvasLayer/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Frame"]
+[node name="LabelName" type="Label" parent="Gui/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Frame"]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 text = "Frame time"
 
-[node name="LabelValue" type="Label" parent="CanvasLayer/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Frame"]
+[node name="LabelValue" type="Label" parent="Gui/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Frame"]
 layout_mode = 2
 
-[node name="HBC_Process" type="HBoxContainer" parent="CanvasLayer/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBC_Process" type="HBoxContainer" parent="Gui/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="LabelName" type="Label" parent="CanvasLayer/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Process"]
+[node name="LabelName" type="Label" parent="Gui/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Process"]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 text = "Process"
 
-[node name="LabelValue" type="Label" parent="CanvasLayer/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Process"]
+[node name="LabelValue" type="Label" parent="Gui/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Process"]
 layout_mode = 2
 
-[node name="HBC_Physics" type="HBoxContainer" parent="CanvasLayer/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBC_Physics" type="HBoxContainer" parent="Gui/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="LabelName" type="Label" parent="CanvasLayer/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Physics"]
+[node name="LabelName" type="Label" parent="Gui/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Physics"]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 text = "Physics"
 
-[node name="LabelValue" type="Label" parent="CanvasLayer/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Physics"]
+[node name="LabelValue" type="Label" parent="Gui/GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Physics"]
 layout_mode = 2
