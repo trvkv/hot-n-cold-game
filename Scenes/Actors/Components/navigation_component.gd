@@ -3,9 +3,13 @@ extends Node3D
 @export var component_owner: Player
 
 @onready var map_rid: RID = get_world_3d().get_navigation_map()
+@onready var timer: Timer = $Timer
+
+var ready_to_use: bool = true
 
 func _ready() -> void:
     EventBus.connect("query_distance", _on_query_distance)
+    timer.connect("timeout", _on_timeout)
 
 func get_path_to_target(from: Vector3, to: Vector3) -> PackedVector3Array:
     return NavigationServer3D.map_get_path(map_rid, from, to, true)
@@ -24,6 +28,9 @@ func _on_query_distance(player: Player) -> void:
     if player != component_owner:
         return
 
+    if not ready_to_use:
+        return
+
     var game_state = GameStateTypes.GameStateData.new(
         PlayersManager.get_opponent(component_owner),
         GameStateTypes.TYPES.FAVOURITE_ITEM_CONTAINER
@@ -33,3 +40,9 @@ func _on_query_distance(player: Player) -> void:
         var target_position: Vector3 = game_state.data.get_global_position()
         var path = get_path_to_target(get_global_position(), target_position)
         EventBus.emit_signal("distance_updated", player, calculate_distance(path))
+        ready_to_use = false
+        timer.start()
+
+func _on_timeout() -> void:
+    ready_to_use = true
+    EventBus.emit_signal("query_ready", component_owner)

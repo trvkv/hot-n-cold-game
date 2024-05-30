@@ -3,11 +3,13 @@
 [ext_resource type="Script" path="res://Scenes/GUI/gui_player.gd" id="1_kogb5"]
 [ext_resource type="PackedScene" uid="uid://df2dm6r1dpgo6" path="res://Scenes/GUI/horizontal_item_container.tscn" id="2_el2ng"]
 
-[node name="GuiIPlayer" type="PanelContainer" node_paths=PackedStringArray("label_player_name", "position_label_value", "rotation_label_value", "horizontal_item_container")]
+[node name="GuiIPlayer" type="PanelContainer" node_paths=PackedStringArray("label_player_name", "position_label_value", "rotation_label_value", "hotcold_ready_label_value", "hotcold_distance_label_value", "horizontal_item_container")]
 script = ExtResource("1_kogb5")
 label_player_name = NodePath("MarginContainer/VBoxContainer/L_player_name")
 position_label_value = NodePath("MarginContainer/VBoxContainer/HBC_Position/Label_value_position")
 rotation_label_value = NodePath("MarginContainer/VBoxContainer/HBC_Rotation/Label_value_rotation")
+hotcold_ready_label_value = NodePath("MarginContainer/VBoxContainer/HBC_HotColdReady/Label_value_query_ready")
+hotcold_distance_label_value = NodePath("MarginContainer/VBoxContainer/HBC_HotColdReady/Label_value_query_distance")
 horizontal_item_container = NodePath("MarginContainer/VBoxContainer/ItemContainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -52,4 +54,18 @@ layout_mode = 2
 text = "Y Rotation"
 
 [node name="Label_value_rotation" type="Label" parent="MarginContainer/VBoxContainer/HBC_Rotation"]
+layout_mode = 2
+
+[node name="HBC_HotColdReady" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label_name" type="Label" parent="MarginContainer/VBoxContainer/HBC_HotColdReady"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Hot/Cold ready"
+
+[node name="Label_value_query_ready" type="Label" parent="MarginContainer/VBoxContainer/HBC_HotColdReady"]
+layout_mode = 2
+
+[node name="Label_value_query_distance" type="Label" parent="MarginContainer/VBoxContainer/HBC_HotColdReady"]
 layout_mode = 2

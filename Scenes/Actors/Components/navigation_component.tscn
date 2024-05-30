@@ -4,3 +4,6 @@
 
 [node name="NavigationComponent" type="Node3D"]
 script = ExtResource("1_3hxyr")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
