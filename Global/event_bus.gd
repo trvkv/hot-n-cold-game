@@ -10,6 +10,8 @@ signal update_actions(player, actions, active_action)
 signal switch_action(player)
 
 signal set_trap(player, global_trap_position)
+signal query_distance(player)
+signal distance_updated(player, distance)
 
 signal store_game_state(player, data_type, data)
 signal retrieve_game_state(player, data_type, data)

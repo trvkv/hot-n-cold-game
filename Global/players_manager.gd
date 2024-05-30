@@ -120,6 +120,15 @@ func find_associated_action(event: InputEvent) -> String:
             detected_action = action
     return detected_action
 
+func get_opponent_id(player_id: PlayerID) -> PlayerID:
+    if player_id == PlayerID.PLAYER_1:
+        return PlayerID.PLAYER_2
+    return PlayerID.PLAYER_1
+
+func get_opponent(player: Player) -> Player:
+    var opponent_id = get_opponent_id(player.player_id)
+    return get_player(opponent_id)
+
 func _unhandled_input(event: InputEvent) -> void:
     # ignore mouse input
     if event as InputEventMouseButton:

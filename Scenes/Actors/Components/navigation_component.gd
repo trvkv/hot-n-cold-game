@@ -1,31 +1,35 @@
 extends Node3D
 
 @export var component_owner: Player
-@export var target_position: Vector3 = Vector3(3.0, 0.0, 0.0)
-@export var debug: bool = false
-@export var debug_line_color: Color = Color(1.0, 1.0, 1.0, 1.0)
 
 @onready var map_rid: RID = get_world_3d().get_navigation_map()
-@onready var canvas: CanvasItem = $CanvasLayer/Control
-
-var current_path: PackedVector3Array = []
 
 func _ready() -> void:
-    if debug:
-        setup_debug_line()
-    else:
-        if is_instance_valid(canvas):
-            canvas.queue_free()
-
-func _process(_delta: float) -> void:
-    current_path = get_path_to_target(get_global_position(), target_position)
-    if debug:
-        setup_debug_line()
-
-func setup_debug_line() -> void:
-    if is_instance_valid(canvas):
-        canvas.debug_line_color = debug_line_color
-        canvas.current_path = current_path
+    EventBus.connect("query_distance", _on_query_distance)
 
 func get_path_to_target(from: Vector3, to: Vector3) -> PackedVector3Array:
     return NavigationServer3D.map_get_path(map_rid, from, to, true)
+
+func calculate_distance(path: PackedVector3Array) -> float:
+    var distance: float = 0.0
+    for segment_id in range(0, path.size()):
+        var p1: Vector3 = path[segment_id]
+        var p2: Vector3 = path[segment_id]
+        if segment_id + 1 < path.size():
+            p2 = path[segment_id + 1]
+        distance += p1.distance_to(p2)
+    return distance
+
+func _on_query_distance(player: Player) -> void:
+    if player != component_owner:
+        return
+
+    var game_state = GameStateTypes.GameStateData.new(
+        PlayersManager.get_opponent(component_owner),
+        GameStateTypes.TYPES.FAVOURITE_ITEM_CONTAINER
+    )
+    EventBus.emit_signal("retrieve_game_state", game_state)
+    if is_instance_valid(game_state.data):
+        var target_position: Vector3 = game_state.data.get_global_position()
+        var path = get_path_to_target(get_global_position(), target_position)
+        EventBus.emit_signal("distance_updated", player, calculate_distance(path))

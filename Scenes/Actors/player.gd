@@ -49,14 +49,17 @@ func _physics_process(delta):
     move_and_slide()
 
 func handle_input(input: InputEventAction) -> void:
-    if input.action == "interact" and input.pressed:
-        EventBus.emit_signal("trigger_interaction", self, interaction_area)
-    elif input.action == "switch_interaction" and input.pressed:
-        EventBus.emit_signal("switch_interaction", self, interaction_area)
-    elif input.action == "switch_item" and input.pressed:
-        EventBus.emit_signal("switch_item", self)
-    elif input.action == "switch_action" and input.pressed:
-        EventBus.emit_signal("switch_action", self)
+    if input.pressed:
+        if input.action == "interact":
+            EventBus.emit_signal("trigger_interaction", self, interaction_area)
+        elif input.action == "switch_interaction":
+            EventBus.emit_signal("switch_interaction", self, interaction_area)
+        elif input.action == "switch_item":
+            EventBus.emit_signal("switch_item", self)
+        elif input.action == "switch_action":
+            EventBus.emit_signal("switch_action", self)
+        elif input.action == "query_distance":
+            EventBus.emit_signal("query_distance", self)
 
 func freeze() -> void:
     set_process(false)
