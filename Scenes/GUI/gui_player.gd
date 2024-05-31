@@ -31,6 +31,9 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
     var player: Player = PlayersManager.get_player(player_id)
+    if not is_instance_valid(player):
+        return
+
     position_label_value.set_text("%0.1f, %0.1f, %0.1f" % [
         player.get_position().x,
         player.get_position().y,

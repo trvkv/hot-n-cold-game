@@ -1,0 +1,169 @@
+[gd_scene load_steps=9 format=3 uid="uid://o8s1kfy706yp"]
+
+[ext_resource type="PackedScene" uid="uid://c1jry8m8264rs" path="res://Scenes/GUI/gui_player.tscn" id="1_stdpa"]
+[ext_resource type="Resource" uid="uid://don7pfb0cf8pq" path="res://Scenes/Items/item_trap.tres" id="2_u3okp"]
+[ext_resource type="Resource" uid="uid://b5ohqfe6mt3q5" path="res://Scenes/Items/item_key.tres" id="3_0ch5d"]
+[ext_resource type="Resource" uid="uid://bqsiaqedj4v3e" path="res://Scenes/Items/item_favourite.tres" id="4_7cpmw"]
+[ext_resource type="PackedScene" uid="uid://ciigl5pdv3i7u" path="res://Scenes/GUI/gui_actions.tscn" id="5_adkdv"]
+[ext_resource type="PackedScene" uid="uid://bka2hbsca3p2u" path="res://Scenes/GUI/gui_inventory.tscn" id="6_rsjdm"]
+[ext_resource type="Script" path="res://Scenes/Util/interaction_manager.gd" id="7_f3bx6"]
+[ext_resource type="Script" path="res://Scenes/GUI/global_debug.gd" id="8_wygou"]
+
+[node name="Gui" type="CanvasLayer"]
+
+[node name="PlayersDebugGUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="PlayersDebugGUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="VBC_P1" type="VBoxContainer" parent="PlayersDebugGUI/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="GuiPlayer" parent="PlayersDebugGUI/GridContainer/VBC_P1" instance=ExtResource("1_stdpa")]
+layout_mode = 2
+size_flags_horizontal = 0
+set_items_at_start = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("4_7cpmw"), ExtResource("3_0ch5d"), ExtResource("2_u3okp")])
+
+[node name="GuiActions" parent="PlayersDebugGUI/GridContainer/VBC_P1" instance=ExtResource("5_adkdv")]
+layout_mode = 2
+
+[node name="GuiInventory" parent="PlayersDebugGUI/GridContainer/VBC_P1" instance=ExtResource("6_rsjdm")]
+layout_mode = 2
+
+[node name="VBC_P2" type="VBoxContainer" parent="PlayersDebugGUI/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GuiPlayer" parent="PlayersDebugGUI/GridContainer/VBC_P2" instance=ExtResource("1_stdpa")]
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 8
+player_id = 2
+set_items_at_start = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("2_u3okp"), ExtResource("3_0ch5d"), ExtResource("4_7cpmw")])
+
+[node name="GuiActions" parent="PlayersDebugGUI/GridContainer/VBC_P2" instance=ExtResource("5_adkdv")]
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 8
+player_id = 2
+
+[node name="GuiInventory" parent="PlayersDebugGUI/GridContainer/VBC_P2" instance=ExtResource("6_rsjdm")]
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 8
+player_id = 2
+
+[node name="InteractionManager" type="Control" parent="PlayersDebugGUI" node_paths=PackedStringArray("player_1_interaction_gui", "player_2_interaction_gui")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_f3bx6")
+player_1_interaction_gui = NodePath("../GridContainer/VBC_P1/GuiActions")
+player_2_interaction_gui = NodePath("../GridContainer/VBC_P2/GuiActions")
+
+[node name="GlobalDebugGUI" type="Control" parent="." node_paths=PackedStringArray("frames_value_path", "fps_value_path", "process_value_path", "physics_value_path")]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("8_wygou")
+frames_value_path = NodePath("CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Frame/LabelValue")
+fps_value_path = NodePath("CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_FPS/LabelValue")
+process_value_path = NodePath("CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Process/LabelValue")
+physics_value_path = NodePath("CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Physics/LabelValue")
+
+[node name="CenterContainer" type="CenterContainer" parent="GlobalDebugGUI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -75.5
+offset_right = 75.5
+offset_bottom = 66.0
+grow_horizontal = 2
+
+[node name="VBC" type="VBoxContainer" parent="GlobalDebugGUI/CenterContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="GlobalDebugGUI/CenterContainer/VBC"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GlobalDebugGUI/CenterContainer/VBC/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="LabelDebug" type="Label" parent="GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Debug"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBC_FPS" type="HBoxContainer" parent="GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelName" type="Label" parent="GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_FPS"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "FPS"
+
+[node name="LabelValue" type="Label" parent="GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_FPS"]
+layout_mode = 2
+
+[node name="HBC_Frame" type="HBoxContainer" parent="GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelName" type="Label" parent="GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Frame"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "Frame time"
+
+[node name="LabelValue" type="Label" parent="GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Frame"]
+layout_mode = 2
+
+[node name="HBC_Process" type="HBoxContainer" parent="GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelName" type="Label" parent="GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Process"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "Process"
+
+[node name="LabelValue" type="Label" parent="GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Process"]
+layout_mode = 2
+
+[node name="HBC_Physics" type="HBoxContainer" parent="GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelName" type="Label" parent="GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Physics"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "Physics"
+
+[node name="LabelValue" type="Label" parent="GlobalDebugGUI/CenterContainer/VBC/PanelContainer/MarginContainer/VBoxContainer/HBC_Physics"]
+layout_mode = 2
