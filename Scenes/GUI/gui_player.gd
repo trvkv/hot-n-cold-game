@@ -48,7 +48,7 @@ func _on_query_ready(player) -> void:
 func _on_distance_updated(player: Player, distance: float) -> void:
     if player == PlayersManager.get_player(player_id):
         hotcold_ready_label_value.set_text("no..:(")
-        hotcold_distance_label_value.set_text("| %s" % distance_to_hotcold_string(distance))
+        hotcold_distance_label_value.set_text("(%s)" % distance_to_hotcold_string(distance))
 
 func _on_switch_item(player: Player):
     if player == PlayersManager.get_player(player_id):
