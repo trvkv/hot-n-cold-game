@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ciigl5pdv3i7u"]
 
-[ext_resource type="Script" path="res://Scenes/GUI/gui_actions.gd" id="1_hsrdo"]
-[ext_resource type="PackedScene" uid="uid://b4m1cmqe2oe2o" path="res://Scenes/GUI/action_holder.tscn" id="2_51ep1"]
+[ext_resource type="Script" path="res://Scenes/GUI/Elements/gui_actions.gd" id="1_hsrdo"]
+[ext_resource type="PackedScene" uid="uid://b4m1cmqe2oe2o" path="res://Scenes/GUI/Elements/action_holder.tscn" id="2_51ep1"]
 
 [node name="GuiActions" type="PanelContainer" node_paths=PackedStringArray("interaction_gui")]
 size_flags_horizontal = 0

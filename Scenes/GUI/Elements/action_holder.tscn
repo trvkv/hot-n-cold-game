@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b4m1cmqe2oe2o"]
 
-[ext_resource type="Script" path="res://Scenes/GUI/action_holder.gd" id="1_pxhqn"]
+[ext_resource type="Script" path="res://Scenes/GUI/Elements/action_holder.gd" id="1_pxhqn"]
 [ext_resource type="StyleBox" uid="uid://5g8m54g7d3mf" path="res://Scenes/GUI/Styles/action_holder_inactive.tres" id="2_oe2ht"]
 [ext_resource type="StyleBox" uid="uid://4l73aaukhdpo" path="res://Scenes/GUI/Styles/action_holder_active.tres" id="2_r51ef"]
 

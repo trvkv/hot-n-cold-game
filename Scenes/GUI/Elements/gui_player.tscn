@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://c1jry8m8264rs"]
 
-[ext_resource type="Script" path="res://Scenes/GUI/gui_player.gd" id="1_kogb5"]
-[ext_resource type="PackedScene" uid="uid://df2dm6r1dpgo6" path="res://Scenes/GUI/horizontal_item_container.tscn" id="2_el2ng"]
+[ext_resource type="Script" path="res://Scenes/GUI/Elements/gui_player.gd" id="1_ivwg0"]
+[ext_resource type="PackedScene" uid="uid://df2dm6r1dpgo6" path="res://Scenes/GUI/Elements/horizontal_item_container.tscn" id="2_a56yq"]
 
 [node name="GuiIPlayer" type="PanelContainer" node_paths=PackedStringArray("label_player_name", "position_label_value", "rotation_label_value", "hotcold_ready_label_value", "hotcold_distance_label_value", "horizontal_item_container")]
-script = ExtResource("1_kogb5")
+script = ExtResource("1_ivwg0")
 label_player_name = NodePath("MarginContainer/VBoxContainer/L_player_name")
 position_label_value = NodePath("MarginContainer/VBoxContainer/HBC_Position/Label_value_position")
 rotation_label_value = NodePath("MarginContainer/VBoxContainer/HBC_Rotation/Label_value_rotation")
@@ -31,7 +31,7 @@ layout_mode = 2
 text = "Inventory"
 vertical_alignment = 1
 
-[node name="ItemContainer" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_el2ng")]
+[node name="ItemContainer" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_a56yq")]
 layout_mode = 2
 
 [node name="HBC_Position" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]

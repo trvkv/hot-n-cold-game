@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=3 uid="uid://o8s1kfy706yp"]
 
-[ext_resource type="PackedScene" uid="uid://c1jry8m8264rs" path="res://Scenes/GUI/gui_player.tscn" id="1_stdpa"]
+[ext_resource type="PackedScene" uid="uid://c1jry8m8264rs" path="res://Scenes/GUI/Elements/gui_player.tscn" id="1_stdpa"]
 [ext_resource type="Resource" uid="uid://don7pfb0cf8pq" path="res://Scenes/Items/item_trap.tres" id="2_u3okp"]
 [ext_resource type="Resource" uid="uid://b5ohqfe6mt3q5" path="res://Scenes/Items/item_key.tres" id="3_0ch5d"]
 [ext_resource type="Resource" uid="uid://bqsiaqedj4v3e" path="res://Scenes/Items/item_favourite.tres" id="4_7cpmw"]
-[ext_resource type="PackedScene" uid="uid://ciigl5pdv3i7u" path="res://Scenes/GUI/gui_actions.tscn" id="5_adkdv"]
-[ext_resource type="PackedScene" uid="uid://bka2hbsca3p2u" path="res://Scenes/GUI/gui_inventory.tscn" id="6_rsjdm"]
+[ext_resource type="PackedScene" uid="uid://ciigl5pdv3i7u" path="res://Scenes/GUI/Elements/gui_actions.tscn" id="5_adkdv"]
+[ext_resource type="PackedScene" uid="uid://bka2hbsca3p2u" path="res://Scenes/GUI/Elements/gui_inventory.tscn" id="6_rsjdm"]
 [ext_resource type="Script" path="res://Scenes/Util/interaction_manager.gd" id="7_f3bx6"]
-[ext_resource type="Script" path="res://Scenes/GUI/global_debug.gd" id="8_wygou"]
+[ext_resource type="Script" path="res://Scenes/GUI/Elements/global_debug.gd" id="8_wygou"]
 
 [node name="Gui" type="CanvasLayer"]
 
