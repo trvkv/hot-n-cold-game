@@ -46,3 +46,5 @@ render_target_update_mode = 4
 register_on_ready = false
 
 [node name="CameraPosition" parent="MarginContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport/Player" instance=ExtResource("2_v1aqd")]
+camera_type = 2
+zoom = 0.41

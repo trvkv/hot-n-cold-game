@@ -20,6 +20,7 @@ var faded_objects: Dictionary
 var UUID: int = -1
 
 func _ready():
+    set_zoom(zoom)
     if Engine.is_editor_hint():
         return
     # camera_owner being null should be OK. For example in case of global cameras.
