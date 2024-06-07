@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccmv1a5nvvo0r"]
+[gd_scene load_steps=8 format=3 uid="uid://ccmv1a5nvvo0r"]
 
 [ext_resource type="Script" path="res://Scenes/GUI/Elements/adjustments_panel.gd" id="1_m22dn"]
 [ext_resource type="PackedScene" uid="uid://dkod8d31vxupb" path="res://Scenes/Actors/player.tscn" id="1_s4dat"]
 [ext_resource type="PackedScene" uid="uid://biqw183sh26cy" path="res://Scenes/Util/camera_position.tscn" id="2_v1aqd"]
 [ext_resource type="PackedScene" uid="uid://df2dm6r1dpgo6" path="res://Scenes/GUI/Elements/horizontal_item_container.tscn" id="4_obikw"]
+[ext_resource type="Resource" uid="uid://bqsiaqedj4v3e" path="res://Scenes/Items/item_favourite.tres" id="5_ojmc6"]
+[ext_resource type="Resource" uid="uid://b5ohqfe6mt3q5" path="res://Scenes/Items/item_key.tres" id="6_4yee7"]
+[ext_resource type="Resource" uid="uid://don7pfb0cf8pq" path="res://Scenes/Items/item_trap.tres" id="7_pangv"]
 
-[node name="AdjustmentsPanel" type="PanelContainer" node_paths=PackedStringArray("proceed_button")]
+[node name="AdjustmentsPanel" type="PanelContainer" node_paths=PackedStringArray("title_label", "proceed_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -14,6 +17,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_m22dn")
+title_label = NodePath("MarginContainer/VBoxContainer/Label_PlayerName")
 proceed_button = NodePath("MarginContainer/VBoxContainer/Button_proceed")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -61,6 +65,7 @@ horizontal_alignment = 1
 [node name="ItemContainer_Chosen" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_obikw")]
 layout_mode = 2
 alignment = 1
+set_active_on_ready = false
 
 [node name="Label_ItemsPool" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -70,6 +75,8 @@ horizontal_alignment = 1
 [node name="ItemContainer_All" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_obikw")]
 layout_mode = 2
 alignment = 1
+items_at_start = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("5_ojmc6"), ExtResource("6_4yee7"), ExtResource("7_pangv")])
+set_active_on_ready = false
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 self_modulate = Color(1, 1, 1, 0)

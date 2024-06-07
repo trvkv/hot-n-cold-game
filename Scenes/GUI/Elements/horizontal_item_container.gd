@@ -1,26 +1,44 @@
+@tool
 extends HBoxContainer
 
 class_name HorizontalItemContainer
 
 @export var item_element_scene: PackedScene
-@export var set_items_at_start: Array[ItemBase]
+@export var items_at_start: Array[ItemBase]:
+    set = set_starting_items, get = get_starting_items
+@export var set_active_on_ready: bool = true
 
 var active_element: ItemElement
 
 func _ready() -> void:
     assert(is_instance_valid(item_element_scene), "Item element scene is needed")
 
-    clear()
+    starting_items_reload()
 
     if get_child_count() == 0:
         return
 
-    # set first item as active
-    var item_element: ItemElement = get_child(0)
-    set_active_by_element(item_element)
+    if set_active_on_ready:
+        # set first item as active
+        var item_element: ItemElement = get_child(0)
+        set_active_by_element(item_element)
 
-func add_item(item: ItemBase) -> void:
+func set_starting_items(items: Array[ItemBase]) -> void:
+    items_at_start = items
+    starting_items_reload()
+
+func get_starting_items() -> Array[ItemBase]:
+    return items_at_start
+
+func starting_items_reload() -> void:
+    clear()
+    for item in items_at_start:
+        add_item(item, true)
+
+func add_item(item: ItemBase, allow_empty: bool = false) -> void:
     if not is_instance_valid(item):
+        if allow_empty:
+            add_empty()
         return
     var item_element: ItemElement = item_element_scene.instantiate()
     if is_instance_valid(item_element):
@@ -73,6 +91,8 @@ func get_items() -> Array[ItemBase]:
     return items
 
 func set_active_by_element(new_active: ItemElement) -> void:
+    if Engine.is_editor_hint():
+        return # do not set active items in editor
     if new_active not in get_children():
         printerr("Item element ", new_active, " not found in ", self)
         return
