@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://ccmv1a5nvvo0r"]
+[gd_scene load_steps=5 format=3 uid="uid://ccmv1a5nvvo0r"]
 
+[ext_resource type="Script" path="res://Scenes/GUI/Elements/adjustments_panel.gd" id="1_m22dn"]
 [ext_resource type="PackedScene" uid="uid://dkod8d31vxupb" path="res://Scenes/Actors/player.tscn" id="1_s4dat"]
 [ext_resource type="PackedScene" uid="uid://biqw183sh26cy" path="res://Scenes/Util/camera_position.tscn" id="2_v1aqd"]
+[ext_resource type="PackedScene" uid="uid://df2dm6r1dpgo6" path="res://Scenes/GUI/Elements/horizontal_item_container.tscn" id="4_obikw"]
 
-[node name="AdjustmentsPanel" type="PanelContainer"]
+[node name="AdjustmentsPanel" type="PanelContainer" node_paths=PackedStringArray("proceed_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -11,6 +13,8 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_m22dn")
+proceed_button = NodePath("MarginContainer/VBoxContainer/Button_proceed")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -48,3 +52,30 @@ register_on_ready = false
 [node name="CameraPosition" parent="MarginContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport/Player" instance=ExtResource("2_v1aqd")]
 camera_type = 2
 zoom = 0.41
+
+[node name="Label_ItemsChosen" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Chosed items"
+horizontal_alignment = 1
+
+[node name="ItemContainer_Chosen" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_obikw")]
+layout_mode = 2
+alignment = 1
+
+[node name="Label_ItemsPool" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "All items"
+horizontal_alignment = 1
+
+[node name="ItemContainer_All" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_obikw")]
+layout_mode = 2
+alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Button_proceed" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Proceed"

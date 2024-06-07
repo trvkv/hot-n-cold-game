@@ -11,9 +11,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_u5tn4")
-next_scene = ExtResource("2_qsdqk")
 button_new_game = NodePath("PanelContainer/MarginContainer/VBoxContainer/ButtonNewGame")
 button_exit = NodePath("PanelContainer/MarginContainer/VBoxContainer/ButtonExit")
+next_scene = ExtResource("2_qsdqk")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1

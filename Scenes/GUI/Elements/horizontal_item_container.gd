@@ -3,6 +3,7 @@ extends HBoxContainer
 class_name HorizontalItemContainer
 
 @export var item_element_scene: PackedScene
+@export var set_items_at_start: Array[ItemBase]
 
 var active_element: ItemElement
 

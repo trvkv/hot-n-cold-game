@@ -2,6 +2,8 @@ extends Control
 
 class_name MenuScreen
 
+@export var next_scene: PackedScene
+
 var _next_scene_to_load: PackedScene = null
 
 func on_enter() -> void:
@@ -13,8 +15,8 @@ func on_exit() -> void:
 func on_update(_delta) -> void:
     pass
 
-func set_next(next: PackedScene) -> void:
+func load_next(next: PackedScene) -> void:
     _next_scene_to_load = next
 
-func get_next() -> PackedScene:
+func is_next_ready() -> PackedScene:
     return _next_scene_to_load

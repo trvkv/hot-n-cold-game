@@ -35,7 +35,7 @@ func set_scene_current(scene: PackedScene) -> MenuScreen:
     return next_screen
 
 func _process(_delta) -> void:
-    var next_scene: PackedScene = current_screen.get_next()
+    var next_scene: PackedScene = current_screen.is_next_ready()
     if is_instance_valid(next_scene):
         current_screen.on_exit()
         print(current_screen, ": Got next... ", next_scene)

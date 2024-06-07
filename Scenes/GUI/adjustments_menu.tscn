@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/GUI/adjustments_menu.gd" id="1_ui1sh"]
 [ext_resource type="PackedScene" uid="uid://ccmv1a5nvvo0r" path="res://Scenes/GUI/Elements/adjustments_panel.tscn" id="2_vbl50"]
 
-[node name="AdjustmentsMenu" type="Control"]
+[node name="AdjustmentsMenu" type="Control" node_paths=PackedStringArray("panel_p1", "panel_p2")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +11,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ui1sh")
+panel_p1 = NodePath("PanelContainer/GridContainer/AdjustmentsPanel_P1")
+panel_p2 = NodePath("PanelContainer/GridContainer/AdjustmentsPanel_P2")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -31,3 +33,4 @@ layout_mode = 2
 
 [node name="AdjustmentsPanel_P2" parent="PanelContainer/GridContainer" instance=ExtResource("2_vbl50")]
 layout_mode = 2
+player_id = 2

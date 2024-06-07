@@ -1,7 +1,5 @@
 extends MenuScreen
 
-@export var next_scene: PackedScene
-
 @export var button_new_game: Button
 @export var button_exit: Button
 
@@ -14,7 +12,7 @@ func _ready() -> void:
     button_exit.connect("pressed", _on_pressed_exit)
 
 func _on_pressed_new_game() -> void:
-    set_next(next_scene)
+    load_next(next_scene)
 
 func _on_pressed_exit() -> void:
     get_tree().quit(0)
