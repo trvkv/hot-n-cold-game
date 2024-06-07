@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dgd2lv871g54q"]
+[gd_scene load_steps=3 format=3 uid="uid://dgd2lv871g54q"]
 
 [ext_resource type="Script" path="res://Scenes/GUI/adjustments_menu.gd" id="1_ui1sh"]
+[ext_resource type="PackedScene" uid="uid://ccmv1a5nvvo0r" path="res://Scenes/GUI/Elements/adjustments_panel.tscn" id="2_vbl50"]
 
 [node name="AdjustmentsMenu" type="Control"]
 layout_mode = 3
@@ -21,14 +22,12 @@ grow_vertical = 2
 
 [node name="GridContainer" type="GridContainer" parent="PanelContainer"]
 layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
 columns = 2
 
-[node name="VBoxContainer_P1" type="VBoxContainer" parent="PanelContainer/GridContainer"]
+[node name="AdjustmentsPanel_P1" parent="PanelContainer/GridContainer" instance=ExtResource("2_vbl50")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
-[node name="VBoxContainer_P2" type="VBoxContainer" parent="PanelContainer/GridContainer"]
+[node name="AdjustmentsPanel_P2" parent="PanelContainer/GridContainer" instance=ExtResource("2_vbl50")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3

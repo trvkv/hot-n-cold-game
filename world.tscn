@@ -215,10 +215,13 @@ glow_enabled = true
 glow_intensity = 1.1
 glow_hdr_threshold = 0.7
 
-[node name="World" type="Node3D" node_paths=PackedStringArray("viewport_player_1", "viewport_player_2")]
+[node name="World" type="Node3D" node_paths=PackedStringArray("viewport_player_1", "viewport_player_2", "camera_player_1", "camera_player_2", "camera_global")]
 script = ExtResource("1_pwml2")
 viewport_player_1 = NodePath("SplitScreenGridContainer/SubViewportContainer_P1")
 viewport_player_2 = NodePath("SplitScreenGridContainer/SubViewportContainer_P2")
+camera_player_1 = NodePath("SplitScreenGridContainer/SubViewportContainer_P1/SubViewport/Player1/Player1_Camera")
+camera_player_2 = NodePath("SplitScreenGridContainer/SubViewportContainer_P2/SubViewport/Player2/Player2_ Camera")
+camera_global = NodePath("GeneralCamera")
 trap_scene = ExtResource("2_wfy8b")
 
 [node name="Map" type="Node3D" parent="."]
@@ -397,7 +400,8 @@ render_target_update_mode = 4
 
 [node name="Player1" parent="SplitScreenGridContainer/SubViewportContainer_P1/SubViewport" instance=ExtResource("6_x12s6")]
 
-[node name="Player1_Camera" parent="SplitScreenGridContainer/SubViewportContainer_P1/SubViewport/Player1" instance=ExtResource("2_7wgqx")]
+[node name="Player1_Camera" parent="SplitScreenGridContainer/SubViewportContainer_P1/SubViewport/Player1" node_paths=PackedStringArray("camera_owner") instance=ExtResource("2_7wgqx")]
+camera_owner = NodePath("..")
 camera_type = 1
 
 [node name="SubViewportContainer_P2" type="SubViewportContainer" parent="SplitScreenGridContainer"]
@@ -414,7 +418,8 @@ render_target_update_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.25578)
 player_id = 2
 
-[node name="Player2_ Camera" parent="SplitScreenGridContainer/SubViewportContainer_P2/SubViewport/Player2" instance=ExtResource("2_7wgqx")]
-camera_type = 2
+[node name="Player2_ Camera" parent="SplitScreenGridContainer/SubViewportContainer_P2/SubViewport/Player2" node_paths=PackedStringArray("camera_owner") instance=ExtResource("2_7wgqx")]
+camera_owner = NodePath("..")
+camera_type = 1
 
 [node name="Gui" parent="." instance=ExtResource("12_x0qin")]

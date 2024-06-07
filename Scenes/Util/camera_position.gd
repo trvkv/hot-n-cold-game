@@ -1,13 +1,29 @@
+@tool
 extends Node3D
 
+class_name CameraPosition
+
+@export var camera_owner: Node
 @export var camera_type: CameraManager.CameraType = CameraManager.CameraType.GLOBAL
+@export var zoom: float = 1.0:
+    get:
+        return zoom
+    set(value):
+        zoom = value
+        set_zoom(zoom)
 
 @onready var collision_area = $Area3D
+@onready var camera: Camera3D = $Camera3D
+@onready var starting_camera_position = camera.get_position()
 
 var faded_objects: Dictionary
+var UUID: int = -1
 
 func _ready():
-    CameraManager.register_camera(camera_type, $Camera3D)
+    if Engine.is_editor_hint():
+        return
+    # camera_owner being null should be OK. For example in case of global cameras.
+    UUID = CameraManager.register_camera(camera_owner, camera_type, $Camera3D)
     collision_area.connect("body_entered", _on_body_entered)
     collision_area.connect("body_exited", _on_body_exited)
 
@@ -49,3 +65,11 @@ func set_distance_fade(body: CollisionObject3D, distance: float):
     var wall: MeshInstance3D = body.get_parent()
     var material: StandardMaterial3D = wall.get_active_material(0)
     interpolate_max_distance(material, 25.0 - min(distance * 7.0, 25.0))
+
+func set_zoom(new_zoom: float) -> void:
+    if is_instance_valid(camera):
+        camera.set_position(Vector3(
+            starting_camera_position.x * new_zoom,
+            starting_camera_position.y * new_zoom,
+            0.0
+        ))

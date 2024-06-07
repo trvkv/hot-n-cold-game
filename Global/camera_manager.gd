@@ -1,36 +1,37 @@
 extends Node
 
-enum CameraType { PLAYER_1 = 1, PLAYER_2 = 2, GLOBAL = 4 }
+enum CameraType { PLAYER = 1, PREVIEW = 2, GLOBAL = 4 }
 
-var cameras = {
-    CameraType.PLAYER_1: null,
-    CameraType.PLAYER_2: null,
-    CameraType.GLOBAL: null
-}
+var registered_cameras = {}
+
+var camera_counter: int = 0
 
 func camera_to_name(camera_type: CameraType) -> String:
-    if camera_type == CameraType.PLAYER_1:
-        return "PLAYER_1"
-    if camera_type == CameraType.PLAYER_2:
-        return "PLAYER_2"
+    if camera_type == CameraType.PLAYER:
+        return "PLAYER"
     if camera_type == CameraType.GLOBAL:
         return "GLOBAL"
+    if camera_type == CameraType.PREVIEW:
+        return "PREVIEW"
     return "UNKNOWN"
 
-func register_camera(camera_type: CameraType, camera_object: Camera3D) -> void:
-    assert(camera_type in cameras.keys(), "No such camera type: " + str(camera_type))
-    assert(cameras[camera_type] == null, camera_to_name(camera_type) + " camera already registered!")
-    cameras[camera_type] = camera_object
+func register_camera(camera_owner: Node, camera_type: CameraType, camera_object: Camera3D) -> int:
+    assert(camera_type in CameraType.values(), "No such camera type: " + str(camera_type))
+    var uuid = camera_counter
+    registered_cameras[uuid] = {
+        "owner": camera_owner,
+        "type": camera_type,
+        "camera": camera_object
+    }
     camera_object.clear_current(false)
-    print("Registering camera (", camera_to_name(camera_type), "): ", camera_object)
+    print("Registering camera (", camera_to_name(camera_type), "): as ", uuid, " ", camera_object)
+    camera_counter += 1
+    return uuid
 
-func set_active_cameras(camera_types: int) -> void:
-    for type in cameras.keys():
-        var camera = type & camera_types
-        if camera > 0:
-            assert(cameras[type] != null, "Camera doesn't exists, cannot set active.")
-            print("Current camera (", camera_to_name(type), "): ", cameras[type])
-            cameras[type].make_current()
-        else:
-            print("Clearing camera (", camera_to_name(type), "): ", cameras[type])
-            cameras[type].clear_current(false)
+func activate_camera(uuid: int) -> void:
+    if uuid in registered_cameras.keys():
+        registered_cameras[uuid]["camera"].make_current()
+
+func deactivate_camera(uuid: int) -> void:
+    if uuid in registered_cameras.keys():
+        registered_cameras[uuid]["camera"].clear_current(false)

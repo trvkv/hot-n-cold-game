@@ -83,6 +83,12 @@ func add_player(player_id: PlayerID, player: Player) -> void:
         return
     players[player_id] = PlayerContainer.new(player_id, player)
 
+func remove_player(player_id: PlayerID) -> void:
+    if player_id not in players.keys():
+        printerr("Player ", str(player_id), " not present in manager")
+        return
+    players.erase(player_id)
+
 func get_container(player_id: PlayerID) -> PlayerContainer:
     if player_id not in players.keys():
         return null

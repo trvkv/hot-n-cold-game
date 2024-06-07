@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 class_name Player
 
+@export var register_on_ready: bool = true
 @export var player_id: PlayersManager.PlayerID = PlayersManager.PlayerID.PLAYER_1
 @export var movement_speed: float = 4.0
 @export var gravity = 9.8
@@ -14,12 +15,17 @@ class_name Player
 @onready var trap_component = $TrapComponent
 
 func _ready() -> void:
-    PlayersManager.add_player(player_id, self)
+    if register_on_ready:
+        PlayersManager.add_player(player_id, self)
     assert(is_instance_valid(animation_player), "Animation player not present")
     assert(is_instance_valid(sprite_position), "Sprite position not present")
     assert(is_instance_valid(interaction_area), "Interaction area not present")
     assert(is_instance_valid(item_inventory), "Item inventory not present")
     assert(is_instance_valid(trap_component), "Trap component not present")
+
+func _exit_tree() -> void:
+    if register_on_ready:
+        PlayersManager.remove_player(player_id)
 
 func _process(_delta):
     if velocity.length() > 0.0:
