@@ -8,7 +8,7 @@
 [ext_resource type="Resource" uid="uid://b5ohqfe6mt3q5" path="res://Scenes/Items/item_key.tres" id="6_4yee7"]
 [ext_resource type="Resource" uid="uid://don7pfb0cf8pq" path="res://Scenes/Items/item_trap.tres" id="7_pangv"]
 
-[node name="AdjustmentsPanel" type="PanelContainer" node_paths=PackedStringArray("title_label", "message_label", "proceed_button", "chosen_items")]
+[node name="AdjustmentsPanel" type="PanelContainer" node_paths=PackedStringArray("title_label", "message_label", "proceed_button_margin", "proceed_button", "chosen_items")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -19,7 +19,8 @@ size_flags_vertical = 3
 script = ExtResource("1_m22dn")
 title_label = NodePath("MarginContainer/VBoxContainer/Label_PlayerName")
 message_label = NodePath("MarginContainer/VBoxContainer/Label_Message")
-proceed_button = NodePath("MarginContainer/VBoxContainer/Button_proceed")
+proceed_button_margin = NodePath("MarginContainer/VBoxContainer/MarginContainer")
+proceed_button = NodePath("MarginContainer/VBoxContainer/MarginContainer/Button_proceed")
 chosen_items = NodePath("MarginContainer/VBoxContainer/ItemContainer_Chosen")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -96,6 +97,9 @@ self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Button_proceed" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button_proceed" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 text = "Proceed"

@@ -5,6 +5,7 @@ class_name AdjustmentsPanel
 @export var player_id: PlayersManager.PlayerID = PlayersManager.PlayerID.PLAYER_1
 @export var title_label: Label
 @export var message_label: Label
+@export var proceed_button_margin: MarginContainer
 @export var proceed_button: Button
 
 @export var chosen_items: HorizontalItemContainer
@@ -15,9 +16,19 @@ signal player_error(player_id, message)
 func _ready() -> void:
     assert(is_instance_valid(title_label), "Title label invalid")
     assert(is_instance_valid(message_label), "Message label invalid")
+    assert(is_instance_valid(proceed_button_margin), "Proceed button margin invalid")
     assert(is_instance_valid(proceed_button), "Proceed button invalid")
     proceed_button.connect("pressed", _on_pressed)
+    proceed_button_margin.connect("resized", _on_resized)
     title_label.set_text(PlayersManager.get_player_name(player_id))
+
+func _on_resized() -> void:
+    var margin_factor = 0.2 # each margin should take 20% of the X size
+    var sx = proceed_button_margin.get_size().x * margin_factor
+    proceed_button_margin.begin_bulk_theme_override()
+    proceed_button_margin.add_theme_constant_override("margin_left", sx)
+    proceed_button_margin.add_theme_constant_override("margin_right", sx)
+    proceed_button_margin.end_bulk_theme_override()
 
 func _on_pressed() -> void:
     var result: GuiResult = check_ready_conditions()
