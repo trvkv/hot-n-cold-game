@@ -13,6 +13,7 @@ class_name Player
 @onready var interaction_area = $InteractionArea
 @onready var item_inventory = $ItemInventory
 @onready var trap_component = $TrapComponent
+@onready var input_component = $PlayerInputComponent
 
 func _ready() -> void:
     if register_on_ready:
@@ -42,8 +43,8 @@ func _physics_process(delta):
     # gravity comes first
     velocity.y -= gravity * delta
 
-    # movement
-    var movement_dir: Vector2 = PlayersManager.get_input(player_id)
+    # player movement
+    var movement_dir: Vector2 = input_component.get_input()
     movement_dir = movement_dir.normalized()
 
     velocity = Vector3(
@@ -52,20 +53,15 @@ func _physics_process(delta):
         movement_dir.y * movement_speed
     )
 
-    move_and_slide()
+    # interaction_area movement
+    if movement_dir.length() > 0:
+        interaction_area.move_interaction_area(movement_dir)
 
-func handle_input(input: InputEventAction) -> void:
-    if input.pressed:
-        if input.action == "interact":
-            EventBus.emit_signal("trigger_interaction", self, interaction_area)
-        elif input.action == "switch_interaction":
-            EventBus.emit_signal("switch_interaction", self, interaction_area)
-        elif input.action == "switch_item":
-            EventBus.emit_signal("switch_item", self)
-        elif input.action == "switch_action":
-            EventBus.emit_signal("switch_action", self)
-        elif input.action == "query_distance":
-            EventBus.emit_signal("query_distance", self)
+    # trap movement
+    if movement_dir.length() > 0:
+        trap_component.move_trap_area(movement_dir)
+
+    move_and_slide()
 
 func freeze() -> void:
     set_process(false)

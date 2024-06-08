@@ -19,11 +19,6 @@ func _ready() -> void:
         printerr(self, ": Interactor not valid, using 'self'")
         interactor = self
 
-func _physics_process(_delta) -> void:
-    var movement_dir: Vector2 = PlayersManager.get_input(interactor.player_id).normalized()
-    if movement_dir.length() > 0:
-        move_interaction_area(movement_dir)
-
 func move_interaction_area(move_direction: Vector2) -> void:
     rotation.y = -move_direction.angle()
     set_position(Vector3(
