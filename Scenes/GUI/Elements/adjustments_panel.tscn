@@ -8,7 +8,7 @@
 [ext_resource type="Resource" uid="uid://b5ohqfe6mt3q5" path="res://Scenes/Items/item_key.tres" id="6_4yee7"]
 [ext_resource type="Resource" uid="uid://don7pfb0cf8pq" path="res://Scenes/Items/item_trap.tres" id="7_pangv"]
 
-[node name="AdjustmentsPanel" type="PanelContainer" node_paths=PackedStringArray("title_label", "proceed_button")]
+[node name="AdjustmentsPanel" type="PanelContainer" node_paths=PackedStringArray("title_label", "message_label", "proceed_button", "chosen_items")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -18,7 +18,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_m22dn")
 title_label = NodePath("MarginContainer/VBoxContainer/Label_PlayerName")
+message_label = NodePath("MarginContainer/VBoxContainer/Label_Message")
 proceed_button = NodePath("MarginContainer/VBoxContainer/Button_proceed")
+chosen_items = NodePath("MarginContainer/VBoxContainer/ItemContainer_Chosen")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -57,14 +59,25 @@ register_on_ready = false
 camera_type = 2
 zoom = 0.41
 
+[node name="Label_Message" type="Label" parent="MarginContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 0, 1)
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+text = "Choose your favourite item. Additionally, you can
+choose up to 2 different items to fight your opponent
+more effectively."
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Label_ItemsChosen" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Chosed items"
+text = "Chosen items"
 horizontal_alignment = 1
 
 [node name="ItemContainer_Chosen" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_obikw")]
 layout_mode = 2
 alignment = 1
+items_at_start = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("5_ojmc6"), null, null])
 set_active_on_ready = false
 
 [node name="Label_ItemsPool" type="Label" parent="MarginContainer/VBoxContainer"]
