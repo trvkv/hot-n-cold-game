@@ -90,7 +90,6 @@ horizontal_alignment = 1
 layout_mode = 2
 alignment = 1
 items_at_start = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("5_ojmc6"), ExtResource("6_4yee7"), ExtResource("7_pangv")])
-set_active_on_ready = false
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 self_modulate = Color(1, 1, 1, 0)

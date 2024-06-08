@@ -124,6 +124,7 @@ func find_associated_action(event: InputEvent) -> String:
     for action in InputMap.get_actions():
         if InputMap.event_is_action(event, action):
             detected_action = action
+            break
     return detected_action
 
 func get_opponent_id(player_id: PlayerID) -> PlayerID:
