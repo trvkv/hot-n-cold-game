@@ -9,6 +9,8 @@ class_name AdjustmentsPanel
 @export var proceed_button: Button
 
 @export var chosen_items: HorizontalItemContainer
+@export var all_items: HorizontalItemContainer
+@export var adjusement_input: AdjustmentInputComponent
 
 signal player_ready(player_id)
 signal player_error(player_id, message)
@@ -18,6 +20,11 @@ func _ready() -> void:
     assert(is_instance_valid(message_label), "Message label invalid")
     assert(is_instance_valid(proceed_button_margin), "Proceed button margin invalid")
     assert(is_instance_valid(proceed_button), "Proceed button invalid")
+    assert(is_instance_valid(adjusement_input), "adjusement input component invalid")
+
+    adjusement_input.connect("switch_item", _on_switch_item)
+    adjusement_input.connect("choose_item", _on_choose_item)
+
     proceed_button.connect("pressed", _on_pressed)
     proceed_button_margin.connect("resized", _on_resized)
     title_label.set_text(PlayersManager.get_player_name(player_id))
@@ -41,6 +48,13 @@ func _on_pressed() -> void:
         emit_signal("player_error", player_id, result.message)
         message_label.set_text(result.message)
         message_label.self_modulate = Color(1.0, 0.0, 0.0)
+
+func _on_switch_item() -> void:
+    var next = all_items.get_next_element_by_active()
+    all_items.set_active_by_element(next)
+
+func _on_choose_item() -> void:
+    pass
 
 func count_item_types(items: Array[ItemBase], item_type: StringName) -> int:
     var count: int = 0

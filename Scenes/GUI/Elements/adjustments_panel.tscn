@@ -1,14 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://ccmv1a5nvvo0r"]
+[gd_scene load_steps=9 format=3 uid="uid://ccmv1a5nvvo0r"]
 
 [ext_resource type="Script" path="res://Scenes/GUI/Elements/adjustments_panel.gd" id="1_m22dn"]
 [ext_resource type="PackedScene" uid="uid://dkod8d31vxupb" path="res://Scenes/Actors/player.tscn" id="1_s4dat"]
 [ext_resource type="PackedScene" uid="uid://biqw183sh26cy" path="res://Scenes/Util/camera_position.tscn" id="2_v1aqd"]
+[ext_resource type="PackedScene" uid="uid://dpytaq7ufqwpn" path="res://Scenes/GUI/adjustment_input_component.tscn" id="4_lrwjy"]
 [ext_resource type="PackedScene" uid="uid://df2dm6r1dpgo6" path="res://Scenes/GUI/Elements/horizontal_item_container.tscn" id="4_obikw"]
 [ext_resource type="Resource" uid="uid://bqsiaqedj4v3e" path="res://Scenes/Items/item_favourite.tres" id="5_ojmc6"]
 [ext_resource type="Resource" uid="uid://b5ohqfe6mt3q5" path="res://Scenes/Items/item_key.tres" id="6_4yee7"]
 [ext_resource type="Resource" uid="uid://don7pfb0cf8pq" path="res://Scenes/Items/item_trap.tres" id="7_pangv"]
 
-[node name="AdjustmentsPanel" type="PanelContainer" node_paths=PackedStringArray("title_label", "message_label", "proceed_button_margin", "proceed_button", "chosen_items")]
+[node name="AdjustmentsPanel" type="PanelContainer" node_paths=PackedStringArray("title_label", "message_label", "proceed_button_margin", "proceed_button", "chosen_items", "all_items", "adjusement_input")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -22,6 +23,8 @@ message_label = NodePath("MarginContainer/VBoxContainer/Label_Message")
 proceed_button_margin = NodePath("MarginContainer/VBoxContainer/MarginContainer")
 proceed_button = NodePath("MarginContainer/VBoxContainer/MarginContainer/Button_proceed")
 chosen_items = NodePath("MarginContainer/VBoxContainer/ItemContainer_Chosen")
+all_items = NodePath("MarginContainer/VBoxContainer/ItemContainer_All")
+adjusement_input = NodePath("MarginContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport/AdjustmentInputComponent")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -59,6 +62,9 @@ register_on_ready = false
 [node name="CameraPosition" parent="MarginContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport/Player" instance=ExtResource("2_v1aqd")]
 camera_type = 2
 zoom = 0.41
+
+[node name="AdjustmentInputComponent" parent="MarginContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport" node_paths=PackedStringArray("adjustments_panel") instance=ExtResource("4_lrwjy")]
+adjustments_panel = NodePath("../../../../../..")
 
 [node name="Label_Message" type="Label" parent="MarginContainer/VBoxContainer"]
 self_modulate = Color(1, 1, 0, 1)

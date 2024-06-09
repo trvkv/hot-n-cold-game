@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpytaq7ufqwpn"]
+
+[ext_resource type="Script" path="res://Scenes/GUI/adjustment_input_component.gd" id="1_y61cj"]
+
+[node name="AdjustmentInputComponent" type="Node3D"]
+script = ExtResource("1_y61cj")
