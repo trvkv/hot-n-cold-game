@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://ctwlxb01ui5r8"]
+[gd_scene load_steps=31 format=3 uid="uid://ctwlxb01ui5r8"]
 
 [ext_resource type="ArrayMesh" uid="uid://dh7gamdvjygwu" path="res://Assets/Meshes/cube-light.res" id="1_8mrn4"]
 [ext_resource type="Script" path="res://world.gd" id="1_pwml2"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://d3n5648hv4hmc" path="res://Scenes/Environment/Furnitures/wardrobe.tscn" id="6_mhe2n"]
 [ext_resource type="PackedScene" uid="uid://k8fwqgtj23rd" path="res://Scenes/Environment/Furnitures/small_cabinet.tscn" id="6_s5i3c"]
 [ext_resource type="PackedScene" uid="uid://dkod8d31vxupb" path="res://Scenes/Actors/player.tscn" id="6_x12s6"]
+[ext_resource type="PackedScene" uid="uid://diaq8risagjav" path="res://Scenes/Actors/Components/player_input_component.tscn" id="12_ae044"]
 [ext_resource type="PackedScene" uid="uid://o8s1kfy706yp" path="res://Scenes/GUI/main_gui.tscn" id="12_x0qin"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_15x4p"]
@@ -398,11 +399,15 @@ handle_input_locally = false
 size = Vector2i(160, 240)
 render_target_update_mode = 4
 
-[node name="Player1" parent="SplitScreenGridContainer/SubViewportContainer_P1/SubViewport" instance=ExtResource("6_x12s6")]
+[node name="Player1" parent="SplitScreenGridContainer/SubViewportContainer_P1/SubViewport" node_paths=PackedStringArray("player_input_component") instance=ExtResource("6_x12s6")]
+player_input_component = NodePath("Player1_InputComponent")
 
 [node name="Player1_Camera" parent="SplitScreenGridContainer/SubViewportContainer_P1/SubViewport/Player1" node_paths=PackedStringArray("camera_owner") instance=ExtResource("2_7wgqx")]
 camera_owner = NodePath("..")
 camera_type = 1
+
+[node name="Player1_InputComponent" parent="SplitScreenGridContainer/SubViewportContainer_P1/SubViewport/Player1" node_paths=PackedStringArray("player") instance=ExtResource("12_ae044")]
+player = NodePath("..")
 
 [node name="SubViewportContainer_P2" type="SubViewportContainer" parent="SplitScreenGridContainer"]
 custom_minimum_size = Vector2(160, 240)
@@ -414,12 +419,16 @@ handle_input_locally = false
 size = Vector2i(160, 240)
 render_target_update_mode = 4
 
-[node name="Player2" parent="SplitScreenGridContainer/SubViewportContainer_P2/SubViewport" instance=ExtResource("6_x12s6")]
+[node name="Player2" parent="SplitScreenGridContainer/SubViewportContainer_P2/SubViewport" node_paths=PackedStringArray("player_input_component") instance=ExtResource("6_x12s6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.25578)
 player_id = 2
+player_input_component = NodePath("Player2_InputComponent")
 
 [node name="Player2_ Camera" parent="SplitScreenGridContainer/SubViewportContainer_P2/SubViewport/Player2" node_paths=PackedStringArray("camera_owner") instance=ExtResource("2_7wgqx")]
 camera_owner = NodePath("..")
 camera_type = 1
+
+[node name="Player2_InputComponent" parent="SplitScreenGridContainer/SubViewportContainer_P2/SubViewport/Player2" node_paths=PackedStringArray("player") instance=ExtResource("12_ae044")]
+player = NodePath("..")
 
 [node name="Gui" parent="." instance=ExtResource("12_x0qin")]

@@ -6,6 +6,7 @@ class_name Player
 @export var player_id: PlayersManager.PlayerID = PlayersManager.PlayerID.PLAYER_1
 @export var movement_speed: float = 4.0
 @export var gravity = 9.8
+@export var player_input_component: PlayerInputComponent
 
 @onready var animation_player = $AnimationPlayer
 @onready var sprite_position = $SpritesPosition
@@ -13,7 +14,6 @@ class_name Player
 @onready var interaction_area = $InteractionArea
 @onready var item_inventory = $ItemInventory
 @onready var trap_component = $TrapComponent
-@onready var input_component = $PlayerInputComponent
 
 func _ready() -> void:
     if register_on_ready:
@@ -23,6 +23,12 @@ func _ready() -> void:
     assert(is_instance_valid(interaction_area), "Interaction area not present")
     assert(is_instance_valid(item_inventory), "Item inventory not present")
     assert(is_instance_valid(trap_component), "Trap component not present")
+
+    # if player_input_component is invalid, player won't move
+    # thus, all animations are also disabled.
+    if not is_instance_valid(player_input_component):
+        print("No player input controller found for player ", player_id, ", freezing.")
+        freeze()
 
 func _exit_tree() -> void:
     if register_on_ready:
@@ -44,7 +50,7 @@ func _physics_process(delta):
     velocity.y -= gravity * delta
 
     # player movement
-    var movement_dir: Vector2 = input_component.get_input()
+    var movement_dir: Vector2 = player_input_component.get_input()
     movement_dir = movement_dir.normalized()
 
     velocity = Vector3(
