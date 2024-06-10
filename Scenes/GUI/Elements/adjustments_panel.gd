@@ -44,13 +44,11 @@ func _on_pressed() -> void:
     var result: GuiResult = check_ready_conditions()
     if result.status == OK:
         emit_signal("player_ready", player_id)
-        message_label.set_text("READY!")
-        message_label.self_modulate = Color(0.0, 1.0, 0.0)
+        set_success_message(result.message)
         proceed_button.set_modulate(Color(0.0, 1.0, 0.0))
     else:
         emit_signal("player_error", player_id, result.message)
-        message_label.set_text(result.message)
-        message_label.self_modulate = Color(1.0, 0.0, 0.0)
+        set_failure_message(result.message)
 
 func _on_switch_item() -> void:
     if not is_favourite_item_already_chosen():
@@ -63,7 +61,12 @@ func _on_switch_item() -> void:
 func _on_choose_item() -> void:
     if not is_favourite_item_already_chosen():
         # first make player to choose required items
-        add_active_item_from_container_to_chosen_items(required_items)
+         if add_active_item_from_container_to_chosen_items(required_items):
+            # after favourite was chosen, set all required to non-active
+            # and first item from additional items as active
+            required_items.set_all_not_active()
+            var next: ItemElement = all_items.get_next_element_by_active()
+            all_items.set_active_by_element(next)
     else:
         # now, additional items can be chosen
         add_active_item_from_container_to_chosen_items(all_items)
@@ -75,17 +78,18 @@ func is_favourite_item_already_chosen() -> bool:
             return true
     return false
 
-func add_active_item_from_container_to_chosen_items(container: HorizontalItemContainer) -> void:
+func add_active_item_from_container_to_chosen_items(container: HorizontalItemContainer) -> bool:
     var active_element = container.get_active_element()
     if not is_instance_valid(active_element):
         printerr("Active element in required items is invalid")
-        return
+        return false
     var active_item_type: StringName = active_element.item.get_class_name()
     var new_item: ItemBase = ItemFactory.create(active_item_type)
     if not is_instance_valid(new_item):
         printerr("Newly created item is not valid! ", new_item)
-        return
+        return false
     add_item_to_chosen_items(new_item)
+    return true
 
 func add_item_to_chosen_items(item: ItemBase) -> void:
     var items = chosen_items.get_items()
@@ -94,6 +98,8 @@ func add_item_to_chosen_items(item: ItemBase) -> void:
         for posessed_item in items:
             chosen_items.add_item(posessed_item)
         chosen_items.add_item(item)
+    else:
+        set_failure_message("Max items number reached!")
 
 func count_item_types(items: Array[ItemBase], item_type: StringName) -> int:
     var count: int = 0
@@ -111,3 +117,11 @@ func check_ready_conditions() -> GuiResult:
     if favourite_count > 0:
         GuiResult.new(FAILED, "Too much favourite items chosen! Only a single one should be added")
     return GuiResult.new(FAILED, "Please choose single favourite item!")
+
+func set_success_message(message: String) -> void:
+    message_label.set_text(message)
+    message_label.self_modulate = Color(0.0, 1.0, 0.0)
+
+func set_failure_message(message: String) -> void:
+    message_label.set_text(message)
+    message_label.self_modulate = Color(1.0, 0.0, 0.0)
