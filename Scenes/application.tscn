@@ -1,16 +1,17 @@
 [gd_scene load_steps=4 format=3 uid="uid://da10gxqf0rmm"]
 
 [ext_resource type="Script" path="res://Scenes/application.gd" id="1_1xhv3"]
-[ext_resource type="Script" path="res://Scenes/GUI/gui_state_machine.gd" id="2_7l8tp"]
+[ext_resource type="Script" path="res://Scenes/StateMachine/state_machine.gd" id="2_hho6b"]
 [ext_resource type="PackedScene" uid="uid://bnesms6581j28" path="res://Scenes/GUI/main_menu.tscn" id="3_x7405"]
 
-[node name="Application" type="Node3D" node_paths=PackedStringArray("gui_state_machine", "gui_menu_container")]
+[node name="Application" type="Node3D" node_paths=PackedStringArray("state_machine", "gui_menu_container", "game_container")]
 script = ExtResource("1_1xhv3")
-gui_state_machine = NodePath("GuiStateMachine")
+state_machine = NodePath("StateMachine")
 gui_menu_container = NodePath("GuiMenuContainer")
+game_container = NodePath("GameContainer")
 
-[node name="GuiStateMachine" type="Node3D" parent="."]
-script = ExtResource("2_7l8tp")
+[node name="StateMachine" type="Node3D" parent="."]
+script = ExtResource("2_hho6b")
 starting_scene = ExtResource("3_x7405")
 
 [node name="GuiMenuContainer" type="Control" parent="."]
@@ -22,3 +23,5 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="GameContainer" type="Node3D" parent="."]

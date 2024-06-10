@@ -1,4 +1,4 @@
-extends Node3D
+extends GameScreen
 
 @export var viewport_player_1: SubViewportContainer
 @export var viewport_player_2: SubViewportContainer
