@@ -62,12 +62,22 @@ func get_next_element_by_active() -> ItemElement:
 
     if is_instance_valid(active_element):
         index = active_element.get_index()
+        index += 1 # increase index
 
-    index += 1 # increase index
     if index < get_child_count():
         return get_child(index)
 
     return get_child(0)
+
+func set_all_not_active() -> void:
+    for element in get_children():
+        set_element_not_active(element)
+
+func set_element_not_active(item_element: ItemElement) -> void:
+    if item_element not in get_children():
+        printerr("Item element ", item_element, " not found in ", self)
+        return
+    item_element.set_active(false)
 
 func clear_element(item_element: ItemElement) -> void:
     if is_instance_valid(item_element):
