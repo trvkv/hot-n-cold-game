@@ -9,7 +9,7 @@
 [ext_resource type="Resource" uid="uid://b5ohqfe6mt3q5" path="res://Scenes/Items/item_key.tres" id="6_4yee7"]
 [ext_resource type="Resource" uid="uid://don7pfb0cf8pq" path="res://Scenes/Items/item_trap.tres" id="7_pangv"]
 
-[node name="AdjustmentsPanel" type="PanelContainer" node_paths=PackedStringArray("title_label", "message_label", "proceed_button_margin", "proceed_button", "chosen_items", "all_items", "adjusement_input")]
+[node name="AdjustmentsPanel" type="PanelContainer" node_paths=PackedStringArray("title_label", "message_label", "proceed_button_margin", "proceed_button", "chosen_items", "required_items", "all_items", "adjusement_input")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,6 +23,7 @@ message_label = NodePath("MarginContainer/VBoxContainer/Label_Message")
 proceed_button_margin = NodePath("MarginContainer/VBoxContainer/MarginContainer")
 proceed_button = NodePath("MarginContainer/VBoxContainer/MarginContainer/Button_proceed")
 chosen_items = NodePath("MarginContainer/VBoxContainer/ItemContainer_Chosen")
+required_items = NodePath("MarginContainer/VBoxContainer/ItemContainer_Required")
 all_items = NodePath("MarginContainer/VBoxContainer/ItemContainer_All")
 adjusement_input = NodePath("MarginContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport/AdjustmentInputComponent")
 
@@ -54,6 +55,7 @@ layout_mode = 2
 [node name="SubViewport" type="SubViewport" parent="MarginContainer/VBoxContainer/CenterContainer/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
+size = Vector2i(400, 400)
 render_target_update_mode = 4
 
 [node name="Player" parent="MarginContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport" instance=ExtResource("1_s4dat")]
@@ -70,8 +72,8 @@ adjustments_panel = NodePath("../../../../../..")
 self_modulate = Color(1, 1, 0, 1)
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
-text = "Choose your favourite item. Additionally, you can
-choose up to 2 different items to fight your opponent
+text = "Choose your favourite item. After that, you can
+choose up to 2 additional items to fight your opponent
 more effectively."
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -84,18 +86,29 @@ horizontal_alignment = 1
 [node name="ItemContainer_Chosen" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_obikw")]
 layout_mode = 2
 alignment = 1
-items_at_start = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("5_ojmc6"), null, null])
+items_at_start = Array[Resource("res://Scenes/Items/item_base.gd")]([null])
 set_active_on_ready = false
 
-[node name="Label_ItemsPool" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Label_ItemsRequired" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "All items"
+text = "Required items"
+horizontal_alignment = 1
+
+[node name="ItemContainer_Required" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_obikw")]
+layout_mode = 2
+alignment = 1
+items_at_start = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("5_ojmc6")])
+
+[node name="Label_ItemsAdditional" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Additional items"
 horizontal_alignment = 1
 
 [node name="ItemContainer_All" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_obikw")]
 layout_mode = 2
 alignment = 1
-items_at_start = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("5_ojmc6"), ExtResource("6_4yee7"), ExtResource("7_pangv")])
+items_at_start = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("6_4yee7"), ExtResource("7_pangv")])
+set_active_on_ready = false
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 self_modulate = Color(1, 1, 1, 0)

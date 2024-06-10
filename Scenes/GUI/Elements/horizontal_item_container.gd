@@ -87,7 +87,8 @@ func get_elements() -> Array[ItemElement]:
 func get_items() -> Array[ItemBase]:
     var items: Array[ItemBase] = []
     for element in get_children():
-        items.append(element.item)
+        if is_instance_valid(element.item):
+            items.append(element.item)
     return items
 
 func set_active_by_element(new_active: ItemElement) -> void:

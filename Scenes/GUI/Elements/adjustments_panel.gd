@@ -3,13 +3,16 @@ extends PanelContainer
 class_name AdjustmentsPanel
 
 @export var player_id: PlayersManager.PlayerID = PlayersManager.PlayerID.PLAYER_1
+@export_range(1, 3) var max_items_to_choose: int = 3
 @export var title_label: Label
 @export var message_label: Label
 @export var proceed_button_margin: MarginContainer
 @export var proceed_button: Button
 
 @export var chosen_items: HorizontalItemContainer
+@export var required_items: HorizontalItemContainer
 @export var all_items: HorizontalItemContainer
+
 @export var adjusement_input: AdjustmentInputComponent
 
 signal player_ready(player_id)
@@ -50,11 +53,47 @@ func _on_pressed() -> void:
         message_label.self_modulate = Color(1.0, 0.0, 0.0)
 
 func _on_switch_item() -> void:
-    var next = all_items.get_next_element_by_active()
-    all_items.set_active_by_element(next)
+    if not is_favourite_item_already_chosen():
+        var next = required_items.get_next_element_by_active()
+        required_items.set_active_by_element(next)
+    else:
+        var next = all_items.get_next_element_by_active()
+        all_items.set_active_by_element(next)
 
 func _on_choose_item() -> void:
-    pass
+    if not is_favourite_item_already_chosen():
+        # first make player to choose required items
+        add_active_item_from_container_to_chosen_items(required_items)
+    else:
+        # now, additional items can be chosen
+        add_active_item_from_container_to_chosen_items(all_items)
+
+func is_favourite_item_already_chosen() -> bool:
+    var items: Array[ItemBase] = chosen_items.get_items()
+    for item in items:
+        if item.get_class_name() == &"ItemFavourite":
+            return true
+    return false
+
+func add_active_item_from_container_to_chosen_items(container: HorizontalItemContainer) -> void:
+    var active_element = container.get_active_element()
+    if not is_instance_valid(active_element):
+        printerr("Active element in required items is invalid")
+        return
+    var active_item_type: StringName = active_element.item.get_class_name()
+    var new_item: ItemBase = ItemFactory.create(active_item_type)
+    if not is_instance_valid(new_item):
+        printerr("Newly created item is not valid! ", new_item)
+        return
+    add_item_to_chosen_items(new_item)
+
+func add_item_to_chosen_items(item: ItemBase) -> void:
+    var items = chosen_items.get_items()
+    if items.size() < max_items_to_choose:
+        chosen_items.clear()
+        for posessed_item in items:
+            chosen_items.add_item(posessed_item)
+        chosen_items.add_item(item)
 
 func count_item_types(items: Array[ItemBase], item_type: StringName) -> int:
     var count: int = 0
