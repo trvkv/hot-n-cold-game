@@ -135,7 +135,7 @@ func action_put_to_container(interaction_data: InteractionData) -> void:
 
         if active_item.get_class_name() == &"ItemFavourite":
             var state = GameStateTypes.GameStateData.new(
-                interaction_data.initiator,
+                interaction_data.initiator.player_id,
                 GameStateTypes.TYPES.FAVOURITE_ITEM_CONTAINER,
                 self
             )

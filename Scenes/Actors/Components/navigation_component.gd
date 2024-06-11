@@ -32,7 +32,7 @@ func _on_query_distance(player: Player) -> void:
         return
 
     var game_state = GameStateTypes.GameStateData.new(
-        PlayersManager.get_opponent(component_owner),
+        PlayersManager.get_opponent(component_owner).player_id,
         GameStateTypes.TYPES.FAVOURITE_ITEM_CONTAINER
     )
     EventBus.emit_signal("retrieve_game_state", game_state)
