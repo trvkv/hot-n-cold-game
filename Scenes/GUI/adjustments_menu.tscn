@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dgd2lv871g54q"]
 
 [ext_resource type="Script" path="res://Scenes/GUI/adjustments_menu.gd" id="1_ui1sh"]
-[ext_resource type="PackedScene" uid="uid://ctwlxb01ui5r8" path="res://Scenes/world.tscn" id="2_fcprf"]
+[ext_resource type="PackedScene" uid="uid://ctwlxb01ui5r8" path="res://Scenes/game_world.tscn" id="2_fcprf"]
 [ext_resource type="PackedScene" uid="uid://ccmv1a5nvvo0r" path="res://Scenes/GUI/Elements/adjustments_panel.tscn" id="2_vbl50"]
 
 [node name="AdjustmentsMenu" type="Control" node_paths=PackedStringArray("panel_p1", "panel_p2")]
