@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://diaq8risagjav" path="res://Scenes/Actors/Components/player_input_component.tscn" id="6_om2p2"]
 [ext_resource type="PackedScene" uid="uid://o8s1kfy706yp" path="res://Scenes/GUI/main_gui.tscn" id="7_r68or"]
 
-[node name="World" type="Node3D" node_paths=PackedStringArray("viewport_player_1", "viewport_player_2", "player_1", "player_2", "camera_player_1", "camera_player_2")]
+[node name="World" type="Node3D" node_paths=PackedStringArray("viewport_player_1", "viewport_player_2", "player_1", "player_2", "camera_player_1", "camera_player_2", "gui")]
 script = ExtResource("1_ikp0e")
 starting_game_stage = ExtResource("2_rkxg0")
 viewport_player_1 = NodePath("SplitScreenGridContainer/SubViewportContainer_P1")
@@ -19,6 +19,7 @@ player_2 = NodePath("SplitScreenGridContainer/SubViewportContainer_P2/SubViewpor
 camera_player_1 = NodePath("SplitScreenGridContainer/SubViewportContainer_P1/SubViewport/Player1/Player1_Camera")
 camera_player_2 = NodePath("SplitScreenGridContainer/SubViewportContainer_P2/SubViewport/Player2/Player2_ Camera")
 trap_scene = ExtResource("2_oogha")
+gui = NodePath("Gui")
 
 [node name="Level" type="Node3D" parent="."]
 

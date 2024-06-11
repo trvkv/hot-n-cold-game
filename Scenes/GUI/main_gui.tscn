@@ -1,15 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://o8s1kfy706yp"]
+[gd_scene load_steps=7 format=3 uid="uid://o8s1kfy706yp"]
 
+[ext_resource type="Script" path="res://Scenes/GUI/main_gui.gd" id="1_g1f3t"]
 [ext_resource type="PackedScene" uid="uid://c1jry8m8264rs" path="res://Scenes/GUI/Elements/gui_player.tscn" id="1_stdpa"]
-[ext_resource type="Resource" uid="uid://don7pfb0cf8pq" path="res://Scenes/Items/item_trap.tres" id="2_u3okp"]
-[ext_resource type="Resource" uid="uid://b5ohqfe6mt3q5" path="res://Scenes/Items/item_key.tres" id="3_0ch5d"]
-[ext_resource type="Resource" uid="uid://bqsiaqedj4v3e" path="res://Scenes/Items/item_favourite.tres" id="4_7cpmw"]
 [ext_resource type="PackedScene" uid="uid://ciigl5pdv3i7u" path="res://Scenes/GUI/Elements/gui_actions.tscn" id="5_adkdv"]
 [ext_resource type="PackedScene" uid="uid://bka2hbsca3p2u" path="res://Scenes/GUI/Elements/gui_inventory.tscn" id="6_rsjdm"]
 [ext_resource type="Script" path="res://Scenes/Util/interaction_manager.gd" id="7_f3bx6"]
 [ext_resource type="Script" path="res://Scenes/GUI/Elements/global_debug.gd" id="8_wygou"]
 
-[node name="Gui" type="CanvasLayer"]
+[node name="Gui" type="CanvasLayer" node_paths=PackedStringArray("gui_player_1", "gui_player_2")]
+script = ExtResource("1_g1f3t")
+gui_player_1 = NodePath("PlayersDebugGUI/GridContainer/VBC_P1/GuiPlayer")
+gui_player_2 = NodePath("PlayersDebugGUI/GridContainer/VBC_P2/GuiPlayer")
 
 [node name="PlayersDebugGUI" type="Control" parent="."]
 layout_mode = 3
@@ -36,7 +37,6 @@ alignment = 1
 [node name="GuiPlayer" parent="PlayersDebugGUI/GridContainer/VBC_P1" instance=ExtResource("1_stdpa")]
 layout_mode = 2
 size_flags_horizontal = 0
-set_items_at_start = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("4_7cpmw"), ExtResource("3_0ch5d"), ExtResource("2_u3okp")])
 
 [node name="GuiActions" parent="PlayersDebugGUI/GridContainer/VBC_P1" instance=ExtResource("5_adkdv")]
 layout_mode = 2
@@ -53,7 +53,6 @@ layout_direction = 3
 layout_mode = 2
 size_flags_horizontal = 8
 player_id = 2
-set_items_at_start = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("2_u3okp"), ExtResource("3_0ch5d"), ExtResource("4_7cpmw")])
 
 [node name="GuiActions" parent="PlayersDebugGUI/GridContainer/VBC_P2" instance=ExtResource("5_adkdv")]
 layout_direction = 3

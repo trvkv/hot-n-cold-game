@@ -1,5 +1,7 @@
 extends PanelContainer
 
+class_name GuiPlayer
+
 @export var player_id: PlayersManager.PlayerID = PlayersManager.PlayerID.PLAYER_1
 @export var label_player_name: Label
 
@@ -20,9 +22,7 @@ func _ready() -> void:
 
     label_player_name.set_text(PlayersManager.get_player_name(player_id))
 
-    horizontal_item_container.clear()
-    for item in set_items_at_start:
-        horizontal_item_container.add_item(item)
+    set_items(set_items_at_start, true)
 
     EventBus.connect("switch_item", _on_switch_item)
     EventBus.connect("action_successful", _on_action_successful)
@@ -97,3 +97,9 @@ func distance_to_hotcold_string(distance: float) -> String:
     elif distance < 10.0:
         return "Cold"
     return "FREEZING x("
+
+func set_items(items: Array[ItemBase], clear: bool = false) -> void:
+    if clear:
+        horizontal_item_container.clear()
+    for item in items:
+        horizontal_item_container.add_item(item)

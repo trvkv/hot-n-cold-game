@@ -12,7 +12,6 @@ class_name Player
 @onready var sprite_position = $SpritesPosition
 @onready var animated_sprite = $SpritesPosition/AnimatedSprite3D
 @onready var interaction_area = $InteractionArea
-@onready var item_inventory = $ItemInventory
 @onready var trap_component = $TrapComponent
 
 func _ready() -> void:
@@ -21,7 +20,6 @@ func _ready() -> void:
     assert(is_instance_valid(animation_player), "Animation player not present")
     assert(is_instance_valid(sprite_position), "Sprite position not present")
     assert(is_instance_valid(interaction_area), "Interaction area not present")
-    assert(is_instance_valid(item_inventory), "Item inventory not present")
     assert(is_instance_valid(trap_component), "Trap component not present")
 
     # if player_input_component is invalid, player won't move

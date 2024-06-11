@@ -12,6 +12,7 @@ class_name GameWorld
 @export var camera_player_1: CameraPosition
 @export var camera_player_2: CameraPosition
 @export var trap_scene: PackedScene
+@export var gui: MainGui
 
 var current_game_stage: GameStage:
     set = set_current_game_stage, get = get_current_game_stage
@@ -22,6 +23,7 @@ func _ready() -> void:
     assert(viewport_player_2, "Viewport for player 2 invalid")
     assert(camera_player_1, "Camera for player 1 invalid")
     assert(camera_player_2, "Camera for player 2 invalid")
+    assert(gui, "Gui invalid")
     CameraManager.activate_camera(camera_player_1.UUID)
     CameraManager.activate_camera(camera_player_2.UUID)
     EventBus.connect("set_trap", _on_trap_set)
@@ -83,6 +85,22 @@ func _freeze_player(player: Player, do_freeze: bool) -> void:
         player.freeze()
     else:
         player.unfreeze()
+
+func set_player_inventory(player_id: PlayersManager.PlayerID, items: Array[StringName]) -> void:
+    var gui_player: GuiPlayer
+
+    if player_id == PlayersManager.PlayerID.PLAYER_1:
+        gui_player = gui.gui_player_1
+    elif player_id == PlayersManager.PlayerID.PLAYER_2:
+        gui_player = gui.gui_player_2
+    else:
+        printerr("set_player_inventory wrong player id passed")
+        return
+
+    var inventory: Array[ItemBase] = []
+    for item in items:
+        inventory.append(ItemFactory.create(item))
+    gui_player.set_items(inventory, true) # clean and set inventory
 
 func _on_get_function_ref(function_container: GameStage.FunctionRefContainer) -> void:
     function_container.callback = Callable(self, function_container.function_name)
