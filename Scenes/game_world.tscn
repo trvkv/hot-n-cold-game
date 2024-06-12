@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://ctwlxb01ui5r8"]
 
 [ext_resource type="Script" path="res://Scenes/game_world.gd" id="1_ikp0e"]
-[ext_resource type="Resource" uid="uid://dvnswe10tqyln" path="res://Scenes/GameStages/TestStages/players_with_items.tres" id="2_ibqyk"]
 [ext_resource type="PackedScene" uid="uid://7w3upqpuk27q" path="res://Scenes/Environment/Traps/trap.tscn" id="2_oogha"]
+[ext_resource type="Resource" uid="uid://yirk3odg8sjr" path="res://Scenes/GameStages/prepare_player_1_stage.tres" id="2_rkxg0"]
 [ext_resource type="PackedScene" uid="uid://bkb1rliucrvlv" path="res://Scenes/Levels/test_level.tscn" id="3_vq7pt"]
 [ext_resource type="PackedScene" uid="uid://dkod8d31vxupb" path="res://Scenes/Actors/player.tscn" id="4_d0bh1"]
 [ext_resource type="PackedScene" uid="uid://biqw183sh26cy" path="res://Scenes/Util/camera_position.tscn" id="5_ghyoh"]
@@ -11,7 +11,7 @@
 
 [node name="World" type="Node3D" node_paths=PackedStringArray("viewport_player_1", "viewport_player_2", "player_1", "player_2", "camera_player_1", "camera_player_2", "gui")]
 script = ExtResource("1_ikp0e")
-starting_game_stage = ExtResource("2_ibqyk")
+starting_game_stage = ExtResource("2_rkxg0")
 viewport_player_1 = NodePath("SplitScreenGridContainer/SubViewportContainer_P1")
 viewport_player_2 = NodePath("SplitScreenGridContainer/SubViewportContainer_P2")
 player_1 = NodePath("SplitScreenGridContainer/SubViewportContainer_P1/SubViewport/Player1")

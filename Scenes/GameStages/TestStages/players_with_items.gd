@@ -6,7 +6,6 @@ class_name TestPlayersWithItemsGameStage
 
 func _init():
     super("Prepare players [test function]")
-    #EventBus.connect("game_state_updated", _on_game_state_updated)
 
 func enter() -> void:
     super()

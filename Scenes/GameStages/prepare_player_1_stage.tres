@@ -1,9 +1,13 @@
-[gd_resource type="Resource" script_class="PreparePlayerGameStage" load_steps=3 format=3 uid="uid://yirk3odg8sjr"]
+[gd_resource type="Resource" script_class="PreparePlayerGameStage" load_steps=6 format=3 uid="uid://yirk3odg8sjr"]
 
 [ext_resource type="Script" path="res://Scenes/GameStages/prepare_player_stage.gd" id="1_e7mxm"]
 [ext_resource type="Resource" uid="uid://buffpilqhfxvx" path="res://Scenes/GameStages/prepare_player_2_stage.tres" id="1_t27ll"]
+[ext_resource type="Resource" uid="uid://bqsiaqedj4v3e" path="res://Scenes/Items/item_favourite.tres" id="3_vohm5"]
+[ext_resource type="Resource" uid="uid://b5ohqfe6mt3q5" path="res://Scenes/Items/item_key.tres" id="4_lsxfh"]
+[ext_resource type="Resource" uid="uid://don7pfb0cf8pq" path="res://Scenes/Items/item_trap.tres" id="5_jtnof"]
 
 [resource]
 script = ExtResource("1_e7mxm")
 player_id = 1
+starting_items = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("3_vohm5"), ExtResource("4_lsxfh"), ExtResource("5_jtnof")])
 next_stage = ExtResource("1_t27ll")
