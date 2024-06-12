@@ -65,14 +65,26 @@ func get_current_game_stage() -> GameStage:
 func hide_player_container(player_id: PlayersManager.PlayerID) -> void:
     if player_id == PlayersManager.PlayerID.PLAYER_1:
         viewport_player_1.set_self_modulate(Color(1.0, 1.0, 1.0, 0.0))
+        gui.gui_player_1.set_modulate(Color(1.0, 1.0, 1.0, 0.0))
+        gui.gui_inventory_1.set_modulate(Color(1.0, 1.0, 1.0, 0.0))
+        gui.gui_actions_1.set_modulate(Color(1.0, 1.0, 1.0, 0.0))
     elif player_id == PlayersManager.PlayerID.PLAYER_2:
         viewport_player_2.set_self_modulate(Color(1.0, 1.0, 1.0, 0.0))
+        gui.gui_player_2.set_modulate(Color(1.0, 1.0, 1.0, 0.0))
+        gui.gui_inventory_2.set_modulate(Color(1.0, 1.0, 1.0, 0.0))
+        gui.gui_actions_2.set_modulate(Color(1.0, 1.0, 1.0, 0.0))
 
 func show_player_container(player_id: PlayersManager.PlayerID) -> void:
     if player_id == PlayersManager.PlayerID.PLAYER_1:
         viewport_player_1.set_self_modulate(Color(1.0, 1.0, 1.0, 1.0))
+        gui.gui_player_1.set_modulate(Color(1.0, 1.0, 1.0, 1.0))
+        gui.gui_inventory_1.set_modulate(Color(1.0, 1.0, 1.0, 1.0))
+        gui.gui_actions_1.set_modulate(Color(1.0, 1.0, 1.0, 1.0))
     elif player_id == PlayersManager.PlayerID.PLAYER_2:
         viewport_player_2.set_self_modulate(Color(1.0, 1.0, 1.0, 1.0))
+        gui.gui_player_2.set_modulate(Color(1.0, 1.0, 1.0, 1.0))
+        gui.gui_inventory_2.set_modulate(Color(1.0, 1.0, 1.0, 1.0))
+        gui.gui_actions_2.set_modulate(Color(1.0, 1.0, 1.0, 1.0))
 
 func freeze(player_id: PlayersManager.PlayerID, do_freeze: bool) -> void:
     if player_id == PlayersManager.PlayerID.PLAYER_1:

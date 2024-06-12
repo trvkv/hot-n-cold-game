@@ -7,10 +7,14 @@
 [ext_resource type="Script" path="res://Scenes/Util/interaction_manager.gd" id="7_f3bx6"]
 [ext_resource type="Script" path="res://Scenes/GUI/Elements/global_debug.gd" id="8_wygou"]
 
-[node name="Gui" type="CanvasLayer" node_paths=PackedStringArray("gui_player_1", "gui_player_2")]
+[node name="Gui" type="CanvasLayer" node_paths=PackedStringArray("gui_player_1", "gui_player_2", "gui_actions_1", "gui_actions_2", "gui_inventory_1", "gui_inventory_2")]
 script = ExtResource("1_g1f3t")
 gui_player_1 = NodePath("PlayersDebugGUI/GridContainer/VBC_P1/GuiPlayer")
 gui_player_2 = NodePath("PlayersDebugGUI/GridContainer/VBC_P2/GuiPlayer")
+gui_actions_1 = NodePath("PlayersDebugGUI/GridContainer/VBC_P1/GuiActions")
+gui_actions_2 = NodePath("PlayersDebugGUI/GridContainer/VBC_P2/GuiActions")
+gui_inventory_1 = NodePath("PlayersDebugGUI/GridContainer/VBC_P1/GuiInventory")
+gui_inventory_2 = NodePath("PlayersDebugGUI/GridContainer/VBC_P2/GuiInventory")
 
 [node name="PlayersDebugGUI" type="Control" parent="."]
 layout_mode = 3
