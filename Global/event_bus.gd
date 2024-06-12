@@ -16,6 +16,7 @@ signal distance_updated(player, distance)
 
 signal store_game_state(player, data_type, data)
 signal retrieve_game_state(player, data_type, data)
+signal game_state_updated(state_data)
 
 signal action_successful(interaction_data)
 signal action_unsuccessful(interaction_data)

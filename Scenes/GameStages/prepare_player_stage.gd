@@ -6,6 +6,7 @@ class_name PreparePlayerGameStage
 
 func _init():
     super("Prepare player %d" % player_id)
+    EventBus.connect("game_state_updated", _on_game_state_updated)
 
 func enter() -> void:
     super()
@@ -30,3 +31,7 @@ func retrieve_player_game_data(data_type: GameStateTypes.TYPES) -> Array[StringN
     if game_state.data == null:
         return []
     return game_state.data
+
+func _on_game_state_updated(state_data: GameStateTypes.GameStateData) -> void:
+    if not state_data.player_id == player_id:
+        return

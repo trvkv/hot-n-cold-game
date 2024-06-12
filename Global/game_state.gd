@@ -11,7 +11,8 @@ func assure_player_is_in_game_state(player_id: int) -> void:
     if not game_state.has(player_id):
         game_state[player_id] = {}
         for data_type in GameStateTypes.TYPES:
-            game_state[player_id][GameStateTypes.TYPES[data_type]] = null
+            var t: int = GameStateTypes.TYPES[data_type]
+            game_state[player_id][t] = GameStateTypes.create_type(t)
     assert(game_state.has(player_id), "CRITICAL: Player not added successfully!")
 
 func _on_store_game_state(state: GameStateTypes.GameStateData) -> void:
@@ -19,19 +20,13 @@ func _on_store_game_state(state: GameStateTypes.GameStateData) -> void:
         printerr("Passed state object is invalid")
         return
     assure_player_is_in_game_state(state.player_id)
-    if state.data_type not in game_state[state.player_id]:
-        printerr("Cannot store: type ", state.data_type, " not found in GameState for ", state.player_id)
-        printerr("   ** State: ", game_state[state.player_id])
-        return
     print("Storing data | Player: ", state.player_id, " | Type: ", state.data_type, " | '", state.data, "'")
     game_state[state.player_id][state.data_type] = state.data
+    EventBus.emit_signal("game_state_updated", state)
 
 func _on_retrieve_game_state(state: GameStateTypes.GameStateData) -> void:
-    if state.player_id not in game_state:
-        printerr("Cannot retrieve: player ", state.player_id, " not found in GameState")
+    if not is_instance_valid(state):
+        printerr("Passed state object is invalid")
         return
-    if state.data_type not in game_state[state.player_id]:
-        printerr("Cannot retrieve: data type ", state.data_type, " not found in player's ", state.player_id, " GameState")
-        printerr("   ** State: ", game_state[state.player_id])
-        return
+    assure_player_is_in_game_state(state.player_id)
     state.data = game_state[state.player_id][state.data_type]
