@@ -31,18 +31,14 @@ func _on_query_distance(player: Player) -> void:
     if not ready_to_use:
         return
 
-    var game_state = GameStateTypes.GameStateData.new(
+    var state = GameStateTypes.GameStateData.new(
         PlayersManager.get_opponent(component_owner).player_id,
-        GameStateTypes.TYPES.ITEM_CONTAINER
+        GameStateTypes.TYPES.FAVOURITE_ITEM_CONTAINER
     )
-    EventBus.emit_signal("retrieve_game_state", game_state)
-    if is_instance_valid(game_state.data):
-        var containers: Array = game_state.data.get_containers(&"ItemFavourite")
-        if containers.size() == 0 or containers.size() > 1:
-            printerr("FATAL: Wrong number of favourite item containers in game data (", containers.size(), ")")
-            return
-        var container: ItemContainer = containers[0]
-        var target_position: Vector3 = container.get_global_position()
+    EventBus.emit_signal("retrieve_game_state", state)
+    if is_instance_valid(state.data):
+        assert(state.data as ItemContainer, "Retrieved data should be of ItemContainer class")
+        var target_position: Vector3 = state.data.get_global_position()
         var path = get_path_to_target(get_global_position(), target_position)
         EventBus.emit_signal("distance_updated", player, calculate_distance(path))
         ready_to_use = false

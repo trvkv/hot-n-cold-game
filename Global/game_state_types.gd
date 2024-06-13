@@ -3,7 +3,7 @@ extends Object
 class_name GameStateTypes
 
 enum TYPES {
-    ITEM_CONTAINER,
+    FAVOURITE_ITEM_CONTAINER,
     CHOSEN_ITEMS
 }
 
@@ -31,6 +31,6 @@ class GameStateItemsContainer extends RefCounted:
         return _map[item_type]
 
 static func create_type(data_type: TYPES) -> RefCounted:
-    if data_type == TYPES.ITEM_CONTAINER:
-        return GameStateItemsContainer.new()
+    if data_type == TYPES.FAVOURITE_ITEM_CONTAINER:
+        return null
     return null
