@@ -44,9 +44,12 @@ func create_interaction_data(interactee, interactor, action) -> InteractionData:
 func _on_interact(interactee, interactor, action) -> void:
     if interactee.has_method("interact"):
         var interaction_data: InteractionData = create_interaction_data(interactee, interactor, action)
+        var action_str: String = PlayerActions.action_to_string(interaction_data.action)
         if interactee.interact(interaction_data):
+            print(interactor, ": Action successful -> ", action_str)
             EventBus.emit_signal("action_successful", interaction_data)
         else:
+            print(interactor, ": Action unsuccessful -> ", action_str)
             EventBus.emit_signal("action_unsuccessful", interaction_data)
 
 func _on_trigger_interaction(player, _interaction_area) -> void:

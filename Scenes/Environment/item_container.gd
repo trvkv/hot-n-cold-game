@@ -133,15 +133,26 @@ func action_put_to_container(interaction_data: InteractionData) -> void:
         interaction_data.is_successful = put(active_item)
         interaction_data.response = {"active_item": active_item}
 
-        var state := GameStateTypes.GameStateData.new(
-            interaction_data.initiator.player_id,
-            GameStateTypes.TYPES.FAVOURITE_ITEM_CONTAINER,
-            self
-        )
-        EventBus.emit_signal("store_game_state", state)
+        # change game state only when putting item to container was successful
+        if interaction_data.is_successful:
+            var player_id = interaction_data.initiator.player_id
+            if active_item.get_class_name() == &"ItemFavourite":
+                store_item_state(player_id, GameStateTypes.TYPES.FAVOURITE_ITEM_CONTAINER, self)
+            elif active_item.get_class_name() == &"ItemKey":
+                var data := GameStateTypes.GameStateItem.new(active_item, self)
+                add_item_state(player_id, GameStateTypes.TYPES.KEY_ITEM_CONTAINER, data)
     else:
         printerr("No active item selected, while putting item to container")
         interaction_data.is_successful = false
+
+func store_item_state(player_id: PlayersManager.PlayerID, data_type: GameStateTypes.TYPES, data) -> void:
+    var state := GameStateTypes.GameStateData.new(player_id, data_type, data)
+    EventBus.emit_signal("store_game_state", state)
+
+func add_item_state(player_id: PlayersManager.PlayerID, data_type: GameStateTypes.TYPES, data) -> void:
+    var state := GameStateTypes.GameStateData.new(player_id, data_type)
+    EventBus.emit_signal("retrieve_game_state", state)
+    store_item_state(player_id, data_type, data)
 
 func action_get_from_container(interaction_data: InteractionData) -> void:
     print("Getting item from container (", interaction_data.initiator, ")")

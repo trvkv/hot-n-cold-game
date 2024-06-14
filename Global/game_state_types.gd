@@ -4,6 +4,7 @@ class_name GameStateTypes
 
 enum TYPES {
     FAVOURITE_ITEM_CONTAINER,
+    KEY_ITEM_CONTAINER,
     CHOSEN_ITEMS
 }
 
@@ -17,20 +18,23 @@ class GameStateData extends RefCounted:
         data_type = data_type_
         data = data_
 
+class GameStateItem extends  RefCounted:
+    var item: ItemBase
+    var container: ItemContainer
+
+    func _init(item_: ItemBase, container_: ItemContainer):
+        item = item_
+        container = container_
+
 class GameStateItemsContainer extends RefCounted:
-    var _map = {}
+    var data = []
 
-    func add(item_type: StringName, container: ItemContainer) -> void:
-        if not item_type in _map:
-            _map[item_type] = []
-        _map[item_type].append(container)
-
-    func get_containers(item_type: StringName) -> Array:
-        if not item_type in _map:
-            return []
-        return _map[item_type]
+    func add(item: ItemBase, container: ItemContainer) -> void:
+        data.append(GameStateItem.new(item, container))
 
 static func create_type(data_type: TYPES) -> RefCounted:
     if data_type == TYPES.FAVOURITE_ITEM_CONTAINER:
         return null
+    elif data_type == TYPES.KEY_ITEM_CONTAINER:
+        return GameStateItemsContainer.new()
     return null
