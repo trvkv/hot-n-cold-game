@@ -8,9 +8,9 @@ static var trap_scene: Resource = preload("res://Scenes/Items/item_trap.tres")
 
 static func create(item_type: StringName) -> ItemBase:
     if item_type == &"ItemFavourite":
-        return favourite_scene
+        return favourite_scene.duplicate()
     elif item_type == &"ItemKey":
-        return key_scene
+        return key_scene.duplicate()
     elif item_type == &"ItemTrap":
-        return trap_scene
+        return trap_scene.duplicate()
     return null

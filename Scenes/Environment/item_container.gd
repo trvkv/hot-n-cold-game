@@ -121,16 +121,30 @@ func action_open_container(interaction_data: InteractionData) -> void:
 func action_lock_container(interaction_data: InteractionData) -> void:
     print("Locking container (", interaction_data.initiator, ")")
     if "active_item" in interaction_data.request:
-        var active_item: ItemBase = interaction_data.request["active_item"]
-        interaction_data.is_successful = lock()
-        interaction_data.response = {"active_item": active_item}
+        var active_item: ItemKey = interaction_data.request["active_item"]
+        if is_instance_valid(active_item):
+            interaction_data.response = {"active_item": active_item}
+            var key_not_used: bool = (active_item.is_used_by == null)
+            if not is_locked and key_not_used:
+                lock()
+                interaction_data.is_successful = true
+                active_item.is_used_by = interaction_data.target
+            else:
+                interaction_data.is_successful = false
 
 func action_unlock_container(interaction_data: InteractionData) -> void:
     print("Unlocking container (", interaction_data.initiator, ")")
     if "active_item" in interaction_data.request:
-        var active_item: ItemBase = interaction_data.request["active_item"]
-        interaction_data.is_successful = unlock()
-        interaction_data.response = {"active_item": active_item}
+        var active_item: ItemKey = interaction_data.request["active_item"]
+        if is_instance_valid(active_item):
+            interaction_data.response = {"active_item": active_item}
+            var same_key: bool = (active_item.is_used_by == interaction_data.target)
+            if is_locked and same_key:
+                unlock()
+                interaction_data.is_successful = true
+                active_item.is_used_by = null
+            else:
+                interaction_data.is_successful = false
 
 func action_put_to_container(interaction_data: InteractionData) -> void:
     print("Putting item to container (", interaction_data.initiator, ")")
