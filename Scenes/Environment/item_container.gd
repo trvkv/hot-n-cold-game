@@ -136,7 +136,7 @@ func action_put_to_container(interaction_data: InteractionData) -> void:
     print("Putting item to container (", interaction_data.initiator, ")")
     if "active_item" in interaction_data.request:
         var active_item: ItemBase = interaction_data.request["active_item"]
-        interaction_data.is_successful = put(active_item)
+        interaction_data.is_successful = is_opened and not is_locked and put(active_item)
         interaction_data.response = {"active_item": active_item}
 
         # change game state only when putting item to container was successful
