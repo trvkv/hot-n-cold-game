@@ -79,14 +79,15 @@ func _on_action_successful(interaction_data: InteractionData) -> void:
         var active_element = horizontal_item_container.get_active_element()
         assert(is_instance_valid(active_element.item), "Critical: item invalid!")
         if active_element.item.get_class_name() == &"ItemTrap":
-            var next = horizontal_item_container.get_next_element_by_active()
             horizontal_item_container.clear_element(active_element)
+            var next = horizontal_item_container.get_next_element_by_active()
+            var item: ItemBase = next.item if is_instance_valid(next) else null
             horizontal_item_container.set_active_by_element(next)
             EventBus.emit_signal(
                 "update_items",
                 interaction_data.initiator,
                 horizontal_item_container.get_items(),
-                next.item
+                item
             )
 
 func distance_to_hotcold_string(distance: float) -> String:

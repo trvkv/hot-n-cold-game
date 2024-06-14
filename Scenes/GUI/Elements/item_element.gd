@@ -54,3 +54,9 @@ func set_active(activate: bool) -> void:
         add_theme_stylebox_override("panel", style_active)
     else:
         add_theme_stylebox_override("panel", style_inactive)
+
+func _to_string():
+    var item_type = null
+    if is_instance_valid(item):
+        item_type = item.get_class_name()
+    return "ItemElement(" + item_type + ")"
