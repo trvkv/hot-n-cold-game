@@ -120,11 +120,17 @@ func action_open_container(interaction_data: InteractionData) -> void:
 
 func action_lock_container(interaction_data: InteractionData) -> void:
     print("Locking container (", interaction_data.initiator, ")")
-    interaction_data.is_successful = lock()
+    if "active_item" in interaction_data.request:
+        var active_item: ItemBase = interaction_data.request["active_item"]
+        interaction_data.is_successful = lock()
+        interaction_data.response = {"active_item": active_item}
 
 func action_unlock_container(interaction_data: InteractionData) -> void:
     print("Unlocking container (", interaction_data.initiator, ")")
-    interaction_data.is_successful = unlock()
+    if "active_item" in interaction_data.request:
+        var active_item: ItemBase = interaction_data.request["active_item"]
+        interaction_data.is_successful = unlock()
+        interaction_data.response = {"active_item": active_item}
 
 func action_put_to_container(interaction_data: InteractionData) -> void:
     print("Putting item to container (", interaction_data.initiator, ")")
