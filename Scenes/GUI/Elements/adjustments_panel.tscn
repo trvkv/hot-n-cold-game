@@ -5,9 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://biqw183sh26cy" path="res://Scenes/Util/camera_position.tscn" id="2_v1aqd"]
 [ext_resource type="PackedScene" uid="uid://dpytaq7ufqwpn" path="res://Scenes/GUI/adjustment_input_component.tscn" id="4_lrwjy"]
 [ext_resource type="PackedScene" uid="uid://df2dm6r1dpgo6" path="res://Scenes/GUI/Elements/horizontal_item_container.tscn" id="4_obikw"]
-[ext_resource type="Resource" uid="uid://bqsiaqedj4v3e" path="res://Scenes/Items/item_favourite.tres" id="5_ojmc6"]
-[ext_resource type="Resource" uid="uid://b5ohqfe6mt3q5" path="res://Scenes/Items/item_key.tres" id="6_4yee7"]
-[ext_resource type="Resource" uid="uid://don7pfb0cf8pq" path="res://Scenes/Items/item_trap.tres" id="7_pangv"]
+[ext_resource type="Resource" uid="uid://bqsiaqedj4v3e" path="res://Resources/Items/item_favourite.tres" id="5_ojmc6"]
+[ext_resource type="Resource" uid="uid://b5ohqfe6mt3q5" path="res://Resources/Items/item_key.tres" id="6_4yee7"]
+[ext_resource type="Resource" uid="uid://don7pfb0cf8pq" path="res://Resources/Items/item_trap.tres" id="7_pangv"]
+
 
 [node name="AdjustmentsPanel" type="PanelContainer" node_paths=PackedStringArray("title_label", "message_label", "proceed_button_margin", "proceed_button", "chosen_items", "required_items", "all_items", "adjusement_input")]
 anchors_preset = 15

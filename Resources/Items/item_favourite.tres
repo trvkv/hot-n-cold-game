@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemFavourite" load_steps=3 format=3 uid="uid://bqsiaqedj4v3e"]
 
 [ext_resource type="Texture2D" uid="uid://b6ywk7no5rsrm" path="res://Assets/Images/kenney_platformer-pack-redux/PNG/Tiles/boxCoin.png" id="1_ca6fa"]
-[ext_resource type="Script" path="res://Scenes/Items/item_favourite.gd" id="1_ynoxb"]
+[ext_resource type="Script" path="res://Resources/Items/item_favourite.gd" id="1_ynoxb"]
 
 [resource]
 script = ExtResource("1_ynoxb")

@@ -5,7 +5,7 @@
 [ext_resource type="ArrayMesh" uid="uid://dh7gamdvjygwu" path="res://Assets/Meshes/cube-light.res" id="3_kakj3"]
 [ext_resource type="PackedScene" uid="uid://o80ya65nvwp2" path="res://Scenes/Environment/item_container.tscn" id="4_ca180"]
 [ext_resource type="PackedScene" uid="uid://k8fwqgtj23rd" path="res://Scenes/Environment/Furnitures/small_cabinet.tscn" id="5_ybv4f"]
-[ext_resource type="Resource" uid="uid://don7pfb0cf8pq" path="res://Scenes/Items/item_trap.tres" id="6_dda80"]
+[ext_resource type="Resource" uid="uid://don7pfb0cf8pq" path="res://Resources/Items/item_trap.tres" id="6_dda80"]
 [ext_resource type="PackedScene" uid="uid://d3n5648hv4hmc" path="res://Scenes/Environment/Furnitures/wardrobe.tscn" id="7_xo6f2"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_15x4p"]
