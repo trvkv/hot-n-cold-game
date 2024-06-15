@@ -1,9 +1,10 @@
 [gd_resource type="Resource" script_class="TestPlayersWithItemsGameStage" load_steps=5 format=3 uid="uid://dvnswe10tqyln"]
 
-[ext_resource type="Script" path="res://Scenes/GameStages/TestStages/players_with_items.gd" id="1_ta0qw"]
+[ext_resource type="Script" path="res://Resources/GameStages/TestStages/players_with_items.gd" id="1_ta0qw"]
 [ext_resource type="Resource" uid="uid://bqsiaqedj4v3e" path="res://Resources/Items/item_favourite.tres" id="2_bu0f5"]
 [ext_resource type="Resource" uid="uid://b5ohqfe6mt3q5" path="res://Resources/Items/item_key.tres" id="3_mgxmv"]
 [ext_resource type="Resource" uid="uid://don7pfb0cf8pq" path="res://Resources/Items/item_trap.tres" id="4_eho4s"]
+
 
 
 [resource]
