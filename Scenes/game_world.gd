@@ -114,5 +114,18 @@ func set_player_inventory(player_id: PlayersManager.PlayerID, items: Array[Strin
         inventory.append(ItemFactory.create(item))
     gui_player.set_items(inventory, true) # clean and set inventory
 
+func set_message(player_id: PlayersManager.PlayerID, message: String) -> void:
+    gui.set_message(player_id, message)
+
+func set_ready_button(player_id: PlayersManager.PlayerID, activate: bool) -> void:
+    if activate:
+        gui.connect("player_ready", _on_player_ready)
+    else:
+        gui.disconnect("player_ready", _on_player_ready)
+    gui.setup_button(player_id, activate, activate)
+
+func _on_player_ready(player_id: PlayersManager.PlayerID) -> void:
+    print("READY PRESSED by player ", player_id)
+
 func _on_get_function_ref(function_container: GameStage.FunctionRefContainer) -> void:
     function_container.callback = Callable(self, function_container.function_name)

@@ -8,6 +8,9 @@ class_name PreparePlayerGameStage
 var stored_items: Array = []
 var locked_items: Array = []
 
+var favourite_placed_correctly: bool = false
+var keys_placed_correctly: bool = false
+
 func _init():
     super("Prepare player %d" % player_id)
 
@@ -23,6 +26,8 @@ func enter() -> void:
             items.append(item.get_class_name())
     print("Starting items: ", items)
     call_function("set_player_inventory", [player_id, items])
+
+    update_user_message()
 
 func exit() -> void:
     super()
@@ -40,7 +45,7 @@ func retrieve_player_game_data(data_type: GameStateTypes.TYPES) -> Array[StringN
 
 func validate_preparation() -> void:
     # check if favourite item is placed in a container
-    var favourite_placed_correctly: bool = false
+    favourite_placed_correctly = false
     for item: GameStateTypes.GameStateItem in stored_items:
         if item.item.get_class_name() == &"ItemFavourite":
             if is_instance_valid(item.container):
@@ -50,26 +55,52 @@ func validate_preparation() -> void:
     # as opponent must be able to find it :)
     # here, the algorithm will check for a negative case (will set 'false'
     # when at least one key won't be found in some container
-    var keys_placed_correctly: bool = false
-    for locked_item in locked_items:
-        print(" -- Key: ", locked_item.item, " (", locked_item.item.get_class_name(),")")
-        for stored_item in stored_items:
-             keys_placed_correctly = keys_placed_correctly || (stored_item.item == locked_item.item)
+    keys_placed_correctly = false
 
-    print("FAVOURITE PLACED CORRECTLY? ", favourite_placed_correctly)
-    print("KEYS PLACED CORRECTLY? ", keys_placed_correctly)
+    if locked_items.size() > 0:
+        for locked_item in locked_items:
+            print(" -- Key: ", locked_item.item, " (", locked_item.item.get_class_name(),")")
+            for stored_item in stored_items:
+                keys_placed_correctly = keys_placed_correctly || (stored_item.item == locked_item.item)
+    else:
+        keys_placed_correctly = true
+
+func update_user_message() -> void:
+    var message: String = ""
+    if not favourite_placed_correctly:
+        message += "* Favourite item not placed in a container\n"
+
+    if not keys_placed_correctly:
+        message += "* Keys not placed correctly. Each key which\n"
+        message += "  was used for locking, should be placed in\n"
+        message += "  a container"
+
+    if favourite_placed_correctly and keys_placed_correctly:
+        message = "Preparation finished! Click ready button below."
+
+    call_function("set_message", [player_id, message])
+
+func update_ready_button() -> void:
+    if favourite_placed_correctly and keys_placed_correctly:
+        call_function("set_ready_button", [player_id, true])
+    else:
+        call_function("set_ready_button", [player_id, false])
 
 func handle_action_put_to_container(interaction_data: InteractionData) -> void:
     if "active_item" in interaction_data.response:
         var active_item: ItemBase = interaction_data.response["active_item"]
         stored_items.append(GameStateTypes.GameStateItem.new(active_item, interaction_data.target))
     validate_preparation()
+    update_user_message()
+    update_ready_button()
 
 func handle_action_lock_container(interaction_data: InteractionData) -> void:
     if "active_item" in interaction_data.response:
         var active_item: ItemBase = interaction_data.response["active_item"]
         locked_items.append(GameStateTypes.GameStateItem.new(active_item, interaction_data.target))
     validate_preparation()
+    update_user_message()
+    update_ready_button()
 
 func _on_action_successful(interaction_data: InteractionData) -> void:
     if not is_instance_valid(interaction_data):
