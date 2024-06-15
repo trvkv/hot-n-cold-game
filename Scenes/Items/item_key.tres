@@ -7,3 +7,4 @@
 script = ExtResource("1_dh8d4")
 icon = ExtResource("1_1rlyc")
 actions = Array[int]([1, 2, 3])
+player_id = 0

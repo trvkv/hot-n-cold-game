@@ -122,7 +122,7 @@ func set_player_inventory(player_id: PlayersManager.PlayerID, items: Array[Strin
 
     var inventory: Array[ItemBase] = []
     for item in items:
-        inventory.append(ItemFactory.create(item))
+        inventory.append(ItemFactory.create(player_id, item))
     gui_player.set_items(inventory, true) # clean and set inventory
 
 func set_message(player_id: PlayersManager.PlayerID, message: String) -> void:

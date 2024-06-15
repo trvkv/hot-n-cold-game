@@ -6,11 +6,15 @@ static var favourite_scene: Resource = preload("res://Scenes/Items/item_favourit
 static var key_scene: Resource = preload("res://Scenes/Items/item_key.tres")
 static var trap_scene: Resource = preload("res://Scenes/Items/item_trap.tres")
 
-static func create(item_type: StringName) -> ItemBase:
+static func create(player_id: PlayersManager.PlayerID, item_type: StringName) -> ItemBase:
+    var resource: ItemBase = null
     if item_type == &"ItemFavourite":
-        return favourite_scene.duplicate()
+        resource = favourite_scene.duplicate()
     elif item_type == &"ItemKey":
-        return key_scene.duplicate()
+        resource = key_scene.duplicate()
     elif item_type == &"ItemTrap":
-        return trap_scene.duplicate()
-    return null
+        resource = trap_scene.duplicate()
+    if not is_instance_valid(resource):
+        return null
+    resource.player_id = player_id
+    return resource

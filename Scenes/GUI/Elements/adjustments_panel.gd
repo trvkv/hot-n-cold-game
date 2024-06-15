@@ -84,7 +84,7 @@ func add_active_item_from_container_to_chosen_items(container: HorizontalItemCon
         printerr("Active element in required items is invalid")
         return false
     var active_item_type: StringName = active_element.item.get_class_name()
-    var new_item: ItemBase = ItemFactory.create(active_item_type)
+    var new_item: ItemBase = ItemFactory.create(player_id, active_item_type)
     if not is_instance_valid(new_item):
         printerr("Newly created item is not valid! ", new_item)
         return false
