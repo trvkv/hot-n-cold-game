@@ -1,4 +1,4 @@
-extends Node3D
+extends Resource
 
 class_name ItemInventory
 

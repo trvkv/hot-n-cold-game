@@ -5,10 +5,8 @@ class_name ItemContainer
 
 @export var container_mesh_scene: PackedScene: set = set_container, get = get_container
 @export var actions: Array[PlayerActions.ACTIONS] = [PlayerActions.ACTIONS.OPEN_CONTAINER]
+@export var inventory: ItemInventory
 @export var is_locked: bool = false
-@export var item: ItemBase: set = set_item, get = get_item
-
-@onready var inventory: ItemInventory = $ItemInventory
 @onready var mesh: Node3D = $Mesh
 
 var is_opened: bool = false
@@ -18,9 +16,6 @@ var container_mesh: MeshInstance3D
 func _ready() -> void:
     create_container_instance()
     assert(is_instance_valid(inventory), "Inventory is not a valid instance")
-    if not Engine.is_editor_hint():
-        inventory.clear()
-        set_item(item)
 
 func get_class_name() -> StringName:
     return &"ItemContainer"
@@ -57,17 +52,6 @@ func set_container(scene: PackedScene) -> void:
 
 func get_container() -> PackedScene:
     return container_mesh_scene
-
-func set_item(item_to_set: ItemBase) -> void:
-    item = item_to_set
-    if Engine.is_editor_hint():
-        return
-    if not is_node_ready():
-        return
-    put(item)
-
-func get_item():
-    return item
 
 func put(item_to_put: ItemBase) -> bool:
     if not is_instance_valid(inventory):
