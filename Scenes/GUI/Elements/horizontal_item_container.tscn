@@ -6,4 +6,4 @@
 [node name="HorizontalItemContainer" type="HBoxContainer"]
 script = ExtResource("1_wc5fk")
 item_element_scene = ExtResource("2_oyih1")
-items_at_start = Array[Resource("res://Scenes/Items/item_base.gd")]([null, null, null])
+items_at_start = Array[Resource("res://Resources/Items/item_base.gd")]([null, null, null])

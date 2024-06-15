@@ -87,7 +87,7 @@ horizontal_alignment = 1
 [node name="ItemContainer_Chosen" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_obikw")]
 layout_mode = 2
 alignment = 1
-items_at_start = Array[Resource("res://Scenes/Items/item_base.gd")]([null])
+items_at_start = Array[Resource("res://Resources/Items/item_base.gd")]([null])
 set_active_on_ready = false
 
 [node name="Label_ItemsRequired" type="Label" parent="MarginContainer/VBoxContainer"]
@@ -98,7 +98,7 @@ horizontal_alignment = 1
 [node name="ItemContainer_Required" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_obikw")]
 layout_mode = 2
 alignment = 1
-items_at_start = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("5_ojmc6")])
+items_at_start = Array[Resource("res://Resources/Items/item_base.gd")]([ExtResource("5_ojmc6")])
 
 [node name="Label_ItemsAdditional" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -108,7 +108,7 @@ horizontal_alignment = 1
 [node name="ItemContainer_All" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_obikw")]
 layout_mode = 2
 alignment = 1
-items_at_start = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("6_4yee7"), ExtResource("7_pangv")])
+items_at_start = Array[Resource("res://Resources/Items/item_base.gd")]([ExtResource("6_4yee7"), ExtResource("7_pangv")])
 set_active_on_ready = false
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]

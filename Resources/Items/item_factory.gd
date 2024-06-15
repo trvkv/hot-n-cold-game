@@ -2,9 +2,9 @@ extends RefCounted
 
 class_name ItemFactory
 
-static var favourite_scene: Resource = preload("res://Scenes/Items/item_favourite.tres")
-static var key_scene: Resource = preload("res://Scenes/Items/item_key.tres")
-static var trap_scene: Resource = preload("res://Scenes/Items/item_trap.tres")
+static var favourite_scene: Resource = preload("res://Resources/Items/item_favourite.tres")
+static var key_scene: Resource = preload("res://Resources/Items/item_key.tres")
+static var trap_scene: Resource = preload("res://Resources/Items/item_trap.tres")
 
 static func create(player_id: PlayersManager.PlayerID, item_type: StringName) -> ItemBase:
     var resource: ItemBase = null

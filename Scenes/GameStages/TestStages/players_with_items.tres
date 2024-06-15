@@ -8,4 +8,4 @@
 
 [resource]
 script = ExtResource("1_ta0qw")
-starting_items = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("2_bu0f5"), ExtResource("3_mgxmv"), ExtResource("4_eho4s")])
+starting_items = Array[Resource("res://Resources/Items/item_base.gd")]([ExtResource("2_bu0f5"), ExtResource("3_mgxmv"), ExtResource("4_eho4s")])
