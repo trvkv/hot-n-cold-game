@@ -62,6 +62,17 @@ func set_current_game_stage(stage: GameStage) -> void:
 func get_current_game_stage() -> GameStage:
     return current_game_stage
 
+func load_next_game_stage() -> void:
+    var current = get_current_game_stage()
+    if not is_instance_valid(current):
+        printerr("Loading next stage failed: current game stage invalid")
+        return
+    var next: GameStage = current.next_stage
+    if not is_instance_valid(next):
+        printerr("Loading next stage failed: next game stage invalid")
+        return
+    set_current_game_stage(next)
+
 func hide_player_container(player_id: PlayersManager.PlayerID) -> void:
     if player_id == PlayersManager.PlayerID.PLAYER_1:
         viewport_player_1.set_self_modulate(Color(1.0, 1.0, 1.0, 0.0))
@@ -125,7 +136,8 @@ func set_ready_button(player_id: PlayersManager.PlayerID, activate: bool) -> voi
     gui.setup_button(player_id, activate, activate)
 
 func _on_player_ready(player_id: PlayersManager.PlayerID) -> void:
-    print("READY PRESSED by player ", player_id)
+    set_ready_button(player_id, false)
+    load_next_game_stage()
 
 func _on_get_function_ref(function_container: GameStage.FunctionRefContainer) -> void:
     function_container.callback = Callable(self, function_container.function_name)

@@ -5,6 +5,8 @@ class_name PreparePlayerGameStage
 @export var player_id: PlayersManager.PlayerID = PlayersManager.PlayerID.PLAYER_1
 @export var starting_items: Array[ItemBase]
 
+@export var debug: bool = false
+
 var stored_items: Array = []
 var locked_items: Array = []
 
@@ -35,6 +37,8 @@ func exit() -> void:
     call_function("show_player_container", [PlayersManager.get_opponent_id(player_id)])
     call_function("freeze", [PlayersManager.get_opponent_id(player_id), false])
     call_function("set_player_inventory", [player_id, []])
+    call_function("set_ready_button", [player_id, false])
+    call_function("set_message", [player_id, ""])
 
 func retrieve_player_game_data(data_type: GameStateTypes.TYPES) -> Array[StringName]:
     var game_state = GameStateTypes.GameStateData.new(player_id, data_type)
@@ -107,14 +111,15 @@ func _on_action_successful(interaction_data: InteractionData) -> void:
         printerr("Interaction data is invalid!")
         return
     var action := PlayerActions.action_to_string(interaction_data.action)
-    print("--[ACTION]-------------------------------------------------------\n",
-        "\t\t-- Player: ", interaction_data.initiator, "\n",
-        "\t\t-- Action: ", action, " (", interaction_data.action, ")\n",
-        "\t\t-- Target: ", interaction_data.target, "\n",
-        "\t\t-- Req.: ", interaction_data.request, "\n",
-        "\t\t-- Res.: ", interaction_data.response, "\n",
-        "------------------------------------------------------------------"
-    )
+    if debug:
+        print("--[ACTION]-------------------------------------------------------\n",
+            "\t\t-- Player: ", interaction_data.initiator, "\n",
+            "\t\t-- Action: ", action, " (", interaction_data.action, ")\n",
+            "\t\t-- Target: ", interaction_data.target, "\n",
+            "\t\t-- Req.: ", interaction_data.request, "\n",
+            "\t\t-- Res.: ", interaction_data.response, "\n",
+            "------------------------------------------------------------------"
+        )
     if interaction_data.action == PlayerActions.ACTIONS.PUT_TO_CONTAINER:
         handle_action_put_to_container(interaction_data)
     elif interaction_data.action == PlayerActions.ACTIONS.LOCK_CONTAINER:

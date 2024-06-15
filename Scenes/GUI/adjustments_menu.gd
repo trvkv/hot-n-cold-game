@@ -29,7 +29,7 @@ func _on_player_ready(player_id: int) -> void:
 
     if players_ready():
         print("Loading next scene...")
-        load_next(next_scene)
+        load_next()
 
 func get_player_item_names(player_id: int) -> Array[StringName]:
     var names: Array[StringName] = []

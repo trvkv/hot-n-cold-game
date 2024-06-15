@@ -15,8 +15,12 @@ func on_exit() -> void:
 func on_update(_delta) -> void:
     pass
 
-func load_next(next: PackedScene) -> void:
-    _next_scene_to_load = next
+func load_next() -> void:
+    if is_instance_valid(next_scene):
+        print("Loading next... ", next_scene)
+    else:
+        printerr("Attempting to load next scene, but it's invalid: ", next_scene)
+    _next_scene_to_load = next_scene
 
 func is_next_ready() -> PackedScene:
     return _next_scene_to_load

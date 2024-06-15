@@ -33,6 +33,8 @@ func _ready() -> void:
 
     setup_button(PlayersManager.PlayerID.PLAYER_1, false, false)
     setup_button(PlayersManager.PlayerID.PLAYER_2, false, false)
+    set_message(PlayersManager.PlayerID.PLAYER_1, "")
+    set_message(PlayersManager.PlayerID.PLAYER_2, "")
 
 func _on_pressed_1() -> void:
     emit_signal("player_ready", PlayersManager.PlayerID.PLAYER_1)

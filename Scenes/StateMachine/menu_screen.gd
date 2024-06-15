@@ -15,8 +15,8 @@ func on_exit() -> void:
 func on_update(_delta) -> void:
     pass
 
-func load_next(next: PackedScene) -> void:
-    _next_scene_to_load = next
+func load_next() -> void:
+    _next_scene_to_load = next_scene
 
 func is_next_ready() -> PackedScene:
     return _next_scene_to_load
