@@ -9,3 +9,4 @@
 script = ExtResource("1_oa31v")
 player_id = 2
 starting_items = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("2_qcvag"), ExtResource("3_pqa64"), ExtResource("4_mnota")])
+debug = false

@@ -10,4 +10,5 @@
 script = ExtResource("1_e7mxm")
 player_id = 1
 starting_items = Array[Resource("res://Scenes/Items/item_base.gd")]([ExtResource("3_vohm5"), ExtResource("4_lsxfh"), ExtResource("5_jtnof")])
+debug = false
 next_stage = ExtResource("1_t27ll")

@@ -132,7 +132,8 @@ func set_ready_button(player_id: PlayersManager.PlayerID, activate: bool) -> voi
     if activate:
         gui.connect("player_ready", _on_player_ready)
     else:
-        gui.disconnect("player_ready", _on_player_ready)
+        if gui.is_connected("player_ready", _on_player_ready):
+            gui.disconnect("player_ready", _on_player_ready)
     gui.setup_button(player_id, activate, activate)
 
 func _on_player_ready(player_id: PlayersManager.PlayerID) -> void:

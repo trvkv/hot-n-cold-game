@@ -63,7 +63,6 @@ func validate_preparation() -> void:
 
     if locked_items.size() > 0:
         for locked_item in locked_items:
-            print(" -- Key: ", locked_item.item, " (", locked_item.item.get_class_name(),")")
             for stored_item in stored_items:
                 keys_placed_correctly = keys_placed_correctly || (stored_item.item == locked_item.item)
     else:
