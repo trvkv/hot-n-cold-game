@@ -46,6 +46,17 @@ func create_container_instance() -> void:
         else:
             printerr("Mesh instance is invalid: ", container_mesh)
 
+func _on_update_interactees(_player, interactees, active_interactee) -> void:
+    if is_instance_valid(container_mesh):
+        if active_interactee == self:
+            container_mesh.get_active_material(0).albedo_color = Color(0.0, 0.0, 0.0)
+        elif self in interactees:
+            container_mesh.get_active_material(0).albedo_color = Color(0.8, 0.8, 0.8)
+        else:
+            container_mesh.get_active_material(0).albedo_color = Color(1.0, 1.0, 1.0)
+    else:
+        printerr("Mesh container or collision body invalid for ", self)
+
 func set_container(scene: PackedScene) -> void:
     container_mesh_scene = scene
     create_container_instance()
@@ -115,6 +126,15 @@ func unlock() -> bool:
         return true
     return false
 
+func store_item_state(player_id: PlayersManager.PlayerID, data_type: GameStateTypes.TYPES, data) -> void:
+    var state := GameStateTypes.GameStateData.new(player_id, data_type, data)
+    EventBus.emit_signal("store_game_state", state)
+
+func add_item_state(player_id: PlayersManager.PlayerID, data_type: GameStateTypes.TYPES, data) -> void:
+    var state := GameStateTypes.GameStateData.new(player_id, data_type)
+    EventBus.emit_signal("retrieve_game_state", state)
+    store_item_state(player_id, data_type, data)
+
 func action_open_container(interaction_data: InteractionData) -> void:
     print("Opening container (", interaction_data.initiator, ")")
     interaction_data.response = {"items": peek(interaction_data.player_id)}
@@ -169,15 +189,6 @@ func action_put_to_container(interaction_data: InteractionData) -> void:
         printerr("No active item selected, while putting item to container")
         interaction_data.is_successful = false
 
-func store_item_state(player_id: PlayersManager.PlayerID, data_type: GameStateTypes.TYPES, data) -> void:
-    var state := GameStateTypes.GameStateData.new(player_id, data_type, data)
-    EventBus.emit_signal("store_game_state", state)
-
-func add_item_state(player_id: PlayersManager.PlayerID, data_type: GameStateTypes.TYPES, data) -> void:
-    var state := GameStateTypes.GameStateData.new(player_id, data_type)
-    EventBus.emit_signal("retrieve_game_state", state)
-    store_item_state(player_id, data_type, data)
-
 func action_get_from_container(interaction_data: InteractionData) -> void:
     print("Getting item from container (", interaction_data.initiator, ")")
     interaction_data.is_successful = is_opened
@@ -188,17 +199,6 @@ func action_get_from_container(interaction_data: InteractionData) -> void:
             print("Container is empty!")
     else:
         print("Container closed! Open it first.")
-
-func _on_update_interactees(_player, interactees, active_interactee) -> void:
-    if is_instance_valid(container_mesh):
-        if active_interactee == self:
-            container_mesh.get_active_material(0).albedo_color = Color(0.0, 0.0, 0.0)
-        elif self in interactees:
-            container_mesh.get_active_material(0).albedo_color = Color(0.8, 0.8, 0.8)
-        else:
-            container_mesh.get_active_material(0).albedo_color = Color(1.0, 1.0, 1.0)
-    else:
-        printerr("Mesh container or collision body invalid for ", self)
 
 func interact(interaction_data: InteractionData) -> bool:
     if interaction_data.target == self:
