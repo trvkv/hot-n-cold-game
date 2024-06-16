@@ -6,8 +6,6 @@
 [ext_resource type="Resource" uid="uid://b5ohqfe6mt3q5" path="res://Resources/Items/item_key.tres" id="4_lsxfh"]
 [ext_resource type="Resource" uid="uid://don7pfb0cf8pq" path="res://Resources/Items/item_trap.tres" id="5_jtnof"]
 
-
-
 [resource]
 script = ExtResource("1_e7mxm")
 player_id = 1

@@ -29,6 +29,8 @@ func enter() -> void:
     print("Starting items: ", items)
     call_function("set_player_inventory", [player_id, items])
 
+    var opponent: Player = PlayersManager.get_opponent(player_id)
+    opponent.hide()
     update_user_message()
 
 func exit() -> void:
@@ -39,6 +41,9 @@ func exit() -> void:
     call_function("set_player_inventory", [player_id, []])
     call_function("set_ready_button", [player_id, false])
     call_function("set_message", [player_id, ""])
+
+    var opponent: Player = PlayersManager.get_opponent(player_id)
+    opponent.show()
 
 func retrieve_player_game_data(data_type: GameStateTypes.TYPES) -> Array[StringName]:
     var game_state = GameStateTypes.GameStateData.new(player_id, data_type)

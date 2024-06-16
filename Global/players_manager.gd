@@ -62,6 +62,6 @@ func get_opponent_id(player_id: PlayerID) -> PlayerID:
         return PlayerID.PLAYER_2
     return PlayerID.PLAYER_1
 
-func get_opponent(player: Player) -> Player:
-    var opponent_id = get_opponent_id(player.player_id)
+func get_opponent(player_id: PlayerID) -> Player:
+    var opponent_id = get_opponent_id(player_id)
     return get_player(opponent_id)
