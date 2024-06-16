@@ -5,16 +5,20 @@ class_name ItemContainer
 
 @export var container_mesh_scene: PackedScene: set = set_container, get = get_container
 @export var actions: Array[PlayerActions.ACTIONS] = [PlayerActions.ACTIONS.OPEN_CONTAINER]
-@export var inventories: Array[PlayerInventory] = []
 @export var is_locked: bool = false
 
 @onready var mesh: Node3D = $Mesh
 
+var inventories: Array[PlayerInventory] = []
 var is_opened: bool = false
 
 var container_mesh: MeshInstance3D
 
 func _ready() -> void:
+    for player_id in PlayersManager.PlayerID:
+        var player_inventory: PlayerInventory = PlayerInventory.new()
+        player_inventory.player_id = player_id
+        inventories.append(player_inventory)
     create_container_instance()
 
 func get_class_name() -> StringName:
