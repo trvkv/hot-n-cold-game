@@ -55,9 +55,11 @@ func set_current_game_stage(stage: GameStage) -> void:
     if is_instance_valid(current_game_stage):
         current_game_stage.exit()
         current_game_stage.disconnect("get_function_ref", _on_get_function_ref)
+        EventBus.emit_signal("update_gameplay_stage", GameStage.ACTIONS.EXITED, current_game_stage)
     current_game_stage = stage
     current_game_stage.connect("get_function_ref", _on_get_function_ref)
     current_game_stage.enter()
+    EventBus.emit_signal("update_gameplay_stage", GameStage.ACTIONS.ENTERED, current_game_stage)
 
 func get_current_game_stage() -> GameStage:
     return current_game_stage

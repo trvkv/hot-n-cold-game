@@ -8,6 +8,8 @@ var stage_name: String
 
 signal get_function_ref(function_ref_container)
 
+enum ACTIONS { ENTERED = 1, EXITED = 2 }
+
 class FunctionRefContainer:
     var sender: Object
     var function_name: String
