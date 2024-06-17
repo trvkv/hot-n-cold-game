@@ -13,6 +13,7 @@ class_name GameWorld
 @export var camera_player_2: CameraPosition
 @export var trap_scene: PackedScene
 @export var gui: MainGui
+@export var level: Level
 
 var current_game_stage: GameStage:
     set = set_current_game_stage, get = get_current_game_stage
@@ -21,9 +22,12 @@ func _ready() -> void:
     assert(trap_scene, "Trap scene invalid")
     assert(viewport_player_1, "Viewport for player 1 invalid")
     assert(viewport_player_2, "Viewport for player 2 invalid")
+    assert(player_1, "Invalid player 1")
+    assert(player_2, "Invalid player 2")
     assert(camera_player_1, "Camera for player 1 invalid")
     assert(camera_player_2, "Camera for player 2 invalid")
     assert(gui, "Gui invalid")
+    assert(level, "Level invalid")
     CameraManager.activate_camera(camera_player_1.UUID)
     CameraManager.activate_camera(camera_player_2.UUID)
     EventBus.connect("set_trap", _on_trap_set)
@@ -126,6 +130,18 @@ func set_player_inventory(player_id: PlayersManager.PlayerID, items: Array[Strin
     for item in items:
         inventory.append(ItemFactory.create(player_id, item))
     gui_player.set_items(inventory, true) # clean and set inventory
+
+func set_player_starting_position(player_id: PlayersManager.PlayerID) -> void:
+    var level_position: Vector3
+    for starting_position in level.player_starting_positions:
+        if starting_position.player_id == player_id:
+            level_position = level.to_local(starting_position.get_position())
+            var player: Player = PlayersManager.get_player(player_id)
+            if not is_instance_valid(player):
+                printerr("Player not found!")
+                return
+            player.set_position(level_position)
+            break
 
 func set_message(player_id: PlayersManager.PlayerID, message: String) -> void:
     gui.set_message(player_id, message)
