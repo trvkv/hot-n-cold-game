@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Scenes/Util/interaction_manager.gd" id="7_f3bx6"]
 [ext_resource type="Script" path="res://Scenes/GUI/Elements/global_debug.gd" id="8_wygou"]
 
-[node name="Gui" type="CanvasLayer" node_paths=PackedStringArray("gui_player_1", "gui_player_2", "gui_actions_1", "gui_actions_2", "gui_inventory_1", "gui_inventory_2", "gui_message_container_1", "gui_message_container_2", "gui_message_1", "gui_message_2", "ready_button_1", "ready_button_2")]
+[node name="Gui" type="CanvasLayer" node_paths=PackedStringArray("gui_player_1", "gui_player_2", "gui_actions_1", "gui_actions_2", "gui_inventory_1", "gui_inventory_2", "gui_message_container_1", "gui_message_container_2", "gui_message_1", "gui_message_2", "ready_button_1", "ready_button_2", "global_message", "global_message_container")]
 script = ExtResource("1_g1f3t")
 gui_player_1 = NodePath("PlayersDebugGUI/GridContainer/PanelContainer_P1/VBC_Main/GuiPlayer")
 gui_player_2 = NodePath("PlayersDebugGUI/GridContainer/PanelContainer_P2/VBC_Main/GuiPlayer")
@@ -21,6 +21,8 @@ gui_message_1 = NodePath("PlayersDebugGUI/GridContainer/PanelContainer_P1/CC_Mes
 gui_message_2 = NodePath("PlayersDebugGUI/GridContainer/PanelContainer_P2/CC_Message/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Label_Message")
 ready_button_1 = NodePath("PlayersDebugGUI/GridContainer/PanelContainer_P1/CC_Message/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Button")
 ready_button_2 = NodePath("PlayersDebugGUI/GridContainer/PanelContainer_P2/CC_Message/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Button")
+global_message = NodePath("PlayersDebugGUI/GlobalMessageBox/MarginContainer/GlobalMessageLabel")
+global_message_container = NodePath("PlayersDebugGUI/GlobalMessageBox")
 
 [node name="PlayersDebugGUI" type="Control" parent="."]
 layout_mode = 3
@@ -152,6 +154,32 @@ offset_bottom = 40.0
 script = ExtResource("7_f3bx6")
 player_1_interaction_gui = NodePath("../GridContainer/PanelContainer_P1/VBC_Main/GuiActions")
 player_2_interaction_gui = NodePath("../GridContainer/PanelContainer_P2/VBC_Main/GuiActions")
+
+[node name="GlobalMessageBox" type="PanelContainer" parent="PlayersDebugGUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayersDebugGUI/GlobalMessageBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="GlobalMessageLabel" type="Label" parent="PlayersDebugGUI/GlobalMessageBox/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Global message box"
 
 [node name="GlobalDebugGUI" type="Control" parent="." node_paths=PackedStringArray("frames_value_path", "fps_value_path", "process_value_path", "physics_value_path")]
 layout_mode = 3

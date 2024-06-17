@@ -14,6 +14,8 @@ class_name MainGui
 @export var gui_message_2: Label
 @export var ready_button_1: Button
 @export var ready_button_2: Button
+@export var global_message: Label
+@export var global_message_container: PanelContainer
 
 signal player_ready(player_id)
 
@@ -30,11 +32,14 @@ func _ready() -> void:
     assert(gui_message_2, "gui message 2 invalid")
     assert(ready_button_1, "ready button 1 invalid")
     assert(ready_button_2, "ready button 2 invalid")
+    assert(global_message, "Global message label invalid")
+    assert(global_message_container, "Global message container invalid")
 
     setup_button(PlayersManager.PlayerID.PLAYER_1, false, false)
     setup_button(PlayersManager.PlayerID.PLAYER_2, false, false)
     set_message(PlayersManager.PlayerID.PLAYER_1, "")
     set_message(PlayersManager.PlayerID.PLAYER_2, "")
+    set_global_message("")
 
 func _on_pressed_1() -> void:
     emit_signal("player_ready", PlayersManager.PlayerID.PLAYER_1)
@@ -78,3 +83,10 @@ func set_message(player_id: PlayersManager.PlayerID, message: String) -> void:
         gui_container.set_modulate(Color(1.0, 1.0, 1.0, 1.0))
 
     gui_message.set_text(message)
+
+func set_global_message(message: String) -> void:
+    if message.length() == 0:
+        global_message_container.set_modulate(Color(1.0, 1.0, 1.0, 0.0))
+    else:
+        global_message_container.set_modulate(Color(1.0, 1.0, 1.0, 1.0))
+    global_message.set_text(message)

@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="PreparePlayerGameStage" load_steps=5 format=3 uid="uid://buffpilqhfxvx"]
+[gd_resource type="Resource" script_class="PreparePlayerGameStage" load_steps=6 format=3 uid="uid://buffpilqhfxvx"]
 
+[ext_resource type="Resource" uid="uid://qu176ebanyo3" path="res://Resources/GameStages/game_ready_stage.tres" id="1_erui8"]
 [ext_resource type="Script" path="res://Resources/GameStages/prepare_player_stage.gd" id="1_oa31v"]
 [ext_resource type="Resource" uid="uid://bqsiaqedj4v3e" path="res://Resources/Items/item_favourite.tres" id="2_qcvag"]
 [ext_resource type="Resource" uid="uid://b5ohqfe6mt3q5" path="res://Resources/Items/item_key.tres" id="3_pqa64"]
@@ -10,3 +11,4 @@ script = ExtResource("1_oa31v")
 player_id = 2
 starting_items = Array[Resource("res://Resources/Items/item_base.gd")]([ExtResource("2_qcvag"), ExtResource("3_pqa64"), ExtResource("4_mnota")])
 debug = false
+next_stage = ExtResource("1_erui8")

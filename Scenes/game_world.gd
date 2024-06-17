@@ -146,6 +146,9 @@ func set_player_starting_position(player_id: PlayersManager.PlayerID) -> void:
 func set_message(player_id: PlayersManager.PlayerID, message: String) -> void:
     gui.set_message(player_id, message)
 
+func set_global_message(message: String) -> void:
+    gui.set_global_message(message)
+
 func set_ready_button(player_id: PlayersManager.PlayerID, activate: bool) -> void:
     if activate:
         gui.connect("player_ready", _on_player_ready)

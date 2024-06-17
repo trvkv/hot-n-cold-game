@@ -33,7 +33,7 @@ func exit() -> void:
 func update(_delta: float) -> void:
     pass
 
-func call_function(function: String, arguments: Array):
+func call_function(function: String, arguments: Array = []):
     var function_container = FunctionRefContainer.new(self, function, arguments)
     emit_signal("get_function_ref", function_container)
     if function_container.sender != self:
