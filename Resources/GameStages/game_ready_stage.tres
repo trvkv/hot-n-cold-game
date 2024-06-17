@@ -1,6 +1,9 @@
-[gd_resource type="Resource" script_class="GameReadyStage" load_steps=2 format=3 uid="uid://qu176ebanyo3"]
+[gd_resource type="Resource" script_class="GameReadyStage" load_steps=3 format=3 uid="uid://qu176ebanyo3"]
 
 [ext_resource type="Script" path="res://Resources/GameStages/game_ready_stage.gd" id="1_r424r"]
+[ext_resource type="Resource" uid="uid://sfyqgnuxw22x" path="res://Resources/GameStages/gameplay_stage.tres" id="1_wgh6w"]
 
 [resource]
 script = ExtResource("1_r424r")
+countdown_time = 10.0
+next_stage = ExtResource("1_wgh6w")

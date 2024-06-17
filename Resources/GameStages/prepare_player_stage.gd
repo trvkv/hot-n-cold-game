@@ -2,7 +2,7 @@ extends GameStage
 
 class_name PreparePlayerGameStage
 
-@export var player_id: PlayersManager.PlayerID = PlayersManager.PlayerID.PLAYER_1
+@export var player_id: PlayersManager.PlayerID = PlayersManager.PlayerID.NONE
 @export var starting_items: Array[ItemBase]
 
 @export var debug: bool = false

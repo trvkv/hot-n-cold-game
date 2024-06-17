@@ -21,6 +21,7 @@ func enter() -> void:
     timer_started = true
 
 func exit() -> void:
+    super()
     call_function("freeze", [PlayersManager.PlayerID.PLAYER_1, false])
     call_function("freeze", [PlayersManager.PlayerID.PLAYER_2, false])
     call_function("show_player_container", [PlayersManager.PlayerID.PLAYER_1])

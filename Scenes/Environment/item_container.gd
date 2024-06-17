@@ -139,9 +139,15 @@ func add_item_state(player_id: PlayersManager.PlayerID, data_type: GameStateType
     EventBus.emit_signal("retrieve_game_state", state)
     store_item_state(player_id, data_type, data)
 
+func decide_player_id(interaction_data: InteractionData) -> PlayersManager.PlayerID:
+    var player_id: PlayersManager.PlayerID = interaction_data.player_id
+    if interaction_data.reverse_container_inventory_search:
+        player_id = PlayersManager.get_opponent_id(interaction_data.player_id)
+    return player_id
+
 func action_open_container(interaction_data: InteractionData) -> void:
     print("Opening container (", interaction_data.initiator, ")")
-    interaction_data.response = {"items": peek(interaction_data.player_id)}
+    interaction_data.response = {"items": peek(decide_player_id(interaction_data))}
     interaction_data.is_successful = not is_locked
     is_opened = not is_locked
 
@@ -177,7 +183,7 @@ func action_put_to_container(interaction_data: InteractionData) -> void:
         var active_item: ItemBase = interaction_data.request["active_item"]
         interaction_data.response = {"active_item": active_item}
         if is_opened and not is_locked:
-            interaction_data.is_successful = put(interaction_data.player_id, active_item)
+            interaction_data.is_successful = put(decide_player_id(interaction_data), active_item)
         else:
             interaction_data.is_successful = false
 
@@ -197,8 +203,9 @@ func action_get_from_container(interaction_data: InteractionData) -> void:
     print("Getting item from container (", interaction_data.initiator, ")")
     interaction_data.is_successful = is_opened
     if interaction_data.is_successful:
-        if peek(interaction_data.player_id) != null:
-            interaction_data.response = {"item": retrieve(interaction_data.player_id)}
+        var player_id = decide_player_id(interaction_data)
+        if peek(player_id) != null:
+            interaction_data.response = {"item": retrieve(player_id)}
         else:
             print("Container is empty!")
     else:

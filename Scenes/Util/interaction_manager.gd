@@ -48,6 +48,7 @@ func create_interaction_data(interactee, interactor, action) -> InteractionData:
     interaction_data.initiator = interactor
     interaction_data.target = interactee
     interaction_data.request = player_interaction_data[interactor]
+    interaction_data.reverse_container_inventory_search = game_stage.reverse_container_inventory_search
     return interaction_data
 
 func _on_interact(interactee, interactor, action) -> void:

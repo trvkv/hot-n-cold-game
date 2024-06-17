@@ -6,6 +6,14 @@ class_name GameStage
 
 var stage_name: String
 
+# Each container has two inventories: one for each player.
+# During the item hiding stage (prepare_player_*_stage.tres)
+# player is using it's own container inventory.
+# But, during gameplay player is searching through his opponent
+# inventory when opening containers. This option is used to
+# adjust this behaviour on per-stage basis.
+var reverse_container_inventory_search: bool = false
+
 signal get_function_ref(function_ref_container)
 
 enum ACTIONS { ENTERED = 1, EXITED = 2 }
@@ -21,8 +29,9 @@ class FunctionRefContainer:
         function_name = function_name_
         arguments = arguments_
 
-func _init(stage_name_: String) -> void:
+func _init(stage_name_: String, reverse_container_inventory_search_: bool = false) -> void:
     stage_name = stage_name_
+    reverse_container_inventory_search = reverse_container_inventory_search_
 
 func enter() -> void:
     print("Entering game stage: ", stage_name)

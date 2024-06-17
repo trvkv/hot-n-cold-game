@@ -76,5 +76,6 @@ func freeze() -> void:
 func unfreeze() -> void:
     set_process(true)
     set_physics_process(true)
-    animation_player.play()
+    if not animation_player.current_animation.is_empty():
+        animation_player.play()
     animated_sprite.play()
