@@ -5,20 +5,18 @@ class_name ItemContainer
 
 @export var container_mesh_scene: PackedScene: set = set_container, get = get_container
 @export var actions: Array[PlayerActions.ACTIONS] = [PlayerActions.ACTIONS.OPEN_CONTAINER]
-@export var is_locked: bool = false
 
 @onready var mesh: Node3D = $Mesh
 
-var inventories: Array[PlayerInventory] = []
-var is_opened: bool = false
+var inventories: Dictionary = {}
 
 var container_mesh: MeshInstance3D
 
 func _ready() -> void:
-    for player_id in PlayersManager.PlayerID:
+    for player_id in PlayersManager.PlayerID.values():
         var player_inventory: PlayerInventory = PlayerInventory.new()
         player_inventory.player_id = player_id
-        inventories.append(player_inventory)
+        inventories[player_id] = player_inventory
     create_container_instance()
 
 func get_class_name() -> StringName:
@@ -68,20 +66,20 @@ func set_container(scene: PackedScene) -> void:
 func get_container() -> PackedScene:
     return container_mesh_scene
 
-func get_inventory(player_id: PlayersManager.PlayerID) -> ItemInventory:
-    if inventories == null:
-        printerr("Container inventories invalid: ", inventories, ", container: ", self)
+func get_player_inventory(player_id: PlayersManager.PlayerID) -> PlayerInventory:
+    if not inventories.has(player_id):
+        printerr("Inventory for player ", player_id, " not found")
         return null
-    for player_inventory: PlayerInventory in inventories:
-        if is_instance_valid(player_inventory):
-            if player_inventory.player_id == player_id:
-                return player_inventory.inventory
-    printerr("Inventory for player ", player_id, " not found")
+    return inventories[player_id]
+
+func get_inventory(player_id: PlayersManager.PlayerID) -> ItemInventory:
+    var player_inventory: PlayerInventory = get_player_inventory(player_id)
+    if is_instance_valid(player_inventory):
+        return player_inventory.inventory
     return null
 
 func put(player_id: PlayersManager.PlayerID, item_to_put: ItemBase) -> bool:
     var inventory: ItemInventory = get_inventory(player_id)
-    print("Inventory: ", inventory)
     if not is_instance_valid(inventory):
         printerr("Inventory object invalid")
         return false
@@ -118,15 +116,23 @@ func retrieve(player_id: PlayersManager.PlayerID) -> ItemBase:
         return item_to_retrieve
     return null
 
-func lock() -> bool:
-    if not is_locked:
-        is_locked = true
+func lock(player_id: PlayersManager.PlayerID) -> bool:
+    var inventory: PlayerInventory = get_player_inventory(player_id)
+    if not is_instance_valid(inventory):
+        printerr("Player inventory invalid")
+        return false
+    if not inventory.is_locked:
+        inventory.is_locked = true
         return true
     return false
 
-func unlock() -> bool:
-    if is_locked:
-        is_locked = false
+func unlock(player_id: PlayersManager.PlayerID) -> bool:
+    var inventory: PlayerInventory = get_player_inventory(player_id)
+    if not is_instance_valid(inventory):
+        printerr("Player inventory invalid")
+        return false
+    if inventory.is_locked:
+        inventory.is_locked = false
         return true
     return false
 
@@ -147,9 +153,14 @@ func decide_player_id(interaction_data: InteractionData) -> PlayersManager.Playe
 
 func action_open_container(interaction_data: InteractionData) -> void:
     print("Opening container (", interaction_data.initiator, ")")
-    interaction_data.response = {"items": peek(decide_player_id(interaction_data))}
-    interaction_data.is_successful = not is_locked
-    is_opened = not is_locked
+    var player_id: PlayersManager.PlayerID = decide_player_id(interaction_data)
+    var inventory: PlayerInventory = get_player_inventory(player_id)
+    if not is_instance_valid(inventory):
+        printerr("Player inventory invalid")
+        return
+    interaction_data.response = {"items": peek(player_id)}
+    interaction_data.is_successful = not inventory.is_locked
+    inventory.is_opened = not inventory.is_locked
 
 func action_lock_container(interaction_data: InteractionData) -> void:
     print("Locking container (", interaction_data.initiator, ")")
@@ -159,7 +170,8 @@ func action_lock_container(interaction_data: InteractionData) -> void:
             interaction_data.response = {"active_item": active_item}
             var key_not_used: bool = (active_item.is_used_by == null)
             if key_not_used:
-                interaction_data.is_successful = lock()
+                var player_id: PlayersManager.PlayerID = decide_player_id(interaction_data)
+                interaction_data.is_successful = lock(player_id)
                 active_item.is_used_by = interaction_data.target
             else:
                 interaction_data.is_successful = false
@@ -172,7 +184,8 @@ func action_unlock_container(interaction_data: InteractionData) -> void:
             interaction_data.response = {"active_item": active_item}
             var same_key: bool = (active_item.is_used_by == interaction_data.target)
             if same_key:
-                interaction_data.is_successful = unlock()
+                var player_id: PlayersManager.PlayerID = decide_player_id(interaction_data)
+                interaction_data.is_successful = unlock(player_id)
                 active_item.is_used_by = null
             else:
                 interaction_data.is_successful = false
@@ -182,28 +195,34 @@ func action_put_to_container(interaction_data: InteractionData) -> void:
     if "active_item" in interaction_data.request:
         var active_item: ItemBase = interaction_data.request["active_item"]
         interaction_data.response = {"active_item": active_item}
-        if is_opened and not is_locked:
-            interaction_data.is_successful = put(decide_player_id(interaction_data), active_item)
+        var player_id: PlayersManager.PlayerID = decide_player_id(interaction_data)
+        var inventory: PlayerInventory = get_player_inventory(player_id)
+        if inventory.is_opened and not inventory.is_locked:
+            interaction_data.is_successful = put(player_id, active_item)
         else:
             interaction_data.is_successful = false
 
         # change game state only when putting item to container was successful
-        if interaction_data.is_successful:
-            var player_id = interaction_data.initiator.player_id
-            if active_item.get_class_name() == &"ItemFavourite":
-                store_item_state(player_id, GameStateTypes.TYPES.FAVOURITE_ITEM_CONTAINER, self)
-            elif active_item.get_class_name() == &"ItemKey":
-                var data := GameStateTypes.GameStateItem.new(active_item, self)
-                add_item_state(player_id, GameStateTypes.TYPES.KEY_ITEM_CONTAINER, data)
+        #if interaction_data.is_successful:
+            #var player_id = interaction_data.initiator.player_id
+            #if active_item.get_class_name() == &"ItemFavourite":
+                #store_item_state(player_id, GameStateTypes.TYPES.FAVOURITE_ITEM_CONTAINER, self)
+            #elif active_item.get_class_name() == &"ItemKey":
+                #var data := GameStateTypes.GameStateItem.new(active_item, self)
+                #add_item_state(player_id, GameStateTypes.TYPES.KEY_ITEM_CONTAINER, data)
     else:
         printerr("No active item selected, while putting item to container")
         interaction_data.is_successful = false
 
 func action_get_from_container(interaction_data: InteractionData) -> void:
     print("Getting item from container (", interaction_data.initiator, ")")
-    interaction_data.is_successful = is_opened
+    var player_id: PlayersManager.PlayerID = decide_player_id(interaction_data)
+    var inventory: PlayerInventory = get_player_inventory(player_id)
+    if not is_instance_valid(inventory):
+        printerr("Player inventory invalid")
+        return
+    interaction_data.is_successful = inventory.is_opened
     if interaction_data.is_successful:
-        var player_id = decide_player_id(interaction_data)
         if peek(player_id) != null:
             interaction_data.response = {"item": retrieve(player_id)}
         else:
