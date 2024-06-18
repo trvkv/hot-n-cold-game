@@ -47,8 +47,20 @@ func update_indicator_color(color: Color) -> void:
         mat.albedo_color = color
 
 func _on_trigger_interaction(player: Player, _interaction_area) -> void:
-    if bodies.size() > 0:
-        return # colliding, cannot set trap
+    if active_action != PlayerActions.ACTIONS.SET_TRAP:
+        return
+
+    var interaction_data: InteractionData = InteractionData.new()
+    interaction_data.action = PlayerActions.ACTIONS.SET_TRAP
+    interaction_data.player_id = player.player_id
+    interaction_data.initiator = player
+
+    var is_colliding: bool = bodies.size() > 0
+    if is_colliding:
+        interaction_data.is_successful = false
+        interaction_data.response["error_message"] = "Please find suitable place for setting a trap"
+        EventBus.emit_signal("action_unsuccessful", interaction_data)
+        return
 
     if not is_instance_valid(player):
         return
@@ -56,18 +68,11 @@ func _on_trigger_interaction(player: Player, _interaction_area) -> void:
     if player != component_owner:
         return
 
-    if active_action != PlayerActions.ACTIONS.SET_TRAP:
-        return
-
     var global_pos: Vector3 = get_global_position()
     global_pos.y = 0.0 # reset to ground level
     EventBus.emit_signal("set_trap", player, global_pos)
 
-    var interaction_data: InteractionData = InteractionData.new()
-    interaction_data.action = PlayerActions.ACTIONS.SET_TRAP
-    interaction_data.player_id = player.player_id
     interaction_data.is_successful = true
-    interaction_data.initiator = player
     EventBus.emit_signal("action_successful", interaction_data)
 
 func _on_update_actions(player, _actions, active_action_) -> void:

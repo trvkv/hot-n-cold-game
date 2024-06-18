@@ -146,8 +146,11 @@ func set_player_starting_position(player_id: PlayersManager.PlayerID) -> void:
             player.set_position(level_position)
             break
 
-func set_message(player_id: PlayersManager.PlayerID, message: String) -> void:
-    gui.set_message(player_id, message)
+func set_message(player_id: PlayersManager.PlayerID, message: String, timeout: float = 5.0) -> void:
+    gui.set_message(player_id, message, timeout)
+
+func clear_messages(player_id: PlayersManager.PlayerID):
+    gui.clear_messages(player_id)
 
 func set_global_message(message: String) -> void:
     gui.set_global_message(message)

@@ -12,3 +12,6 @@ var target: Object = null
 
 var request: Dictionary = {}
 var response: Dictionary = {}
+
+func _to_string():
+    return "InteractionData(" + PlayerActions.action_to_string(action) + "): " + str(is_successful)

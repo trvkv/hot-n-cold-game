@@ -92,7 +92,9 @@ func update_user_message() -> void:
     if favourite_placed_correctly and keys_placed_correctly:
         message = "Preparation finished! Click ready button below."
 
-    call_function("set_message", [player_id, message])
+    # this messages do not disappear after timeout
+    call_function("clear_messages", [player_id])
+    call_function("set_message", [player_id, message, 0.0])
 
 func update_ready_button() -> void:
     if favourite_placed_correctly and keys_placed_correctly:
