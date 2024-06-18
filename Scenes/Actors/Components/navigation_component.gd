@@ -6,9 +6,11 @@ extends Node3D
 @onready var timer: Timer = $Timer
 
 var ready_to_use: bool = true
+var game_stage: GameStage = null
 
 func _ready() -> void:
     EventBus.connect("query_distance", _on_query_distance)
+    EventBus.connect("update_game_stage", _on_update_game_stage)
     timer.connect("timeout", _on_timeout)
 
 func get_path_to_target(from: Vector3, to: Vector3) -> PackedVector3Array:
@@ -24,7 +26,20 @@ func calculate_distance(path: PackedVector3Array) -> float:
         distance += p1.distance_to(p2)
     return distance
 
+func _on_update_game_stage(action: GameStage.ACTIONS, stage: GameStage) -> void:
+    if action == GameStage.ACTIONS.ENTERED:
+        game_stage = stage
+    elif action == GameStage.ACTIONS.EXITED:
+        game_stage = null
+
 func _on_query_distance(player: Player) -> void:
+    if game_stage == null:
+        printerr("Game state is null!")
+        return
+
+    if not game_stage.should_hot_cold_system_work:
+        return
+
     if player != component_owner:
         return
 

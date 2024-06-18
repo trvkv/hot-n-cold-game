@@ -22,6 +22,10 @@ class_name GameStage
 # even when set the trap won't activate
 @export var should_traps_work: bool = false
 
+# if set to true, in this stage the hot/cold system will work,
+# reporting the distance to favourite item.
+@export var should_hot_cold_system_work: bool = false
+
 var stage_name: String
 
 signal get_function_ref(function_ref_container)
