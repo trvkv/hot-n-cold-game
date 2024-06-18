@@ -34,7 +34,6 @@ func enter() -> void:
     update_user_message()
 
     call_function("set_player_starting_position", [player_id])
-    call_function("set_player_starting_position", [PlayersManager.get_opponent_id(player_id)])
 
 func exit() -> void:
     super()
@@ -43,13 +42,12 @@ func exit() -> void:
     call_function("freeze", [PlayersManager.get_opponent_id(player_id), false])
     call_function("set_player_inventory", [player_id, []])
     call_function("set_ready_button", [player_id, false])
-    call_function("set_message", [player_id, ""])
+    call_function("clear_messages", [player_id])
 
     var opponent: Player = PlayersManager.get_opponent(player_id)
     opponent.show()
 
     call_function("set_player_starting_position", [player_id])
-    call_function("set_player_starting_position", [PlayersManager.get_opponent_id(player_id)])
 
 func retrieve_player_game_data(data_type: GameStateTypes.TYPES) -> Array[StringName]:
     var game_state = GameStateTypes.GameStateData.new(player_id, data_type)

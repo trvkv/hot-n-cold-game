@@ -142,6 +142,8 @@ func clear_messages(player_id: PlayersManager.PlayerID) -> void:
         message_box.remove_child(message)
         message.queue_free()
 
+    update_message_container(player_id)
+
 func set_global_message(message: String) -> void:
     if message.length() == 0:
         global_message_container.set_modulate(Color(1.0, 1.0, 1.0, 0.0))
