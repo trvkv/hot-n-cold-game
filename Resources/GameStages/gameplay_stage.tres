@@ -1,6 +1,8 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://sfyqgnuxw22x"]
+[gd_resource type="Resource" script_class="GameplayStage" load_steps=2 format=3 uid="uid://sfyqgnuxw22x"]
 
 [ext_resource type="Script" path="res://Resources/GameStages/gameplay_state.gd" id="1_nwh4s"]
 
 [resource]
 script = ExtResource("1_nwh4s")
+reverse_container_inventory_search = true
+save_favourite_items = false

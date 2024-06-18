@@ -22,7 +22,6 @@ func _ready() -> void:
     EventBus.connect("update_actions", _on_update_actions)
     EventBus.connect("switch_action", _on_action_switch)
     EventBus.connect("interact", _on_interact)
-    EventBus.connect("update_gameplay_stage", _on_update_gameplay_stage)
 
 func _on_action_switch(player: Player) -> void:
     var gui = get_interaction_gui(player)
@@ -35,12 +34,6 @@ func _on_action_switch(player: Player) -> void:
         gui.set_active_action(next.action)
         EventBus.emit_signal("update_actions", player, gui.get_actions(), next.action)
 
-func _on_update_gameplay_stage(action: GameStage.ACTIONS, stage: GameStage) -> void:
-    if action == GameStage.ACTIONS.ENTERED:
-        game_stage = stage
-    elif action == GameStage.ACTIONS.EXITED:
-        game_stage = null
-
 func create_interaction_data(interactee, interactor, action) -> InteractionData:
     var interaction_data: InteractionData = InteractionData.new()
     interaction_data.player_id = interactor.player_id
@@ -48,7 +41,6 @@ func create_interaction_data(interactee, interactor, action) -> InteractionData:
     interaction_data.initiator = interactor
     interaction_data.target = interactee
     interaction_data.request = player_interaction_data[interactor]
-    interaction_data.reverse_container_inventory_search = game_stage.reverse_container_inventory_search
     return interaction_data
 
 func _on_interact(interactee, interactor, action) -> void:

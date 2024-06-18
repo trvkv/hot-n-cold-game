@@ -151,7 +151,8 @@ func set_global_message(message: String) -> void:
 
 func set_ready_button(player_id: PlayersManager.PlayerID, activate: bool) -> void:
     if activate:
-        gui.connect("player_ready", _on_player_ready)
+        if not gui.is_connected("player_ready", _on_player_ready):
+            gui.connect("player_ready", _on_player_ready)
     else:
         if gui.is_connected("player_ready", _on_player_ready):
             gui.disconnect("player_ready", _on_player_ready)

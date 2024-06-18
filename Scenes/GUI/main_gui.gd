@@ -56,7 +56,8 @@ func setup_button(player_id: PlayersManager.PlayerID, activate: bool, show_butto
         ready_button = ready_button_2
 
     if activate:
-        ready_button.connect("pressed", _on_pressed_1)
+        if not ready_button.is_connected("pressed", _on_pressed_1):
+            ready_button.connect("pressed", _on_pressed_1)
     else:
         if ready_button.is_connected("pressed", _on_pressed_1):
             ready_button.disconnect("pressed", _on_pressed_1)

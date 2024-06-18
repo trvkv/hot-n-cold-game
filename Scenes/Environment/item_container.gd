@@ -11,12 +11,14 @@ class_name ItemContainer
 var inventories: Dictionary = {}
 
 var container_mesh: MeshInstance3D
+var game_stage: GameStage
 
 func _ready() -> void:
     for player_id in PlayersManager.PlayerID.values():
         var player_inventory: PlayerInventory = PlayerInventory.new()
         player_inventory.player_id = player_id
         inventories[player_id] = player_inventory
+    EventBus.connect("update_gameplay_stage", _on_update_gameplay_stage)
     create_container_instance()
 
 func get_class_name() -> StringName:
@@ -47,6 +49,12 @@ func create_container_instance() -> void:
                 printerr("Mesh collision body is invalid: ", container_mesh)
         else:
             printerr("Mesh instance is invalid: ", container_mesh)
+
+func _on_update_gameplay_stage(action: GameStage.ACTIONS, stage: GameStage) -> void:
+    if action == GameStage.ACTIONS.ENTERED:
+        game_stage = stage
+    elif action == GameStage.ACTIONS.EXITED:
+        game_stage = null
 
 func _on_update_interactees(_player, interactees, active_interactee) -> void:
     if is_instance_valid(container_mesh):
@@ -147,7 +155,10 @@ func add_item_state(player_id: PlayersManager.PlayerID, data_type: GameStateType
 
 func decide_player_id(interaction_data: InteractionData) -> PlayersManager.PlayerID:
     var player_id: PlayersManager.PlayerID = interaction_data.player_id
-    if interaction_data.reverse_container_inventory_search:
+    if not is_instance_valid(game_stage):
+        printerr("Game stage not valid")
+        return player_id
+    if game_stage.reverse_container_inventory_search:
         player_id = PlayersManager.get_opponent_id(interaction_data.player_id)
     return player_id
 
@@ -203,13 +214,16 @@ func action_put_to_container(interaction_data: InteractionData) -> void:
             interaction_data.is_successful = false
 
         # change game state only when putting item to container was successful
-        #if interaction_data.is_successful:
-            #var player_id = interaction_data.initiator.player_id
-            #if active_item.get_class_name() == &"ItemFavourite":
-                #store_item_state(player_id, GameStateTypes.TYPES.FAVOURITE_ITEM_CONTAINER, self)
-            #elif active_item.get_class_name() == &"ItemKey":
-                #var data := GameStateTypes.GameStateItem.new(active_item, self)
-                #add_item_state(player_id, GameStateTypes.TYPES.KEY_ITEM_CONTAINER, data)
+        if not is_instance_valid(game_stage):
+            printerr("Game stage not valid")
+            return
+        if interaction_data.is_successful and game_stage.save_favourite_items:
+            player_id = interaction_data.initiator.player_id
+            if active_item.get_class_name() == &"ItemFavourite":
+                store_item_state(player_id, GameStateTypes.TYPES.FAVOURITE_ITEM_CONTAINER, self)
+            elif active_item.get_class_name() == &"ItemKey":
+                var data := GameStateTypes.GameStateItem.new(active_item, self)
+                add_item_state(player_id, GameStateTypes.TYPES.KEY_ITEM_CONTAINER, data)
     else:
         printerr("No active item selected, while putting item to container")
         interaction_data.is_successful = false

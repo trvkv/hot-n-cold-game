@@ -12,3 +12,5 @@ player_id = 2
 starting_items = Array[Resource("res://Resources/Items/item_base.gd")]([ExtResource("2_qcvag"), ExtResource("3_pqa64"), ExtResource("4_mnota")])
 debug = false
 next_stage = ExtResource("1_erui8")
+reverse_container_inventory_search = false
+save_favourite_items = true

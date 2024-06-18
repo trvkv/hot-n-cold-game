@@ -3,8 +3,7 @@ extends GameStage
 class_name GameplayStage
 
 func _init():
-    var reverse_inventory_search: bool = true
-    super("Gameplay stage", reverse_inventory_search)
+    super("Gameplay stage")
 
 func enter() -> void:
     super()
