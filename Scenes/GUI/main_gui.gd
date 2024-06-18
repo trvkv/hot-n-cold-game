@@ -43,6 +43,7 @@ func _ready() -> void:
     update_message_container(PlayersManager.PlayerID.PLAYER_2)
     set_global_message("")
 
+    EventBus.connect("action_successful", _on_action_successful)
     EventBus.connect("action_unsuccessful", _on_action_unsuccessful)
 
 func _on_pressed_1() -> void:
@@ -55,6 +56,11 @@ func _on_action_unsuccessful(interaction_data: InteractionData):
     if interaction_data.response is Dictionary:
         if interaction_data.response.has("error_message"):
             set_message(interaction_data.player_id, interaction_data.response["error_message"])
+
+func _on_action_successful(interaction_data: InteractionData):
+    if interaction_data.response is Dictionary:
+        if interaction_data.response.has("success_message"):
+            set_message(interaction_data.player_id, interaction_data.response["success_message"])
 
 func setup_button(player_id: PlayersManager.PlayerID, activate: bool, show_button: bool) -> void:
     var ready_button: Button

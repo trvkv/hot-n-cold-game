@@ -93,7 +93,6 @@ func put(player_id: PlayersManager.PlayerID, item_to_put: ItemBase) -> bool:
         return false
 
     if inventory.size() > 0:
-        printerr("Inventory already contains an item!")
         return false
 
     if not inventory.has_item(item_to_put):
@@ -170,22 +169,34 @@ func action_open_container(interaction_data: InteractionData) -> void:
         printerr("Player inventory invalid")
         return
     interaction_data.response = {"items": peek(player_id)}
-    interaction_data.is_successful = not inventory.is_locked
-    inventory.is_opened = not inventory.is_locked
+    if inventory.is_locked:
+        interaction_data.is_successful = false
+        inventory.is_opened = false
+        interaction_data.response["error_message"] = "Container is locked"
+    else:
+        interaction_data.is_successful = true
+        inventory.is_opened = true
 
 func action_lock_container(interaction_data: InteractionData) -> void:
     print("Locking container (", interaction_data.initiator, ")")
     if "active_item" in interaction_data.request:
         var active_item: ItemKey = interaction_data.request["active_item"]
-        if is_instance_valid(active_item):
-            interaction_data.response = {"active_item": active_item}
+        if active_item != null and active_item is ItemKey:
+            interaction_data.response["active_item"] = active_item
             var key_not_used: bool = (active_item.is_used_by == null)
             if key_not_used:
                 var player_id: PlayersManager.PlayerID = decide_player_id(interaction_data)
-                interaction_data.is_successful = lock(player_id)
-                active_item.is_used_by = interaction_data.target
+                var success: bool = lock(player_id)
+                if success:
+                    interaction_data.is_successful = true
+                    active_item.is_used_by = interaction_data.target
+                    interaction_data.response["success_message"] = "Container locked"
+                else:
+                    interaction_data.is_successful = false
+                    interaction_data.response["error_message"] = "Container already locked"
             else:
                 interaction_data.is_successful = false
+                interaction_data.response["error_message"] = "Container already locked"
 
 func action_unlock_container(interaction_data: InteractionData) -> void:
     print("Unlocking container (", interaction_data.initiator, ")")
@@ -196,10 +207,17 @@ func action_unlock_container(interaction_data: InteractionData) -> void:
             var same_key: bool = (active_item.is_used_by == interaction_data.target)
             if same_key:
                 var player_id: PlayersManager.PlayerID = decide_player_id(interaction_data)
-                interaction_data.is_successful = unlock(player_id)
-                active_item.is_used_by = null
+                var success: bool = unlock(player_id)
+                if success:
+                    interaction_data.is_successful = true
+                    active_item.is_used_by = null
+                    interaction_data.response["success_message"] = "Container unlocked"
+                else:
+                    interaction_data.is_successful = false
+                    interaction_data.response["error_message"] = "Container already unlocked"
             else:
                 interaction_data.is_successful = false
+                interaction_data.response["error_message"] = "Container was locked with different key"
 
 func action_put_to_container(interaction_data: InteractionData) -> void:
     print("Putting item to container (", interaction_data.initiator, ")")
@@ -208,16 +226,30 @@ func action_put_to_container(interaction_data: InteractionData) -> void:
         interaction_data.response = {"active_item": active_item}
         var player_id: PlayersManager.PlayerID = decide_player_id(interaction_data)
         var inventory: PlayerInventory = get_player_inventory(player_id)
-        if inventory.is_opened and not inventory.is_locked:
-            interaction_data.is_successful = put(player_id, active_item)
-        else:
+        if inventory.is_locked:
             interaction_data.is_successful = false
+            interaction_data.response["error_message"] = "Container is locked"
+            return
+
+        if not inventory.is_opened:
+            interaction_data.is_successful = false
+            interaction_data.response["error_message"] = "Open the container first"
+            return
+
+        var success: bool = put(player_id, active_item)
+        if not success:
+            interaction_data.is_successful = false
+            interaction_data.response["error_message"] = "Container is full"
+            return
+
+        interaction_data.is_successful = true
 
         # change game state only when putting item to container was successful
         if game_stage == null:
             printerr("Game stage is null")
             return
-        if interaction_data.is_successful and game_stage.save_favourite_items:
+
+        if game_stage.save_favourite_items:
             player_id = interaction_data.initiator.player_id
             if active_item.get_class_name() == &"ItemFavourite":
                 store_item_state(player_id, GameStateTypes.TYPES.FAVOURITE_ITEM_CONTAINER, self)
@@ -235,14 +267,20 @@ func action_get_from_container(interaction_data: InteractionData) -> void:
     if not is_instance_valid(inventory):
         printerr("Player inventory invalid")
         return
-    interaction_data.is_successful = inventory.is_opened
-    if interaction_data.is_successful:
-        if peek(player_id) != null:
-            interaction_data.response = {"item": retrieve(player_id)}
-        else:
-            print("Container is empty!")
-    else:
-        print("Container closed! Open it first.")
+
+    if not inventory.is_opened:
+        interaction_data.is_successful = false
+        interaction_data.response["error_message"] = "Open container first"
+        return
+
+    var item: ItemBase = peek(player_id)
+    if item == null:
+        interaction_data.is_successful = false
+        interaction_data.response["error_message"] = "Container is empty!"
+        return
+
+    interaction_data.is_successful = true
+    interaction_data.response = {"item": retrieve(player_id)}
 
 func interact(interaction_data: InteractionData) -> bool:
     if interaction_data.target == self:

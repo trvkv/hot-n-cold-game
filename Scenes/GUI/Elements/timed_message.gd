@@ -10,7 +10,6 @@ class_name TimedMessage
 signal dismissing_message(timed_message)
 
 func _ready() -> void:
-    print("New TimedMessage: ", text)
     assert(timer, "Timer invalid")
     timer.connect("timeout", _on_timeout)
     if autostart:
