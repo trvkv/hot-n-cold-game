@@ -18,6 +18,10 @@ class_name GameStage
 # stages, but 'false' during the gameplay.
 @export var save_favourite_items: bool = false
 
+# if set to true, in this stage the traps will work. Otherwise,
+# even when set the trap won't activate
+@export var should_traps_work: bool = false
+
 var stage_name: String
 
 signal get_function_ref(function_ref_container)
@@ -58,3 +62,6 @@ func call_function(function: String, arguments: Array = []):
         printerr("Callback invalid: ", function_container.callback)
         return
     return function_container.callback.callv(arguments)
+
+func _to_string():
+    return "GameStage(" + stage_name + ") [" + str(get_instance_id()) + "]"

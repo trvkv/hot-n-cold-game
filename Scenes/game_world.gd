@@ -36,7 +36,7 @@ func _ready() -> void:
     set_starting_game_stage(starting_game_stage)
 
 func _process(delta) -> void:
-    if is_instance_valid(current_game_stage):
+    if current_game_stage != null:
         current_game_stage.update(delta)
 
 func _on_trap_set(player, global_trap_position) -> void:
@@ -46,6 +46,7 @@ func _on_trap_set(player, global_trap_position) -> void:
         trap.owner = self
         trap.player_id = player.player_id
         trap.set_position(to_local(global_trap_position))
+        trap.game_stage = current_game_stage
 
 func set_starting_game_stage(stage: GameStage) -> void:
     starting_game_stage = stage
@@ -56,26 +57,28 @@ func get_starting_game_stage() -> GameStage:
     return starting_game_stage
 
 func set_current_game_stage(stage: GameStage) -> void:
-    if is_instance_valid(current_game_stage):
+    print("Setting current game stage: ", stage)
+    if current_game_stage != null:
         current_game_stage.exit()
         current_game_stage.disconnect("get_function_ref", _on_get_function_ref)
-        EventBus.emit_signal("update_gameplay_stage", GameStage.ACTIONS.EXITED, current_game_stage)
+        EventBus.emit_signal("update_game_stage", GameStage.ACTIONS.EXITED, current_game_stage)
     current_game_stage = stage
-    current_game_stage.connect("get_function_ref", _on_get_function_ref)
-    current_game_stage.enter()
-    EventBus.emit_signal("update_gameplay_stage", GameStage.ACTIONS.ENTERED, current_game_stage)
+    if current_game_stage != null:
+        current_game_stage.connect("get_function_ref", _on_get_function_ref)
+        current_game_stage.enter()
+    EventBus.emit_signal("update_game_stage", GameStage.ACTIONS.ENTERED, current_game_stage)
 
 func get_current_game_stage() -> GameStage:
     return current_game_stage
 
 func load_next_game_stage() -> void:
-    var current = get_current_game_stage()
-    if not is_instance_valid(current):
-        printerr("Loading next stage failed: current game stage invalid")
+    var current: GameStage = get_current_game_stage()
+    if current == null:
+        printerr("Loading next stage failed: current game stage is null")
         return
     var next: GameStage = current.next_stage
-    if not is_instance_valid(next):
-        printerr("Loading next stage failed: next game stage invalid")
+    if next == null:
+        printerr("Loading next stage failed: next game stage is null")
         return
     set_current_game_stage(next)
 

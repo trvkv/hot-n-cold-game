@@ -18,7 +18,7 @@ func _ready() -> void:
         var player_inventory: PlayerInventory = PlayerInventory.new()
         player_inventory.player_id = player_id
         inventories[player_id] = player_inventory
-    EventBus.connect("update_gameplay_stage", _on_update_gameplay_stage)
+    EventBus.connect("update_game_stage", _on_update_game_stage)
     create_container_instance()
 
 func get_class_name() -> StringName:
@@ -50,7 +50,7 @@ func create_container_instance() -> void:
         else:
             printerr("Mesh instance is invalid: ", container_mesh)
 
-func _on_update_gameplay_stage(action: GameStage.ACTIONS, stage: GameStage) -> void:
+func _on_update_game_stage(action: GameStage.ACTIONS, stage: GameStage) -> void:
     if action == GameStage.ACTIONS.ENTERED:
         game_stage = stage
     elif action == GameStage.ACTIONS.EXITED:
@@ -155,8 +155,8 @@ func add_item_state(player_id: PlayersManager.PlayerID, data_type: GameStateType
 
 func decide_player_id(interaction_data: InteractionData) -> PlayersManager.PlayerID:
     var player_id: PlayersManager.PlayerID = interaction_data.player_id
-    if not is_instance_valid(game_stage):
-        printerr("Game stage not valid")
+    if game_stage == null:
+        printerr("Game stage is null, returning player ID: ", player_id)
         return player_id
     if game_stage.reverse_container_inventory_search:
         player_id = PlayersManager.get_opponent_id(interaction_data.player_id)
@@ -214,8 +214,8 @@ func action_put_to_container(interaction_data: InteractionData) -> void:
             interaction_data.is_successful = false
 
         # change game state only when putting item to container was successful
-        if not is_instance_valid(game_stage):
-            printerr("Game stage not valid")
+        if game_stage == null:
+            printerr("Game stage is null")
             return
         if interaction_data.is_successful and game_stage.save_favourite_items:
             player_id = interaction_data.initiator.player_id

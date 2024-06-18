@@ -6,3 +6,4 @@
 script = ExtResource("1_nwh4s")
 reverse_container_inventory_search = true
 save_favourite_items = false
+should_traps_work = true

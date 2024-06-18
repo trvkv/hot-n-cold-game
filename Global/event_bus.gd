@@ -14,7 +14,7 @@ signal query_distance(player)
 signal query_ready(player)
 signal distance_updated(player, distance)
 
-signal update_gameplay_stage(action, stage)
+signal update_game_stage(action, stage)
 
 signal store_game_state(player, data_type, data)
 signal retrieve_game_state(player, data_type, data)
