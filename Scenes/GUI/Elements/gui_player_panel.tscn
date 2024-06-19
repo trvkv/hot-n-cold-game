@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbq5a0bnitcmq"]
+
+[ext_resource type="Script" path="res://Scenes/GUI/Elements/gui_player_panel.gd" id="1_7df1j"]
+[ext_resource type="PackedScene" uid="uid://c1jry8m8264rs" path="res://Scenes/GUI/Elements/gui_player.tscn" id="2_5ekmi"]
+[ext_resource type="PackedScene" uid="uid://dix2he0wuuhsd" path="res://Scenes/GUI/Elements/timed_message.tscn" id="2_npudj"]
+[ext_resource type="PackedScene" uid="uid://ciigl5pdv3i7u" path="res://Scenes/GUI/Elements/gui_actions.tscn" id="3_qbfwd"]
+[ext_resource type="PackedScene" uid="uid://bka2hbsca3p2u" path="res://Scenes/GUI/Elements/gui_inventory.tscn" id="4_dhyxm"]
+
+[node name="GuiPlayerPanel" type="MarginContainer" node_paths=PackedStringArray("gui_player", "gui_actions", "gui_inventory", "gui_message", "gui_message_container", "ready_button")]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_7df1j")
+player_id = 1
+gui_player = NodePath("VBC_Main/GuiPlayer")
+gui_actions = NodePath("VBC_Main/GuiActions")
+gui_inventory = NodePath("VBC_Main/GuiInventory")
+gui_message = NodePath("CC_Message/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MessageBox")
+gui_message_container = NodePath("CC_Message")
+ready_button = NodePath("CC_Message/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ReadyButton")
+timed_message_scene = ExtResource("2_npudj")
+
+[node name="VBC_Main" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="GuiPlayer" parent="VBC_Main" instance=ExtResource("2_5ekmi")]
+layout_mode = 2
+size_flags_horizontal = 0
+player_id = 1
+
+[node name="GuiActions" parent="VBC_Main" instance=ExtResource("3_qbfwd")]
+layout_mode = 2
+
+[node name="GuiInventory" parent="VBC_Main" instance=ExtResource("4_dhyxm")]
+layout_mode = 2
+
+[node name="CC_Message" type="CenterContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="CenterContainer" type="CenterContainer" parent="CC_Message"]
+custom_minimum_size = Vector2(300, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="CC_Message/CenterContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CC_Message/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CC_Message/CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="MessageBox" type="VBoxContainer" parent="CC_Message/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ReadyButton" type="Button" parent="CC_Message/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "READY"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CC_Message"]
+layout_mode = 2

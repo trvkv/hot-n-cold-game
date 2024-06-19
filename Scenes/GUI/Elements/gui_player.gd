@@ -2,9 +2,8 @@ extends PanelContainer
 
 class_name GuiPlayer
 
-@export var player_id: PlayersManager.PlayerID = PlayersManager.PlayerID.PLAYER_1
+@export var player_id: PlayersManager.PlayerID = PlayersManager.PlayerID.NONE
 @export var label_player_name: Label
-
 @export var position_label_value: Label
 @export var rotation_label_value: Label
 @export var hotcold_ready_label_value: Label
@@ -20,7 +19,7 @@ func _ready() -> void:
     assert(is_instance_valid(hotcold_ready_label_value), "Hot/cold ready label not found")
     assert(is_instance_valid(hotcold_distance_label_value), "Hot/cold distance label not found")
 
-    label_player_name.set_text(PlayersManager.get_player_name(player_id))
+    set_player_name(PlayersManager.get_player_name(player_id))
 
     set_items(set_items_at_start, true)
 
@@ -40,6 +39,10 @@ func _process(_delta: float) -> void:
         player.get_position().z
     ])
     rotation_label_value.set_text(str(player.get_rotation_degrees()))
+
+func set_player_name(text: String) -> void:
+    if is_instance_valid(label_player_name):
+        label_player_name.set_text(text)
 
 func _on_query_ready(player) -> void:
     if player == PlayersManager.get_player(player_id):

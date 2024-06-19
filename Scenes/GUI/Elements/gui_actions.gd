@@ -2,7 +2,7 @@ extends PanelContainer
 
 class_name GuiActions
 
-@export var player_id: PlayersManager.PlayerID = PlayersManager.PlayerID.PLAYER_1
+@export var player_id: PlayersManager.PlayerID = PlayersManager.PlayerID.NONE
 @export var interaction_gui: VBoxContainer
 @export var action_holder_scene: PackedScene
 

@@ -85,26 +85,30 @@ func load_next_game_stage() -> void:
 func hide_player_container(player_id: PlayersManager.PlayerID) -> void:
     if player_id == PlayersManager.PlayerID.PLAYER_1:
         viewport_player_1.set_self_modulate(Color(1.0, 1.0, 1.0, 0.0))
-        gui.gui_player_1.set_modulate(Color(1.0, 1.0, 1.0, 0.0))
-        gui.gui_inventory_1.set_modulate(Color(1.0, 1.0, 1.0, 0.0))
-        gui.gui_actions_1.set_modulate(Color(1.0, 1.0, 1.0, 0.0))
     elif player_id == PlayersManager.PlayerID.PLAYER_2:
         viewport_player_2.set_self_modulate(Color(1.0, 1.0, 1.0, 0.0))
-        gui.gui_player_2.set_modulate(Color(1.0, 1.0, 1.0, 0.0))
-        gui.gui_inventory_2.set_modulate(Color(1.0, 1.0, 1.0, 0.0))
-        gui.gui_actions_2.set_modulate(Color(1.0, 1.0, 1.0, 0.0))
+
+    var panel: GuiPlayerPanel = gui.get_player_panel(player_id)
+    if not is_instance_valid(panel):
+        printerr("Player panel not valid")
+        return
+    panel.gui_player.set_modulate(Color(1.0, 1.0, 1.0, 0.0))
+    panel.gui_inventory.set_modulate(Color(1.0, 1.0, 1.0, 0.0))
+    panel.gui_actions.set_modulate(Color(1.0, 1.0, 1.0, 0.0))
 
 func show_player_container(player_id: PlayersManager.PlayerID) -> void:
     if player_id == PlayersManager.PlayerID.PLAYER_1:
         viewport_player_1.set_self_modulate(Color(1.0, 1.0, 1.0, 1.0))
-        gui.gui_player_1.set_modulate(Color(1.0, 1.0, 1.0, 1.0))
-        gui.gui_inventory_1.set_modulate(Color(1.0, 1.0, 1.0, 1.0))
-        gui.gui_actions_1.set_modulate(Color(1.0, 1.0, 1.0, 1.0))
     elif player_id == PlayersManager.PlayerID.PLAYER_2:
         viewport_player_2.set_self_modulate(Color(1.0, 1.0, 1.0, 1.0))
-        gui.gui_player_2.set_modulate(Color(1.0, 1.0, 1.0, 1.0))
-        gui.gui_inventory_2.set_modulate(Color(1.0, 1.0, 1.0, 1.0))
-        gui.gui_actions_2.set_modulate(Color(1.0, 1.0, 1.0, 1.0))
+
+    var panel: GuiPlayerPanel = gui.get_player_panel(player_id)
+    if not is_instance_valid(panel):
+        printerr("Player panel not valid")
+        return
+    panel.gui_player.set_modulate(Color(1.0, 1.0, 1.0, 1.0))
+    panel.gui_inventory.set_modulate(Color(1.0, 1.0, 1.0, 1.0))
+    panel.gui_actions.set_modulate(Color(1.0, 1.0, 1.0, 1.0))
 
 func freeze(player_id: PlayersManager.PlayerID, do_freeze: bool) -> void:
     if player_id == PlayersManager.PlayerID.PLAYER_1:
@@ -119,16 +123,12 @@ func _freeze_player(player: Player, do_freeze: bool) -> void:
         player.unfreeze()
 
 func set_player_inventory(player_id: PlayersManager.PlayerID, items: Array[StringName]) -> void:
-    var gui_player: GuiPlayer
-
-    if player_id == PlayersManager.PlayerID.PLAYER_1:
-        gui_player = gui.gui_player_1
-    elif player_id == PlayersManager.PlayerID.PLAYER_2:
-        gui_player = gui.gui_player_2
-    else:
-        printerr("set_player_inventory wrong player id passed")
+    var panel: GuiPlayerPanel = gui.get_player_panel(player_id)
+    if not is_instance_valid(panel):
+        printerr("Player panel not valid")
         return
 
+    var gui_player: GuiPlayer = panel.gui_player
     var inventory: Array[ItemBase] = []
     for item in items:
         inventory.append(ItemFactory.create(player_id, item))

@@ -1,7 +1,7 @@
 extends Control
 
-@export var player_1_interaction_gui: Control
-@export var player_2_interaction_gui: Control
+@export var player_1_gui_panel: GuiPlayerPanel
+@export var player_2_gui_panel: GuiPlayerPanel
 
 var player_interaction_data: Dictionary = {}
 
@@ -13,8 +13,8 @@ func _ready() -> void:
         player_interaction_data[player] = {}
         player_interaction_data[player]["interaction_area"] = get_interaction_area(player)
 
-    assert(is_instance_valid(player_1_interaction_gui), "Player 1 gui not valid")
-    assert(is_instance_valid(player_2_interaction_gui), "Player 2 gui not valid")
+    assert(is_instance_valid(player_1_gui_panel), "Player 1 gui not valid")
+    assert(is_instance_valid(player_2_gui_panel), "Player 2 gui not valid")
 
     EventBus.connect("trigger_interaction", _on_trigger_interaction)
     EventBus.connect("update_interactees", _on_update_interactees)
@@ -166,9 +166,9 @@ func get_actions(active_resource) -> Array[PlayerActions.ACTIONS]:
 
 func get_interaction_gui(player: Player) -> Control:
     if player.player_id == PlayersManager.PlayerID.PLAYER_1:
-        return player_1_interaction_gui
+        return player_1_gui_panel.gui_actions
     elif player.player_id == PlayersManager.PlayerID.PLAYER_2:
-        return player_2_interaction_gui
+        return player_2_gui_panel.gui_actions
     printerr("Wrong player given... (", player, ")")
     return null
 

@@ -1,30 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://o8s1kfy706yp"]
+[gd_scene load_steps=5 format=3 uid="uid://o8s1kfy706yp"]
 
 [ext_resource type="Script" path="res://Scenes/GUI/main_gui.gd" id="1_g1f3t"]
-[ext_resource type="PackedScene" uid="uid://c1jry8m8264rs" path="res://Scenes/GUI/Elements/gui_player.tscn" id="1_stdpa"]
-[ext_resource type="PackedScene" uid="uid://dix2he0wuuhsd" path="res://Scenes/GUI/Elements/timed_message.tscn" id="2_5g504"]
-[ext_resource type="PackedScene" uid="uid://ciigl5pdv3i7u" path="res://Scenes/GUI/Elements/gui_actions.tscn" id="5_adkdv"]
-[ext_resource type="PackedScene" uid="uid://bka2hbsca3p2u" path="res://Scenes/GUI/Elements/gui_inventory.tscn" id="6_rsjdm"]
+[ext_resource type="PackedScene" uid="uid://bbq5a0bnitcmq" path="res://Scenes/GUI/Elements/gui_player_panel.tscn" id="3_dlmfk"]
 [ext_resource type="Script" path="res://Scenes/Util/interaction_manager.gd" id="7_f3bx6"]
 [ext_resource type="Script" path="res://Scenes/GUI/Elements/global_debug.gd" id="8_wygou"]
 
-[node name="Gui" type="CanvasLayer" node_paths=PackedStringArray("gui_player_1", "gui_player_2", "gui_actions_1", "gui_actions_2", "gui_inventory_1", "gui_inventory_2", "gui_message_1", "gui_message_2", "gui_message_container_1", "gui_message_container_2", "ready_button_1", "ready_button_2", "global_message", "global_message_container")]
+[node name="Gui" type="CanvasLayer" node_paths=PackedStringArray("players_panels", "global_message", "global_message_container")]
 script = ExtResource("1_g1f3t")
-gui_player_1 = NodePath("PlayersDebugGUI/GridContainer/PanelContainer_P1/VBC_Main/GuiPlayer")
-gui_player_2 = NodePath("PlayersDebugGUI/GridContainer/PanelContainer_P2/VBC_Main/GuiPlayer")
-gui_actions_1 = NodePath("PlayersDebugGUI/GridContainer/PanelContainer_P1/VBC_Main/GuiActions")
-gui_actions_2 = NodePath("PlayersDebugGUI/GridContainer/PanelContainer_P2/VBC_Main/GuiActions")
-gui_inventory_1 = NodePath("PlayersDebugGUI/GridContainer/PanelContainer_P1/VBC_Main/GuiInventory")
-gui_inventory_2 = NodePath("PlayersDebugGUI/GridContainer/PanelContainer_P2/VBC_Main/GuiInventory")
-gui_message_1 = NodePath("PlayersDebugGUI/GridContainer/PanelContainer_P1/CC_Message/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MessageBox_P1")
-gui_message_2 = NodePath("PlayersDebugGUI/GridContainer/PanelContainer_P2/CC_Message/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MessageBox_P2")
-gui_message_container_1 = NodePath("PlayersDebugGUI/GridContainer/PanelContainer_P1/CC_Message")
-gui_message_container_2 = NodePath("PlayersDebugGUI/GridContainer/PanelContainer_P2/CC_Message")
-ready_button_1 = NodePath("PlayersDebugGUI/GridContainer/PanelContainer_P1/CC_Message/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Button")
-ready_button_2 = NodePath("PlayersDebugGUI/GridContainer/PanelContainer_P2/CC_Message/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Button")
+players_panels = [NodePath("PlayersDebugGUI/GridContainer/GuiPlayerPanel_P1"), NodePath("PlayersDebugGUI/GridContainer/GuiPlayerPanel_P2")]
 global_message = NodePath("PlayersDebugGUI/GlobalMessageBox/MarginContainer/GlobalMessageLabel")
 global_message_container = NodePath("PlayersDebugGUI/GlobalMessageBox")
-timed_message_scene = ExtResource("2_5g504")
 
 [node name="PlayersDebugGUI" type="Control" parent="."]
 layout_mode = 3
@@ -43,120 +28,21 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 2
 
-[node name="PanelContainer_P1" type="MarginContainer" parent="PlayersDebugGUI/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VBC_Main" type="VBoxContainer" parent="PlayersDebugGUI/GridContainer/PanelContainer_P1"]
+[node name="GuiPlayerPanel_P1" parent="PlayersDebugGUI/GridContainer" instance=ExtResource("3_dlmfk")]
 layout_mode = 2
 
-[node name="GuiPlayer" parent="PlayersDebugGUI/GridContainer/PanelContainer_P1/VBC_Main" instance=ExtResource("1_stdpa")]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="GuiActions" parent="PlayersDebugGUI/GridContainer/PanelContainer_P1/VBC_Main" instance=ExtResource("5_adkdv")]
-layout_mode = 2
-
-[node name="GuiInventory" parent="PlayersDebugGUI/GridContainer/PanelContainer_P1/VBC_Main" instance=ExtResource("6_rsjdm")]
-layout_mode = 2
-
-[node name="CC_Message" type="CenterContainer" parent="PlayersDebugGUI/GridContainer/PanelContainer_P1"]
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="CenterContainer" type="CenterContainer" parent="PlayersDebugGUI/GridContainer/PanelContainer_P1/CC_Message"]
-custom_minimum_size = Vector2(300, 400)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="PanelContainer" type="PanelContainer" parent="PlayersDebugGUI/GridContainer/PanelContainer_P1/CC_Message/CenterContainer"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="PlayersDebugGUI/GridContainer/PanelContainer_P1/CC_Message/CenterContainer/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayersDebugGUI/GridContainer/PanelContainer_P1/CC_Message/CenterContainer/PanelContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="MessageBox_P1" type="VBoxContainer" parent="PlayersDebugGUI/GridContainer/PanelContainer_P1/CC_Message/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="PlayersDebugGUI/GridContainer/PanelContainer_P1/CC_Message/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "READY"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayersDebugGUI/GridContainer/PanelContainer_P1/CC_Message"]
-layout_mode = 2
-
-[node name="PanelContainer_P2" type="MarginContainer" parent="PlayersDebugGUI/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VBC_Main" type="VBoxContainer" parent="PlayersDebugGUI/GridContainer/PanelContainer_P2"]
-layout_mode = 2
-
-[node name="GuiPlayer" parent="PlayersDebugGUI/GridContainer/PanelContainer_P2/VBC_Main" instance=ExtResource("1_stdpa")]
+[node name="GuiPlayerPanel_P2" parent="PlayersDebugGUI/GridContainer" instance=ExtResource("3_dlmfk")]
 layout_direction = 3
 layout_mode = 2
-size_flags_horizontal = 8
 player_id = 2
 
-[node name="GuiActions" parent="PlayersDebugGUI/GridContainer/PanelContainer_P2/VBC_Main" instance=ExtResource("5_adkdv")]
-layout_direction = 3
-layout_mode = 2
-size_flags_horizontal = 8
-player_id = 2
-
-[node name="GuiInventory" parent="PlayersDebugGUI/GridContainer/PanelContainer_P2/VBC_Main" instance=ExtResource("6_rsjdm")]
-layout_direction = 3
-layout_mode = 2
-size_flags_horizontal = 8
-player_id = 2
-
-[node name="CC_Message" type="CenterContainer" parent="PlayersDebugGUI/GridContainer/PanelContainer_P2"]
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="CenterContainer" type="CenterContainer" parent="PlayersDebugGUI/GridContainer/PanelContainer_P2/CC_Message"]
-custom_minimum_size = Vector2(300, 400)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="PanelContainer" type="PanelContainer" parent="PlayersDebugGUI/GridContainer/PanelContainer_P2/CC_Message/CenterContainer"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="PlayersDebugGUI/GridContainer/PanelContainer_P2/CC_Message/CenterContainer/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayersDebugGUI/GridContainer/PanelContainer_P2/CC_Message/CenterContainer/PanelContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="MessageBox_P2" type="VBoxContainer" parent="PlayersDebugGUI/GridContainer/PanelContainer_P2/CC_Message/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="PlayersDebugGUI/GridContainer/PanelContainer_P2/CC_Message/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "READY"
-
-[node name="InteractionManager" type="Control" parent="PlayersDebugGUI" node_paths=PackedStringArray("player_1_interaction_gui", "player_2_interaction_gui")]
+[node name="InteractionManager" type="Control" parent="PlayersDebugGUI" node_paths=PackedStringArray("player_1_gui_panel", "player_2_gui_panel")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("7_f3bx6")
-player_1_interaction_gui = NodePath("../GridContainer/PanelContainer_P1/VBC_Main/GuiActions")
-player_2_interaction_gui = NodePath("../GridContainer/PanelContainer_P2/VBC_Main/GuiActions")
+player_1_gui_panel = NodePath("../GridContainer/GuiPlayerPanel_P1")
+player_2_gui_panel = NodePath("../GridContainer/GuiPlayerPanel_P2")
 
 [node name="GlobalMessageBox" type="PanelContainer" parent="PlayersDebugGUI"]
 layout_mode = 1

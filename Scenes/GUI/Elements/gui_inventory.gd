@@ -2,8 +2,7 @@ extends PanelContainer
 
 class_name GuiInventory
 
-@export var player_id: PlayersManager.PlayerID = PlayersManager.PlayerID.PLAYER_1
-
+@export var player_id: PlayersManager.PlayerID = PlayersManager.PlayerID.NONE
 @export var horizontal_item_container: HorizontalItemContainer
 @export var set_items_at_start: Array[ItemBase] = []
 
