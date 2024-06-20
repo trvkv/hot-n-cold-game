@@ -21,7 +21,7 @@ func update(delta) -> void:
     if load_new_stage:
         time_elapsed += delta
         if time_elapsed > new_stage_wait_time:
-            call_function("load_next_game_stage")
+            call_function("load_next")
 
 func _on_action_successful(interaction_data: InteractionData) -> void:
     if load_new_stage: # after requesting new stage, do not check win conditions
@@ -48,5 +48,8 @@ func _on_action_successful(interaction_data: InteractionData) -> void:
     if interaction_data.player_id != active_item.player_id:
         call_function("set_information_message", [interaction_data.player_id, "Winner winner chicken dinner!"])
         load_new_stage = true
+        # store winner id
+        var state := GameStateTypes.GameStateData.new(interaction_data.player_id, GameStateTypes.TYPES.WINNER, interaction_data.player_id)
+        EventBus.emit_signal("store_game_state", state)
     else:
         printerr("Own item picked up? WTF! Got a bug somewhere.")

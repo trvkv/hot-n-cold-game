@@ -4,7 +4,7 @@ class_name GameStateTypes
 
 enum TYPES {
     FAVOURITE_ITEM_CONTAINER,
-    KEY_ITEM_CONTAINER,
+    WINNER,
     CHOSEN_ITEMS
 }
 
@@ -35,6 +35,6 @@ class GameStateItemsContainer extends RefCounted:
 static func create_type(data_type: TYPES) -> RefCounted:
     if data_type == TYPES.FAVOURITE_ITEM_CONTAINER:
         return null
-    elif data_type == TYPES.KEY_ITEM_CONTAINER:
-        return GameStateItemsContainer.new()
+    elif data_type == TYPES.WINNER:
+        return null
     return null

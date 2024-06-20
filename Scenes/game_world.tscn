@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://ctwlxb01ui5r8"]
+[gd_scene load_steps=10 format=3 uid="uid://ctwlxb01ui5r8"]
 
 [ext_resource type="Script" path="res://Scenes/game_world.gd" id="1_ikp0e"]
 [ext_resource type="Resource" uid="uid://yirk3odg8sjr" path="res://Resources/GameStages/prepare_player_1_stage.tres" id="2_6pefh"]
 [ext_resource type="PackedScene" uid="uid://7w3upqpuk27q" path="res://Scenes/Environment/Traps/trap.tscn" id="2_oogha"]
 [ext_resource type="PackedScene" uid="uid://bkb1rliucrvlv" path="res://Scenes/Levels/test_level.tscn" id="3_vq7pt"]
 [ext_resource type="PackedScene" uid="uid://dkod8d31vxupb" path="res://Scenes/Actors/player.tscn" id="4_d0bh1"]
+[ext_resource type="PackedScene" uid="uid://cip4a3ggvisl3" path="res://Scenes/GUI/winner_highlight.tscn" id="4_wbs63"]
 [ext_resource type="PackedScene" uid="uid://biqw183sh26cy" path="res://Scenes/Util/camera_position.tscn" id="5_ghyoh"]
 [ext_resource type="PackedScene" uid="uid://diaq8risagjav" path="res://Scenes/Actors/Components/player_input_component.tscn" id="6_om2p2"]
 [ext_resource type="PackedScene" uid="uid://o8s1kfy706yp" path="res://Scenes/GUI/main_gui.tscn" id="7_r68or"]
@@ -21,6 +22,7 @@ camera_player_2 = NodePath("SplitScreenGridContainer/SubViewportContainer_P2/Sub
 trap_scene = ExtResource("2_oogha")
 gui = NodePath("Gui")
 level = NodePath("Level/Map")
+next_scene = ExtResource("4_wbs63")
 
 [node name="Level" type="Node3D" parent="."]
 

@@ -253,9 +253,6 @@ func action_put_to_container(interaction_data: InteractionData) -> void:
             player_id = interaction_data.initiator.player_id
             if active_item.get_class_name() == &"ItemFavourite":
                 store_item_state(player_id, GameStateTypes.TYPES.FAVOURITE_ITEM_CONTAINER, self)
-            elif active_item.get_class_name() == &"ItemKey":
-                var data := GameStateTypes.GameStateItem.new(active_item, self)
-                add_item_state(player_id, GameStateTypes.TYPES.KEY_ITEM_CONTAINER, data)
     else:
         printerr("No active item selected, while putting item to container")
         interaction_data.is_successful = false
