@@ -2,8 +2,26 @@
 
 [ext_resource type="Script" path="res://Scenes/GUI/Elements/timed_message.gd" id="1_jhylv"]
 
-[node name="TimedMessage" type="Label" node_paths=PackedStringArray("timer")]
+[node name="TimedMessage" type="MarginContainer" node_paths=PackedStringArray("timer", "message_label")]
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 script = ExtResource("1_jhylv")
 timer = NodePath("Timer")
+message_label = NodePath("PanelContainer/MarginContainer/MessageLabel")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="MessageLabel" type="Label" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
 
 [node name="Timer" type="Timer" parent="."]
