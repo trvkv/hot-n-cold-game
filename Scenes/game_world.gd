@@ -146,11 +146,11 @@ func set_player_starting_position(player_id: PlayersManager.PlayerID) -> void:
             player.set_position(level_position)
             break
 
-func set_message(player_id: PlayersManager.PlayerID, message: String, timeout: float = 5.0) -> void:
-    gui.set_message(player_id, message, timeout)
+func set_requirement_message(player_id: PlayersManager.PlayerID, message: String) -> void:
+    gui.set_requirement_message(player_id, message)
 
-func clear_messages(player_id: PlayersManager.PlayerID):
-    gui.clear_messages(player_id)
+func clear_requirement_messages(player_id: PlayersManager.PlayerID):
+    gui.clear_requirement_messages(player_id)
 
 func set_global_message(message: String) -> void:
     gui.set_global_message(message)
@@ -162,7 +162,7 @@ func set_ready_button(player_id: PlayersManager.PlayerID, activate: bool) -> voi
     else:
         if gui.is_connected("player_ready", _on_player_ready):
             gui.disconnect("player_ready", _on_player_ready)
-    gui.setup_button(player_id, activate, activate)
+    gui.setup_ready_button(player_id, activate, activate)
 
 func _on_player_ready(player_id: PlayersManager.PlayerID) -> void:
     set_ready_button(player_id, false)

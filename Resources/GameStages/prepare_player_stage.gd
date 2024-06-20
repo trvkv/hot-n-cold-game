@@ -42,7 +42,7 @@ func exit() -> void:
     call_function("freeze", [PlayersManager.get_opponent_id(player_id), false])
     call_function("set_player_inventory", [player_id, []])
     call_function("set_ready_button", [player_id, false])
-    call_function("clear_messages", [player_id])
+    call_function("clear_requirement_messages", [player_id])
 
     var opponent: Player = PlayersManager.get_opponent(player_id)
     opponent.show()
@@ -91,8 +91,8 @@ func update_user_message() -> void:
         message = "Preparation finished! Click ready button below."
 
     # this messages do not disappear after timeout
-    call_function("clear_messages", [player_id])
-    call_function("set_message", [player_id, message, 0.0])
+    call_function("clear_requirement_messages", [player_id])
+    call_function("set_requirement_message", [player_id, message])
 
 func update_ready_button() -> void:
     if favourite_placed_correctly and keys_placed_correctly:
