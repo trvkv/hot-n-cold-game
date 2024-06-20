@@ -76,11 +76,7 @@ func load_next_game_stage() -> void:
     if current == null:
         printerr("Loading next stage failed: current game stage is null")
         return
-    var next: GameStage = current.next_stage
-    if next == null:
-        printerr("Loading next stage failed: next game stage is null")
-        return
-    set_current_game_stage(next)
+    set_current_game_stage(current.next_stage)
 
 func hide_player_container(player_id: PlayersManager.PlayerID) -> void:
     if player_id == PlayersManager.PlayerID.PLAYER_1:
