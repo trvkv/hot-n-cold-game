@@ -73,22 +73,34 @@ func update_information_container() -> void:
     else:
         gui_message_container.set_modulate(Color(1.0, 1.0, 1.0, 0.0))
 
-func set_requirement_message(message: String) -> void:
+func instance_timed_message(message: String, timeout: float) -> TimedMessage:
     if not timed_message_scene.can_instantiate():
         printerr("Cannot instantiate TimedMessage scene")
-        return
+        return null
 
+    var timed_message: TimedMessage = timed_message_scene.instantiate()
+    timed_message.player_id = player_id
+    timed_message.timeout = timeout
+    timed_message.autostart = true
+    timed_message.text = message
+    return timed_message
+
+func set_requirement_message(message: String) -> void:
     if message.length() > 0:
-        var timed_message: TimedMessage = timed_message_scene.instantiate()
-        timed_message.player_id = player_id
-        timed_message.timeout = 0.0 # must be dismissed manually
-        timed_message.autostart = true
-        gui_requirements_list.add_child(timed_message)
-        gui_requirements_list.move_child(timed_message, 0)
-        timed_message.connect("dismissing_message", _on_dismissing_message)
-        timed_message.set_text(message)
-
+        var timed_message: TimedMessage = instance_timed_message(message, 0.0)
+        if is_instance_valid(timed_message):
+            gui_requirements_list.add_child(timed_message)
+            gui_requirements_list.move_child(timed_message, 0)
     update_requirements_container()
+
+func set_information_message(message: String) -> void:
+    if message.length() > 0:
+        var timed_message: TimedMessage = instance_timed_message(message, 5.0)
+        if is_instance_valid(timed_message):
+            gui_message_list.add_child(timed_message)
+            gui_message_list.move_child(timed_message, 0)
+            timed_message.connect("dismissing_message", _on_dismissing_message)
+    update_information_container()
 
 func clear_requirement_messages() -> void:
     for message in gui_requirements_list.get_children():
@@ -98,6 +110,6 @@ func clear_requirement_messages() -> void:
 
 func _on_dismissing_message(message: TimedMessage) -> void:
     if message.player_id == player_id:
-        gui_requirements_list.remove_child(message)
+        gui_message_list.remove_child(message)
         message.queue_free()
-        call_deferred("update_requirements_container")
+        call_deferred("update_information_container")

@@ -152,6 +152,9 @@ func set_requirement_message(player_id: PlayersManager.PlayerID, message: String
 func clear_requirement_messages(player_id: PlayersManager.PlayerID):
     gui.clear_requirement_messages(player_id)
 
+func set_information_message(player_id: PlayersManager.PlayerID, message: String) -> void:
+    gui.set_information_message(player_id, message)
+
 func set_global_message(message: String) -> void:
     gui.set_global_message(message)
 

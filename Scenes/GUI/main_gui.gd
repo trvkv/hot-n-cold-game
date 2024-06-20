@@ -26,14 +26,14 @@ func _on_action_unsuccessful(interaction_data: InteractionData):
         if interaction_data.response.has("error_message"):
             var panel: GuiPlayerPanel = get_player_panel(interaction_data.player_id)
             if is_instance_valid(panel):
-                panel.set_requirement_message(interaction_data.response["error_message"])
+                panel.set_information_message(interaction_data.response["error_message"])
 
 func _on_action_successful(interaction_data: InteractionData):
     if interaction_data.response is Dictionary:
         if interaction_data.response.has("success_message"):
             var panel: GuiPlayerPanel = get_player_panel(interaction_data.player_id)
             if is_instance_valid(panel):
-                panel.set_requirement_message(interaction_data.response["success_message"])
+                panel.set_information_message(interaction_data.response["success_message"])
 
 func _on_player_ready(player_id: PlayersManager.PlayerID) -> void:
     emit_signal("player_ready", player_id)
@@ -71,6 +71,20 @@ func clear_requirement_messages(player_id: PlayersManager.PlayerID) -> void:
         printerr("Player panel instance invalid for player ", player_id)
         return
     panel.clear_requirement_messages()
+
+func update_information_container(player_id: PlayersManager.PlayerID) -> void:
+    var panel: GuiPlayerPanel = get_player_panel(player_id)
+    if not is_instance_valid(panel):
+        printerr("Player panel instance invalid for player ", player_id)
+        return
+    panel.update_information_container()
+
+func set_information_message(player_id: PlayersManager.PlayerID, message: String) -> void:
+    var panel: GuiPlayerPanel = get_player_panel(player_id)
+    if not is_instance_valid(panel):
+        printerr("Player panel instance invalid for player ", player_id)
+        return
+    panel.set_information_message(message)
 
 func set_global_message(message: String) -> void:
     if message.length() == 0:

@@ -31,7 +31,7 @@ func enter() -> void:
 
     var opponent: Player = PlayersManager.get_opponent(player_id)
     opponent.hide()
-    update_user_message()
+    update_requirement_message()
 
     call_function("set_player_starting_position", [player_id])
 
@@ -77,7 +77,7 @@ func validate_preparation() -> void:
     else:
         keys_placed_correctly = true
 
-func update_user_message() -> void:
+func update_requirement_message() -> void:
     var message: String = ""
     if not favourite_placed_correctly:
         message += "* Favourite item not placed in a container\n"
@@ -105,7 +105,7 @@ func handle_action_put_to_container(interaction_data: InteractionData) -> void:
         var active_item: ItemBase = interaction_data.response["active_item"]
         stored_items.append(GameStateTypes.GameStateItem.new(active_item, interaction_data.target))
     validate_preparation()
-    update_user_message()
+    update_requirement_message()
     update_ready_button()
 
 func handle_action_lock_container(interaction_data: InteractionData) -> void:
@@ -113,7 +113,7 @@ func handle_action_lock_container(interaction_data: InteractionData) -> void:
         var active_item: ItemBase = interaction_data.response["active_item"]
         locked_items.append(GameStateTypes.GameStateItem.new(active_item, interaction_data.target))
     validate_preparation()
-    update_user_message()
+    update_requirement_message()
     update_ready_button()
 
 func _on_action_successful(interaction_data: InteractionData) -> void:

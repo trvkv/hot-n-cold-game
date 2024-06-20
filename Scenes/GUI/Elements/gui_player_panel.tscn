@@ -83,7 +83,6 @@ theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
 [node name="PanelContainer" type="PanelContainer" parent="PlayerInformationContainer"]
-custom_minimum_size = Vector2(250, 300)
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="PlayerInformationContainer/PanelContainer"]
