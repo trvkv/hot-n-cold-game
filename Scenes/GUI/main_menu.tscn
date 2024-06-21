@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnesms6581j28"]
+[gd_scene load_steps=2 format=3 uid="uid://bnesms6581j28"]
 
 [ext_resource type="Script" path="res://Scenes/GUI/main_menu.gd" id="1_u5tn4"]
-[ext_resource type="PackedScene" uid="uid://dgd2lv871g54q" path="res://Scenes/GUI/adjustments_menu.tscn" id="2_qsdqk"]
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("button_new_game", "button_exit")]
 layout_mode = 3
@@ -13,7 +12,7 @@ grow_vertical = 2
 script = ExtResource("1_u5tn4")
 button_new_game = NodePath("PanelContainer/MarginContainer/VBoxContainer/ButtonNewGame")
 button_exit = NodePath("PanelContainer/MarginContainer/VBoxContainer/ButtonExit")
-next_scene = ExtResource("2_qsdqk")
+next_scene = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
