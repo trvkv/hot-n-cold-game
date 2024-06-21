@@ -7,6 +7,7 @@ class_name GameWorld
 
 @export var viewport_player_1: SubViewportContainer
 @export var viewport_player_2: SubViewportContainer
+@export var splitscreen_container: GridContainer
 @export var player_1: Player
 @export var player_2: Player
 @export var camera_player_1: CameraPosition
@@ -22,6 +23,7 @@ func _ready() -> void:
     assert(trap_scene, "Trap scene invalid")
     assert(viewport_player_1, "Viewport for player 1 invalid")
     assert(viewport_player_2, "Viewport for player 2 invalid")
+    assert(splitscreen_container, "splitscreen container invalid")
     assert(player_1, "Invalid player 1")
     assert(player_2, "Invalid player 2")
     assert(camera_player_1, "Camera for player 1 invalid")
@@ -34,6 +36,13 @@ func _ready() -> void:
 
     # calling only when the node is ready
     set_starting_game_stage(starting_game_stage)
+
+    splitscreen_container.connect("resized", _on_resized)
+
+func _on_resized() -> void:
+    print("############# CHANGING SCREEN SIZES NOT IMPLEMENTED ##############")
+    print("# Splitscreen container: ", splitscreen_container.get_size())
+    print("##################################################################")
 
 func _process(delta) -> void:
     if current_game_stage != null:

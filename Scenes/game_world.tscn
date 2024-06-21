@@ -9,11 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://diaq8risagjav" path="res://Scenes/Actors/Components/player_input_component.tscn" id="6_om2p2"]
 [ext_resource type="PackedScene" uid="uid://o8s1kfy706yp" path="res://Scenes/GUI/main_gui.tscn" id="7_r68or"]
 
-[node name="World" type="Node3D" node_paths=PackedStringArray("viewport_player_1", "viewport_player_2", "player_1", "player_2", "camera_player_1", "camera_player_2", "gui", "level")]
+[node name="World" type="Node3D" node_paths=PackedStringArray("viewport_player_1", "viewport_player_2", "splitscreen_container", "player_1", "player_2", "camera_player_1", "camera_player_2", "gui", "level")]
 script = ExtResource("1_ikp0e")
 starting_game_stage = ExtResource("2_6pefh")
 viewport_player_1 = NodePath("SplitScreenGridContainer/SubViewportContainer_P1")
 viewport_player_2 = NodePath("SplitScreenGridContainer/SubViewportContainer_P2")
+splitscreen_container = NodePath("SplitScreenGridContainer")
 player_1 = NodePath("SplitScreenGridContainer/SubViewportContainer_P1/SubViewport/Player1")
 player_2 = NodePath("SplitScreenGridContainer/SubViewportContainer_P2/SubViewport/Player2")
 camera_player_1 = NodePath("SplitScreenGridContainer/SubViewportContainer_P1/SubViewport/Player1/Player1_Camera")
@@ -32,8 +33,8 @@ texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -959.0
-offset_bottom = -720.0
+offset_right = -1440.0
+offset_bottom = -810.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(4, 4)
@@ -41,13 +42,14 @@ theme_override_constants/h_separation = 1
 columns = 2
 
 [node name="SubViewportContainer_P1" type="SubViewportContainer" parent="SplitScreenGridContainer"]
-custom_minimum_size = Vector2(160, 240)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SplitScreenGridContainer/SubViewportContainer_P1"]
 handle_input_locally = false
-size = Vector2i(160, 240)
+size = Vector2i(240, 270)
 render_target_update_mode = 4
 
 [node name="Player1" parent="SplitScreenGridContainer/SubViewportContainer_P1/SubViewport" node_paths=PackedStringArray("player_input_component") instance=ExtResource("4_d0bh1")]
@@ -61,13 +63,14 @@ camera_type = 1
 player = NodePath("..")
 
 [node name="SubViewportContainer_P2" type="SubViewportContainer" parent="SplitScreenGridContainer"]
-custom_minimum_size = Vector2(160, 240)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SplitScreenGridContainer/SubViewportContainer_P2"]
 handle_input_locally = false
-size = Vector2i(160, 240)
+size = Vector2i(239, 270)
 render_target_update_mode = 4
 
 [node name="Player2" parent="SplitScreenGridContainer/SubViewportContainer_P2/SubViewport" node_paths=PackedStringArray("player_input_component") instance=ExtResource("4_d0bh1")]
