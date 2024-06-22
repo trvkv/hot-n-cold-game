@@ -6,11 +6,17 @@ class_name ItemContainer
 @export var container_mesh_scene: PackedScene: set = set_container, get = get_container
 @export var actions: Array[PlayerActions.ACTIONS] = [PlayerActions.ACTIONS.OPEN_CONTAINER]
 
+@export var container_material: StandardMaterial3D
+@export var highlight_scale: float = 1.03
+@export var highlight_transparency: float = 0.95
+@export var highlight_material: StandardMaterial3D
+
 @onready var mesh: Node3D = $Mesh
 
 var inventories: Dictionary = {}
 
 var container_mesh: MeshInstance3D
+var highlight_mesh: MeshInstance3D
 var game_stage: GameStage
 
 func _ready() -> void:
@@ -26,6 +32,7 @@ func get_class_name() -> StringName:
 
 func create_container_instance() -> void:
     if not is_instance_valid(mesh):
+        printerr("Mesh instance not valid")
         return
 
     for child in mesh.get_children():
@@ -33,22 +40,38 @@ func create_container_instance() -> void:
         child.queue_free()
 
     if container_mesh_scene == null:
+        printerr("Container mesh scene is null")
         return
 
-    if container_mesh_scene.can_instantiate():
-        container_mesh = container_mesh_scene.instantiate()
-        if is_instance_valid(container_mesh):
-            mesh.add_child(container_mesh)
-            if is_instance_valid(container_mesh.collision_body):
-                container_mesh.collision_body.add_to_group("containers")
-                # setting owner to the "topmost" parent. It could be then retrieved
-                # inside 'interaction area' during collision detection
-                container_mesh.collision_body.set_owner(self)
-                EventBus.connect("update_interactees", _on_update_interactees)
-            else:
-                printerr("Mesh collision body is invalid: ", container_mesh)
-        else:
-            printerr("Mesh instance is invalid: ", container_mesh)
+    if not container_mesh_scene.can_instantiate():
+        printerr("Cannot instantiate container mesh scene")
+        return
+
+    container_mesh = container_mesh_scene.instantiate()
+    if not is_instance_valid(container_mesh):
+        printerr("Mesh instance is invalid: ", container_mesh)
+        return
+
+    container_mesh.set_surface_override_material(0, container_material)
+    mesh.add_child(container_mesh)
+
+    if not is_instance_valid(container_mesh.collision_body):
+        printerr("Mesh collision body is invalid: ", container_mesh)
+        return
+
+    container_mesh.collision_body.add_to_group("containers")
+    # setting owner to the "topmost" parent. It could be then retrieved
+    # inside 'interaction area' during collision detection
+    container_mesh.collision_body.set_owner(self)
+
+    highlight_mesh = container_mesh_scene.instantiate()
+    var new_scale: Vector3 = highlight_mesh.get_scale() * highlight_scale
+    highlight_mesh.set_scale(new_scale)
+    highlight_mesh.set_transparency(1.0)
+    highlight_mesh.set_surface_override_material(0, highlight_material)
+    mesh.add_child(highlight_mesh)
+
+    EventBus.connect("update_interactees", _on_update_interactees)
 
 func _on_update_game_stage(action: GameStage.ACTIONS, stage: GameStage) -> void:
     if action == GameStage.ACTIONS.ENTERED:
@@ -59,11 +82,11 @@ func _on_update_game_stage(action: GameStage.ACTIONS, stage: GameStage) -> void:
 func _on_update_interactees(_player, interactees, active_interactee) -> void:
     if is_instance_valid(container_mesh):
         if active_interactee == self:
-            container_mesh.get_active_material(0).albedo_color = Color(0.0, 0.0, 0.0)
+            highlight_mesh.set_transparency(0.70)
         elif self in interactees:
-            container_mesh.get_active_material(0).albedo_color = Color(0.8, 0.8, 0.8)
+            highlight_mesh.set_transparency(0.95)
         else:
-            container_mesh.get_active_material(0).albedo_color = Color(1.0, 1.0, 1.0)
+            highlight_mesh.set_transparency(1.0)
     else:
         printerr("Mesh container or collision body invalid for ", self)
 

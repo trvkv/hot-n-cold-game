@@ -1,9 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://o80ya65nvwp2"]
+[gd_scene load_steps=4 format=3 uid="uid://o80ya65nvwp2"]
 
 [ext_resource type="Script" path="res://Scenes/Environment/item_container.gd" id="1_4x5bq"]
+[ext_resource type="Material" uid="uid://evuwulcpxn8j" path="res://Assets/Materials/prototype-green.tres" id="2_1cke3"]
+[ext_resource type="Material" uid="uid://bsnpvp4r74ail" path="res://Assets/Materials/container_highlight_active_material.tres" id="3_py03c"]
 
 [node name="Container" type="Node3D"]
 script = ExtResource("1_4x5bq")
 actions = Array[int]([5, 6])
+container_material = ExtResource("2_1cke3")
+highlight_material = ExtResource("3_py03c")
 
 [node name="Mesh" type="Node3D" parent="."]
