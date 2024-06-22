@@ -48,7 +48,7 @@ func find_associated_action(event: InputEvent) -> String:
             break
     return detected_action
 
-func _unhandled_key_input(event):
+func _unhandled_input(event):
     # find which action was made
     var action_name: String = find_associated_action(event)
     if action_name.is_empty():
