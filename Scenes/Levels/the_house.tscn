@@ -1,8 +1,10 @@
-[gd_scene load_steps=76 format=3 uid="uid://83o3w38736kg"]
+[gd_scene load_steps=78 format=3 uid="uid://83o3w38736kg"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/level.gd" id="1_5aaf8"]
 [ext_resource type="PackedScene" uid="uid://dnbsanbg1w806" path="res://Scenes/Environment/cube_with_collision.tscn" id="2_wuuyo"]
 [ext_resource type="Texture2D" uid="uid://bhu5kergo3m88" path="res://Assets/Images/kenney_prototype-textures/PNG/Green/texture_06.png" id="3_ccef1"]
+[ext_resource type="PackedScene" uid="uid://o80ya65nvwp2" path="res://Scenes/Environment/item_container.tscn" id="4_ht31a"]
+[ext_resource type="PackedScene" uid="uid://d3n5648hv4hmc" path="res://Scenes/Environment/Furnitures/wardrobe.tscn" id="5_mka15"]
 [ext_resource type="PackedScene" uid="uid://3yjn42qde6nl" path="res://Scenes/Util/player_starting_position.tscn" id="8_yb8a4"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_2espr"]
@@ -30,7 +32,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_0c0yc"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_fof4x"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -56,7 +58,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_5n2h6"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_o7rg4"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -82,7 +84,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_iv8l6"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_i7ulw"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -108,7 +110,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_pxax5"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_flskp"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -134,7 +136,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_qsngi"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_lf73d"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -160,7 +162,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_8wl0e"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_xmbyn"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -186,7 +188,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_qf64f"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_ci3xy"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -212,7 +214,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_g102p"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_d13ob"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -238,7 +240,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_ew48g"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_fvb1f"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -264,7 +266,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_0mu2l"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_y4ro4"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -290,7 +292,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_t7ay1"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_cpiaf"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -316,7 +318,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_cj3x7"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_f3ada"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -342,7 +344,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_whw56"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_7v883"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -368,7 +370,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_es2nm"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_uv7mx"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -394,7 +396,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_wqi67"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_w8r8r"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -434,7 +436,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_pdgoq"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_g3pf1"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -460,7 +462,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_oon60"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_nsafe"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -500,7 +502,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_kycck"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_ef1e3"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -540,7 +542,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_nsc1i"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_co7o1"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -566,7 +568,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_ts3jy"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_e1len"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -592,7 +594,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_uvir0"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_02v01"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -618,7 +620,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_5pd3s"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_ux0dt"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -644,7 +646,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_ksiql"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_d0mho"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -670,7 +672,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_r6550"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_wc30f"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -696,7 +698,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_6yds5"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_o72m3"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -722,7 +724,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_insem"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_xxlm2"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -748,7 +750,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_5548h"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_n2rxm"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -774,7 +776,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_eucla"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_hri31"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -800,7 +802,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_1sm3t"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_m7xsl"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -826,7 +828,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_ahyfw"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_qdvkp"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -852,7 +854,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ccef1")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_o55wv"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_8r31f"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -892,7 +894,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_bcw3w"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_j2a8t"]
 resource_local_to_scene = true
 resource_name = "prototyping_Cube"
 _surfaces = [{
@@ -944,32 +946,32 @@ transform = Transform3D(37.3322, 0, 0, 0, 1, 0, 0, 0, 42.588, 0, -0.49, 0)
 
 [node name="CubeWithCollision2" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(1, 0, 0, 0, 2.5, 0, 0, 0, 16.0981, -17.188, 1.25, -1.99359)
-mesh = SubResource("ArrayMesh_0c0yc")
+mesh = SubResource("ArrayMesh_fof4x")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision25" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(0.940141, 0, -1.83256, 0, 2.5, 0, 0.392845, 0, 4.38561, -18.122, 1.25, 8.09969)
-mesh = SubResource("ArrayMesh_5n2h6")
+mesh = SubResource("ArrayMesh_o7rg4")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision26" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(0.988423, 0, 0.00386465, 0, 2.5, 0, -0.00100061, 0, 3.81767, -19.0801, 1.25, 11.7447)
-mesh = SubResource("ArrayMesh_iv8l6")
+mesh = SubResource("ArrayMesh_i7ulw")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision27" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(0.800502, 0, 2.23944, 0, 2.5, 0, -0.579808, 0, 3.09184, -18.0775, 1.25, 14.9094)
-mesh = SubResource("ArrayMesh_pxax5")
+mesh = SubResource("ArrayMesh_flskp")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision28" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(0.588394, 0, 3.06755, 0, 2.5, 0, -0.794212, 0, 2.2726, -15.6449, 1.25, 17.3841)
-mesh = SubResource("ArrayMesh_qsngi")
+mesh = SubResource("ArrayMesh_lf73d")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision29" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(0.588394, 0, 3.06755, 0, 2.5, 0, -0.794212, 0, 2.2726, -15.6449, 1.25, 17.3841)
-mesh = SubResource("ArrayMesh_8wl0e")
+mesh = SubResource("ArrayMesh_xmbyn")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision30" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
@@ -980,7 +982,7 @@ transform = Transform3D(-0.00854959, 0, 7.79428, 0, 2.5, 0, -0.981642, 0, -0.067
 
 [node name="CubeWithCollision32" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(-0.0218384, 0, 1.1973, 0, 2.5, 0, -2.50743, 0, -0.0104278, -3.12334, 1.25, 19.0114)
-mesh = SubResource("ArrayMesh_qf64f")
+mesh = SubResource("ArrayMesh_ci3xy")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision33" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
@@ -988,12 +990,12 @@ transform = Transform3D(-9.78362, 0, 0.0108771, 0, 2.5, 0, -0.0843554, 0, -1.261
 
 [node name="CubeWithCollision34" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(-2.48371, 0, 0.0123036, 0, 2.5, 0, -0.0214148, 0, -1.42698, 1.56193, 1.25, 18.39)
-mesh = SubResource("ArrayMesh_g102p")
+mesh = SubResource("ArrayMesh_d13ob")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision35" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(-0.454813, 0, 0.0291597, 0, 2.5, 0, -0.00392144, 0, -3.38196, 1.89266, 1.25, 16.1806)
-mesh = SubResource("ArrayMesh_ew48g")
+mesh = SubResource("ArrayMesh_fvb1f")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision36" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
@@ -1004,7 +1006,7 @@ transform = Transform3D(-0.0106643, 0, -1.42533, 0, 2.5, 0, 0.475791, 0, -0.0319
 
 [node name="CubeWithCollision38" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(0.484847, 0, -0.037285, 0, 2.5, 0, 0.00356265, 0, 5.07416, 5.77728, 1.25, 17.0085)
-mesh = SubResource("ArrayMesh_0mu2l")
+mesh = SubResource("ArrayMesh_y4ro4")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision39" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
@@ -1015,7 +1017,7 @@ transform = Transform3D(-0.00943298, 0, 3.79914, 0, 2.5, 0, -1.00831, 0, -0.0355
 
 [node name="CubeWithCollision4" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(-1.00142, 0, 0.0227754, 0, 2.5, 0, -0.0121828, 0, -1.87214, -13.4627, 1.25, -9.3995)
-mesh = SubResource("ArrayMesh_t7ay1")
+mesh = SubResource("ArrayMesh_cpiaf")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision5" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
@@ -1023,7 +1025,7 @@ transform = Transform3D(0.0151716, 0, -1.87206, 0, 2.5, 0, 1.00138, 0, 0.028363,
 
 [node name="CubeWithCollision6" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(-1.01377, 0, 0.0499605, 0, 2.5, 0, -0.0145274, 0, -3.48641, -12.97, 1.25, -12.9827)
-mesh = SubResource("ArrayMesh_cj3x7")
+mesh = SubResource("ArrayMesh_f3ada")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision7" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
@@ -1040,7 +1042,7 @@ transform = Transform3D(-0.0170153, 0, -2.30088, 0, 2.5, 0, 0.85059, 0, -0.04602
 
 [node name="CubeWithCollision11" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(1.00237, 0, 0, 0, 2.5, 0, 0, 0, 7.60901, -2.98019, 1.25, -13.5903)
-mesh = SubResource("ArrayMesh_whw56")
+mesh = SubResource("ArrayMesh_7v883")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision12" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
@@ -1072,7 +1074,7 @@ transform = Transform3D(-0.0125971, 0, -4.8531, 0, 2.5, 0, 0.508181, 0, -0.12030
 
 [node name="CubeWithCollision45" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(0.50875, 0, 0.013854, 0, 2.5, 0, -0.00212226, 0, 3.32108, 5.8699, 1.25, 10.864)
-mesh = SubResource("ArrayMesh_es2nm")
+mesh = SubResource("ArrayMesh_uv7mx")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision69" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
@@ -1080,12 +1082,12 @@ transform = Transform3D(3.34046, 0, 0.00292821, 0, 2.5, 0, -0.0139348, 0, 0.7019
 
 [node name="CubeWithCollision70" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(-0.00124011, 0, 0.948131, 0, 2.5, 0, -2.21977, 0, -0.000529713, 2.18482, 1.25, 11.2166)
-mesh = SubResource("ArrayMesh_wqi67")
+mesh = SubResource("ArrayMesh_w8r8r")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision71" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(-0.00168172, 0, 0.94832, 0, 2.5, 0, -3.01024, 0, -0.000529818, 5.41666, 1.25, 0.979826)
-mesh = SubResource("ArrayMesh_pdgoq")
+mesh = SubResource("ArrayMesh_g3pf1")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision47" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
@@ -1096,7 +1098,7 @@ transform = Transform3D(0.00253721, 0, -2.39103, 0, 2.5, 0, 0.510073, 0, 0.01189
 
 [node name="CubeWithCollision46" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(0.505844, 0, 0.0345437, 0, 2.5, 0, -0.00211014, 0, 8.28078, 9.20862, 1.25, 14.6445)
-mesh = SubResource("ArrayMesh_oon60")
+mesh = SubResource("ArrayMesh_nsafe")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision16" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
@@ -1104,7 +1106,7 @@ transform = Transform3D(0.0104989, 0, -6.12287, 0, 2.5, 0, 0.582822, 0, 0.110297
 
 [node name="CubeWithCollision17" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(0.578223, 0, -0.0193557, 0, 2.5, 0, 0.00545977, 0, 2.04989, 0.390373, 1.25, -8.76957)
-mesh = SubResource("ArrayMesh_kycck")
+mesh = SubResource("ArrayMesh_ef1e3")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision18" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
@@ -1118,17 +1120,17 @@ transform = Transform3D(-0.00246463, 0, -1.12395, 0, 2.5, 0, 0.850742, 0, -0.003
 
 [node name="CubeWithCollision22" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(-0.0278475, 0, -0.392879, 0, 2.5, 0, 9.6124, 0, -0.00113817, -2.86981, 1.25, -5.72551)
-mesh = SubResource("ArrayMesh_nsc1i")
+mesh = SubResource("ArrayMesh_co7o1")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision49" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(-0.016428, 0, -0.393346, 0, 2.5, 0, 5.67063, 0, -0.00113953, -2.86981, 1.25, 5.49335)
-mesh = SubResource("ArrayMesh_ts3jy")
+mesh = SubResource("ArrayMesh_e1len")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision51" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(-0.00875223, 0, -0.741941, 0, 2.5, 0, 3.0211, 0, -0.00214941, -2.90479, 1.25, 12.957)
-mesh = SubResource("ArrayMesh_uvir0")
+mesh = SubResource("ArrayMesh_02v01")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision52" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
@@ -1139,17 +1141,17 @@ transform = Transform3D(-0.00249537, 0, -3.23821, 0, 2.5, 0, 0.861354, 0, -0.009
 
 [node name="CubeWithCollision54" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(-0.00666817, 0, -2.6132, 0, 2.5, 0, 2.30172, 0, -0.00757048, -8.21752, 1.25, 11.6336)
-mesh = SubResource("ArrayMesh_5pd3s")
+mesh = SubResource("ArrayMesh_ux0dt")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision55" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(-0.0113389, 0, -0.584406, 0, 2.5, 0, 3.91396, 0, -0.00169302, -8.60637, 1.25, 8.5408)
-mesh = SubResource("ArrayMesh_ksiql")
+mesh = SubResource("ArrayMesh_d0mho")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision56" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(-0.0261947, 0, -0.585573, 0, 2.5, 0, 0.951475, 0, -0.0161211, -8.60637, 1.25, 4.62012)
-mesh = SubResource("ArrayMesh_r6550")
+mesh = SubResource("ArrayMesh_wc30f")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision57" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
@@ -1166,32 +1168,32 @@ transform = Transform3D(0.00261447, 0, -4.85637, 0, 2.5, 0, 0.531172, 0, 0.02390
 
 [node name="CubeWithCollision61" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(-0.072164, 0, -1.16985, 0, 2.5, 0, 3.92619, 0, -0.0215021, -13.5505, 1.25, -2.44237)
-mesh = SubResource("ArrayMesh_6yds5")
+mesh = SubResource("ArrayMesh_o72m3")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision68" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(-0.0263877, 0, -3.59484, 0, 2.5, 0, 1.43566, 0, -0.0660736, -15.564, 1.25, -3.26553)
-mesh = SubResource("ArrayMesh_insem")
+mesh = SubResource("ArrayMesh_xxlm2")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision62" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(0.043487, 0, -1.15742, 0, 2.5, 0, 6.22876, 0, 0.00808071, -13.5505, 1.25, 5.20956)
-mesh = SubResource("ArrayMesh_5548h")
+mesh = SubResource("ArrayMesh_n2rxm")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision63" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(-2.32616, 0, -0.559293, 0, 2.5, 0, 3.13583, 0, -0.414883, -14.394, 1.25, 8.94697)
-mesh = SubResource("ArrayMesh_eucla")
+mesh = SubResource("ArrayMesh_hri31")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision64" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(-0.0754252, 0, -0.700805, 0, 2.5, 0, 2.89778, 0, -0.0182408, -15.5277, 1.25, 11.6519)
-mesh = SubResource("ArrayMesh_1sm3t")
+mesh = SubResource("ArrayMesh_m7xsl")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision65" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(1.59104, 0, -0.528887, 0, 2.5, 0, 1.84962, 0, 0.454947, -14.8754, 1.25, 13.8052)
-mesh = SubResource("ArrayMesh_ahyfw")
+mesh = SubResource("ArrayMesh_qdvkp")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision66" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
@@ -1205,7 +1207,7 @@ transform = Transform3D(2.96788, 0, 0.00243587, 0, 2.5, 0, -0.0184414, 0, 0.3920
 
 [node name="CubeWithCollision23" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(-0.00694267, 0, -2.54731, 0, 2.5, 0, 2.39647, 0, -0.00737958, -7.87363, 1.25, -9.24465)
-mesh = SubResource("ArrayMesh_o55wv")
+mesh = SubResource("ArrayMesh_8r31f")
 can_fade_when_near_player = true
 
 [node name="CubeWithCollision24" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
@@ -1213,7 +1215,7 @@ transform = Transform3D(-0.00263049, 0, -5.16028, 0, 2.5, 0, 0.907995, 0, -0.014
 
 [node name="CubeWithCollision20" parent="NavigationRegion3D/Static/Walls" instance=ExtResource("2_wuuyo")]
 transform = Transform3D(0.581464, 0, 0.0015453, 0, 2.5, 0, -0.000466976, 0, 1.9239, 0.371727, 1.25, -5.15997)
-mesh = SubResource("ArrayMesh_bcw3w")
+mesh = SubResource("ArrayMesh_j2a8t")
 can_fade_when_near_player = true
 
 [node name="Furnitures" type="Node3D" parent="NavigationRegion3D/Static"]
@@ -1222,6 +1224,14 @@ can_fade_when_near_player = true
 environment = SubResource("Environment_0qa8a")
 
 [node name="Containers" type="Node3D" parent="."]
+
+[node name="Container" parent="Containers" instance=ExtResource("4_ht31a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.03806, 0, 0.404022)
+container_mesh_scene = ExtResource("5_mka15")
+
+[node name="Container2" parent="Containers" instance=ExtResource("4_ht31a")]
+transform = Transform3D(0.999516, 0, 0.0311142, 0, 1, 0, -0.0311142, 0, 0.999516, 3.98834, 0, 1.63983)
+container_mesh_scene = ExtResource("5_mka15")
 
 [node name="Lights" type="Node3D" parent="."]
 
@@ -1352,9 +1362,9 @@ light_energy = 2.5
 shadow_enabled = true
 
 [node name="PlayerStartingPosition_P1" parent="." instance=ExtResource("8_yb8a4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.23108)
 player_id = 1
 
 [node name="PlayerStartingPosition_P2" parent="." instance=ExtResource("8_yb8a4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.1883)
 player_id = 2
