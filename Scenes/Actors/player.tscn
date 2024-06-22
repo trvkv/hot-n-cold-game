@@ -106,7 +106,12 @@ _data = {
 "move": SubResource("Animation_sibnx")
 }
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_50i36"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_6gn5q"]
+top_radius = 0.7
+bottom_radius = 0.7
+height = 0.01
+radial_segments = 16
+rings = 1
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -116,8 +121,10 @@ script = ExtResource("1_wdvuh")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="SpritesPosition"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.736997, 0)
+sorting_offset = 4.0
 cast_shadow = 0
 pixel_size = 0.0136
+shaded = true
 alpha_cut = 2
 texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_kfebt")
@@ -137,10 +144,10 @@ libraries = {
 interactor = NodePath("..")
 
 [node name="ShadowCaster" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.528072, 0)
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.1, 0)
 layers = 2
 cast_shadow = 3
-mesh = SubResource("CapsuleMesh_50i36")
+mesh = SubResource("CylinderMesh_6gn5q")
 
 [node name="TrapComponent" parent="." node_paths=PackedStringArray("component_owner") instance=ExtResource("5_02noe")]
 component_owner = NodePath("..")

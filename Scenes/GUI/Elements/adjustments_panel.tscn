@@ -9,7 +9,6 @@
 [ext_resource type="Resource" uid="uid://b5ohqfe6mt3q5" path="res://Resources/Items/item_key.tres" id="6_4yee7"]
 [ext_resource type="Resource" uid="uid://don7pfb0cf8pq" path="res://Resources/Items/item_trap.tres" id="7_pangv"]
 
-
 [node name="AdjustmentsPanel" type="PanelContainer" node_paths=PackedStringArray("title_label", "message_label", "proceed_button_margin", "proceed_button", "chosen_items", "required_items", "all_items", "adjusement_input")]
 anchors_preset = 15
 anchor_right = 1.0
@@ -68,6 +67,10 @@ zoom = 0.41
 
 [node name="AdjustmentInputComponent" parent="MarginContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport" node_paths=PackedStringArray("adjustments_panel") instance=ExtResource("4_lrwjy")]
 adjustments_panel = NodePath("../../../../../..")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="MarginContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 0)
+light_energy = 1.2
 
 [node name="Label_Message" type="Label" parent="MarginContainer/VBoxContainer"]
 self_modulate = Color(1, 1, 0, 1)
