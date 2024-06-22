@@ -32,7 +32,6 @@ func get_class_name() -> StringName:
 
 func create_container_instance() -> void:
     if not is_instance_valid(mesh):
-        printerr("Mesh instance not valid")
         return
 
     for child in mesh.get_children():
@@ -80,15 +79,17 @@ func _on_update_game_stage(action: GameStage.ACTIONS, stage: GameStage) -> void:
         game_stage = null
 
 func _on_update_interactees(_player, interactees, active_interactee) -> void:
-    if is_instance_valid(container_mesh):
-        if active_interactee == self:
-            highlight_mesh.set_transparency(0.70)
-        elif self in interactees:
-            highlight_mesh.set_transparency(0.95)
-        else:
-            highlight_mesh.set_transparency(1.0)
-    else:
+
+    if not is_instance_valid(container_mesh):
         printerr("Mesh container or collision body invalid for ", self)
+        return
+
+    if active_interactee == self:
+        highlight_mesh.set_transparency(0.70)
+    elif self in interactees:
+        highlight_mesh.set_transparency(0.95)
+    else:
+        highlight_mesh.set_transparency(1.0)
 
 func set_container(scene: PackedScene) -> void:
     container_mesh_scene = scene

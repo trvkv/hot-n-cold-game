@@ -140,8 +140,8 @@ libraries = {
 "": SubResource("AnimationLibrary_albr1")
 }
 
-[node name="InteractionArea" parent="." node_paths=PackedStringArray("interactor") instance=ExtResource("3_1vdlc")]
-interactor = NodePath("..")
+[node name="InteractionArea" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_1vdlc")]
+player = NodePath("..")
 
 [node name="ShadowCaster" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.1, 0)

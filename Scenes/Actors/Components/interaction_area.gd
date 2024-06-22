@@ -4,7 +4,7 @@ extends Area3D
 @export var interaction_height = 0.5
 @export var interaction_initial_direction = Vector2(-1, 0)
 
-@export var interactor: Node3D
+@export var player: Node3D
 
 var interactees: Array[Node3D]
 var active_interactee: Node3D
@@ -15,9 +15,9 @@ func _ready() -> void:
     connect("body_exited", _on_body_exited)
     EventBus.connect("switch_interaction", _on_switch_interaction)
 
-    if not is_instance_valid(interactor):
-        printerr(self, ": Interactor not valid, using 'self'")
-        interactor = self
+    if not is_instance_valid(player):
+        printerr(self, ": Player not valid, using 'self'")
+        player = self
 
 func move_interaction_area(move_direction: Vector2) -> void:
     rotation.y = -move_direction.angle()
@@ -48,26 +48,20 @@ func find_closest_node(target: Node3D, nodes: Array[Node3D]) -> Node3D:
     return null
 
 func _on_body_entered(body):
-    var send_signal = false
     if body.is_in_group("containers"):
         var body_owner = body.get_owner()
         if body_owner in interactees:
             return
         interactees.push_back(body_owner)
-        active_interactee = find_closest_node(interactor, interactees)
-        send_signal = true
-    if send_signal:
-        EventBus.emit_signal("update_interactees", interactor, interactees, active_interactee)
+        active_interactee = find_closest_node(player, interactees)
+        EventBus.emit_signal("update_interactees", player, interactees, active_interactee)
 
 func _on_body_exited(body):
-    var send_signal = false
     if body.is_in_group("containers"):
         var body_owner = body.get_owner()
         interactees.erase(body_owner)
-        active_interactee = find_closest_node(interactor, interactees)
-        send_signal = true
-    if send_signal:
-        EventBus.emit_signal("update_interactees", interactor, interactees, active_interactee)
+        active_interactee = find_closest_node(player, interactees)
+        EventBus.emit_signal("update_interactees", player, interactees, active_interactee)
 
 func _on_switch_interaction(_player, interaction_area) -> void:
     if interaction_area != self:
@@ -78,4 +72,4 @@ func _on_switch_interaction(_player, interaction_area) -> void:
         if index == interactees.size():
             index = 0
         active_interactee = interactees[index]
-        EventBus.emit_signal("update_interactees", interactor, interactees, active_interactee)
+        EventBus.emit_signal("update_interactees", player, interactees, active_interactee)

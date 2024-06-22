@@ -66,6 +66,6 @@ func _on_action_successful(interaction_data: InteractionData) -> void:
         handle_get_from_container(interaction_data)
     return
 
-func _on_update_interactees(_interactor, _interactees, _active_interactee):
+func _on_update_interactees(_player, _interactees, _active_interactee):
     horizontal_item_container.clear()
     hide()
