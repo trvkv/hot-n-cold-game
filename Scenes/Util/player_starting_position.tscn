@@ -1,7 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://3yjn42qde6nl"]
+[gd_scene load_steps=8 format=3 uid="uid://3yjn42qde6nl"]
 
 [ext_resource type="Script" path="res://Scenes/Util/player_starting_position.gd" id="1_qiok0"]
+[ext_resource type="ArrayMesh" uid="uid://bob1abga010qa" path="res://Assets/Meshes/trap.res" id="2_cfs18"]
 [ext_resource type="Texture2D" uid="uid://dno756bxxcawy" path="res://Assets/Images/kenney_board-game-icons/Tilesheet/iconsDouble.png" id="2_u4p3p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uqdr0"]
+shading_mode = 0
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_u6bv7"]
+radius = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_el070"]
 albedo_color = Color(0, 1, 0, 1)
@@ -15,9 +23,24 @@ rings = 4
 script = ExtResource("1_qiok0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_sxr78")
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, -0.195473, 0)
+material_override = SubResource("StandardMaterial3D_uqdr0")
+transparency = 0.73
+mesh = ExtResource("2_cfs18")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Area3D" type="Area3D" parent="MeshInstance3D"]
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
+shape = SubResource("SphereShape3D_u6bv7")
+
+[node name="Editor-only" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Editor-only"]
+mesh = SubResource("SphereMesh_sxr78")
+skeleton = NodePath("../..")
+
+[node name="Sprite3D" type="Sprite3D" parent="Editor-only"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 billboard = 1
 texture = ExtResource("2_u4p3p")

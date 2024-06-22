@@ -39,7 +39,6 @@ func create_container_instance() -> void:
         child.queue_free()
 
     if container_mesh_scene == null:
-        printerr("Container mesh scene is null")
         return
 
     if not container_mesh_scene.can_instantiate():
