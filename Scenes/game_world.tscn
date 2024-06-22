@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://diaq8risagjav" path="res://Scenes/Actors/Components/player_input_component.tscn" id="6_om2p2"]
 [ext_resource type="PackedScene" uid="uid://o8s1kfy706yp" path="res://Scenes/GUI/main_gui.tscn" id="7_r68or"]
 
-[node name="World" type="Node3D" node_paths=PackedStringArray("viewport_player_1", "viewport_player_2", "splitscreen_container", "player_1", "player_2", "camera_player_1", "camera_player_2", "gui", "level")]
+[node name="World" type="Node3D" node_paths=PackedStringArray("viewport_player_1", "viewport_player_2", "splitscreen_container", "player_1", "player_2", "camera_player_1", "camera_player_2", "gui", "level_container")]
 script = ExtResource("1_ikp0e")
 starting_game_stage = ExtResource("2_6pefh")
 viewport_player_1 = NodePath("SplitScreenGridContainer/SubViewportContainer_P1")
@@ -21,12 +21,11 @@ camera_player_1 = NodePath("SplitScreenGridContainer/SubViewportContainer_P1/Sub
 camera_player_2 = NodePath("SplitScreenGridContainer/SubViewportContainer_P2/SubViewport/Player2/Player2_ Camera")
 trap_scene = ExtResource("2_oogha")
 gui = NodePath("Gui")
-level = NodePath("Level/Map")
+map_scene = ExtResource("4_jp0t0")
+level_container = NodePath("Level")
 next_scene = 3
 
 [node name="Level" type="Node3D" parent="."]
-
-[node name="Map" parent="Level" instance=ExtResource("4_jp0t0")]
 
 [node name="SplitScreenGridContainer" type="GridContainer" parent="."]
 texture_filter = 1

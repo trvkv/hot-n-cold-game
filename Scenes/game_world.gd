@@ -14,7 +14,10 @@ class_name GameWorld
 @export var camera_player_2: CameraPosition
 @export var trap_scene: PackedScene
 @export var gui: MainGui
-@export var level: Level
+@export var map_scene: PackedScene
+@export var level_container: Node3D
+
+var level: Level
 
 var current_game_stage: GameStage:
     set = set_current_game_stage, get = get_current_game_stage
@@ -29,10 +32,13 @@ func _ready() -> void:
     assert(camera_player_1, "Camera for player 1 invalid")
     assert(camera_player_2, "Camera for player 2 invalid")
     assert(gui, "Gui invalid")
-    assert(level, "Level invalid")
+    assert(map_scene, "Map scene invalid")
     CameraManager.activate_camera(camera_player_1.UUID)
     CameraManager.activate_camera(camera_player_2.UUID)
     EventBus.connect("set_trap", _on_trap_set)
+
+    level = map_scene.instantiate()
+    level_container.add_child(level)
 
     # calling only when the node is ready
     set_starting_game_stage(starting_game_stage)
