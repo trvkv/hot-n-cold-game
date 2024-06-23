@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://d3n5648hv4hmc"]
 
-[ext_resource type="ArrayMesh" uid="uid://dh7gamdvjygwu" path="res://Assets/Meshes/cube-light.res" id="1_7xqjj"]
+[ext_resource type="ArrayMesh" uid="uid://b7bla15h20cp6" path="res://Assets/Meshes/cube-green.res" id="1_43tnd"]
 [ext_resource type="Script" path="res://Scenes/Environment/Furnitures/furniture.gd" id="2_u4l2r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ib3b0"]
 
 [node name="Wardrobe" type="MeshInstance3D" node_paths=PackedStringArray("collision_body")]
 transform = Transform3D(0.5, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0)
-mesh = ExtResource("1_7xqjj")
+mesh = ExtResource("1_43tnd")
 script = ExtResource("2_u4l2r")
 collision_body = NodePath("StaticBody3D")
 

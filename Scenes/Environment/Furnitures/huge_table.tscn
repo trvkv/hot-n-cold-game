@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://qiv5501uvd0y"]
+
+[ext_resource type="ArrayMesh" uid="uid://b7bla15h20cp6" path="res://Assets/Meshes/cube-green.res" id="1_bcx4b"]
+[ext_resource type="Script" path="res://Scenes/Environment/Furnitures/furniture.gd" id="1_y7v5o"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rkxig"]
+
+[node name="HugeTable" type="MeshInstance3D" node_paths=PackedStringArray("collision_body")]
+transform = Transform3D(2.5, 0, 0, 0, 0.8, 0, 0, 0, 3, 0, 0.4, 0)
+mesh = ExtResource("1_bcx4b")
+script = ExtResource("1_y7v5o")
+collision_body = NodePath("StaticBody3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_rkxig")
