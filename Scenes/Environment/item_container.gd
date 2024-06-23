@@ -12,6 +12,7 @@ class_name ItemContainer
 @export var highlight_material: StandardMaterial3D
 
 @onready var mesh: Node3D = $Mesh
+@onready var in_editor: Node3D = $"in-editor"
 
 var inventories: Dictionary = {}
 
@@ -26,6 +27,11 @@ func _ready() -> void:
         inventories[player_id] = player_inventory
     EventBus.connect("update_game_stage", _on_update_game_stage)
     create_container_instance()
+
+    if not Engine.is_editor_hint():
+        if is_instance_valid(in_editor):
+            remove_child(in_editor)
+            in_editor.queue_free()
 
 func get_class_name() -> StringName:
     return &"ItemContainer"
