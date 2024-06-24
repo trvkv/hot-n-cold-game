@@ -2,10 +2,11 @@
 
 [ext_resource type="Script" path="res://Scenes/GUI/Elements/timed_message.gd" id="1_jhylv"]
 
-[node name="TimedMessage" type="MarginContainer" node_paths=PackedStringArray("timer", "message_label")]
+[node name="TimedMessage" type="MarginContainer" node_paths=PackedStringArray("timer", "icon_rectangle", "message_label")]
 script = ExtResource("1_jhylv")
 timer = NodePath("Timer")
-message_label = NodePath("PanelContainer/MarginContainer/MessageLabel")
+icon_rectangle = NodePath("PanelContainer/MarginContainer/HBoxContainer/TextureRect")
+message_label = NodePath("PanelContainer/MarginContainer/HBoxContainer/MessageLabel")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
@@ -17,7 +18,16 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="MessageLabel" type="Label" parent="PanelContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+expand_mode = 2
+
+[node name="MessageLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "EXAMPLE TEXT"
 
 [node name="Timer" type="Timer" parent="."]

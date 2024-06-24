@@ -11,8 +11,8 @@ signal switch_action(player)
 
 signal set_trap(player, global_trap_position)
 signal query_distance(player)
-signal query_ready(player)
-signal distance_updated(player, distance)
+signal query_ready(player_id)
+signal distance_updated(player_id, distance)
 signal starting_position_reached(player_id)
 
 signal update_game_stage(action, stage)

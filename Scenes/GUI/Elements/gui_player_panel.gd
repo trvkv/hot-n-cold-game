@@ -14,6 +14,18 @@ class_name GuiPlayerPanel
 @export var ready_button: Button
 @export var timed_message_scene: PackedScene
 
+@export var query_ready_icon: Texture2D
+@export var query_ready_icon_color: Color = Color(1.0, 1.0, 1.0, 1.0)
+
+@export var icon_hot: Texture2D
+@export var icon_hot_color: Color = Color(1.0, 1.0, 1.0, 1.0)
+@export var icon_warm: Texture2D
+@export var icon_warm_color: Color = Color(1.0, 1.0, 1.0, 1.0)
+@export var icon_cold: Texture2D
+@export var icon_cold_color: Color = Color(1.0, 1.0, 1.0, 1.0)
+@export var icon_freezing: Texture2D
+@export var icon_freezing_color: Color = Color(1.0, 1.0, 1.0, 1.0)
+
 signal player_ready(player_id)
 
 func _ready() -> void:
@@ -26,6 +38,9 @@ func _ready() -> void:
     assert(is_instance_valid(gui_message_container), "gui message container invalid")
     assert(is_instance_valid(ready_button), "ready button invalid")
     assert(is_instance_valid(timed_message_scene), "times message scene invalid")
+
+    EventBus.connect("distance_updated", _on_distance_updated)
+    EventBus.connect("query_ready", _on_query_ready)
 
     set_player_id(player_id)
 
@@ -47,6 +62,34 @@ func _enter_tree():
 
 func _on_pressed() -> void:
     emit_signal("player_ready", player_id)
+
+func _on_query_ready(query_player_id: PlayersManager.PlayerID) -> void:
+    if player_id == query_player_id:
+        set_information_message("HOT-COLD query is ready!", 9.0, query_ready_icon, query_ready_icon_color)
+
+func _on_distance_updated(requesting_player_id: PlayersManager.PlayerID, distance: float) -> void:
+    if player_id == requesting_player_id:
+        var message: String = ""
+        var icon: Texture2D = null
+        var color: Color = Color(1.0, 1.0, 1.0, 1.0)
+        if distance < 3.0:
+            message = "HOT!"
+            icon = icon_hot
+            color = icon_hot_color
+        elif distance < 9.0:
+            message = "WARM..."
+            icon = icon_warm
+            color = icon_warm_color
+        elif distance < 15.0:
+            message = "Cold..."
+            icon = icon_cold
+            color = icon_cold_color
+        else: # freezing
+            message = "FREEZING!"
+            icon = icon_freezing
+            color = icon_freezing_color
+        print(color)
+        set_information_message(message, 9.0, icon, color)
 
 func setup_ready_button(activate: bool, show_button: bool) -> void:
     if activate:
@@ -93,12 +136,14 @@ func set_requirement_message(message: String) -> void:
             gui_requirements_list.move_child(timed_message, 0)
     update_requirements_container()
 
-func set_information_message(message: String) -> void:
+func set_information_message(message: String, timeout: float = 5.0, icon: Texture2D = null, color = Color(1.0, 1.0, 1.0, 1.0)) -> void:
     if message.length() > 0:
-        var timed_message: TimedMessage = instance_timed_message(message, 5.0)
+        var timed_message: TimedMessage = instance_timed_message(message, timeout)
         if is_instance_valid(timed_message):
             gui_message_list.add_child(timed_message)
             gui_message_list.move_child(timed_message, 0)
+            timed_message.icon = icon
+            timed_message.icon_color = color
             timed_message.connect("dismissing_message", _on_dismissing_message)
     update_information_container()
 

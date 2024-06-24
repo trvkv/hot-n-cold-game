@@ -55,10 +55,10 @@ func _on_query_distance(player: Player) -> void:
         assert(state.data as ItemContainer, "Retrieved data should be of ItemContainer class")
         var target_position: Vector3 = state.data.get_global_position()
         var path = get_path_to_target(get_global_position(), target_position)
-        EventBus.emit_signal("distance_updated", player, calculate_distance(path))
+        EventBus.emit_signal("distance_updated", player.player_id, calculate_distance(path))
         ready_to_use = false
         timer.start()
 
 func _on_timeout() -> void:
     ready_to_use = true
-    EventBus.emit_signal("query_ready", component_owner)
+    EventBus.emit_signal("query_ready", component_owner.player_id)

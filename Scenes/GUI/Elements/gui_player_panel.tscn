@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bbq5a0bnitcmq"]
+[gd_scene load_steps=8 format=3 uid="uid://bbq5a0bnitcmq"]
 
 [ext_resource type="Script" path="res://Scenes/GUI/Elements/gui_player_panel.gd" id="1_7df1j"]
 [ext_resource type="PackedScene" uid="uid://c1jry8m8264rs" path="res://Scenes/GUI/Elements/gui_player.tscn" id="2_5ekmi"]
 [ext_resource type="PackedScene" uid="uid://dix2he0wuuhsd" path="res://Scenes/GUI/Elements/timed_message.tscn" id="2_npudj"]
+[ext_resource type="Texture2D" uid="uid://btgigjychxkxj" path="res://Resources/Textures/ready.tres" id="3_mrbvy"]
+[ext_resource type="Texture2D" uid="uid://bq32xwxnadb5t" path="res://Resources/Textures/flame.tres" id="3_ntgj6"]
 [ext_resource type="PackedScene" uid="uid://ciigl5pdv3i7u" path="res://Scenes/GUI/Elements/gui_actions.tscn" id="3_qbfwd"]
 [ext_resource type="PackedScene" uid="uid://bka2hbsca3p2u" path="res://Scenes/GUI/Elements/gui_inventory.tscn" id="4_dhyxm"]
 
@@ -25,6 +27,16 @@ gui_message_list = NodePath("PlayerInformationContainer/PanelContainer/MarginCon
 gui_message_container = NodePath("PlayerInformationContainer")
 ready_button = NodePath("RequiremensMessageContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ReadyButton")
 timed_message_scene = ExtResource("2_npudj")
+query_ready_icon = ExtResource("3_mrbvy")
+query_ready_icon_color = Color(0, 0.815686, 0.580392, 1)
+icon_hot = ExtResource("3_ntgj6")
+icon_hot_color = Color(1, 0, 0.356863, 1)
+icon_warm = ExtResource("3_ntgj6")
+icon_warm_color = Color(1, 0.752941, 0.415686, 1)
+icon_cold = ExtResource("3_ntgj6")
+icon_cold_color = Color(0.8, 0.270588, 0.556863, 1)
+icon_freezing = ExtResource("3_ntgj6")
+icon_freezing_color = Color(0.494118, 0.533333, 1, 1)
 
 [node name="VBC_Main" type="VBoxContainer" parent="."]
 layout_mode = 2
